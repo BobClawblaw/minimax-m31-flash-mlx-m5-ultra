@@ -154,7 +154,7 @@ does not rescue many (3 of 12 failed prompts pass with it on). No thinking-on qu
 [result](https://tensorfold.dev/benchmarks?result=bc110e01-c245-4dec-aa40-63d3e432c456) (code 32.0 / 51.4 and chat
 28.1 / 45.7 tokens a second at temperature 1 / 0, as the client receives them; the engine commit plus the client's
 `--suite community-v1` protocol). mix34 could not complete the suite: its code fixture is an instruction sent as a raw
-completion, and at temperature 0 mix34 ends it at the first token (an empty reply), as it did on 10 of 12 tries at
+completion, and at temperature 0 mix34 ends it at the first token (an empty reply), as it did on 4 of 6 tries at
 temperature 1.
 
 ## Limits
