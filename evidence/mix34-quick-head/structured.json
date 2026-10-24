@@ -15,7 +15,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 3.905,
+  "seconds": 4.061,
   "prompt": "Describe a cat as JSON with a few fields.",
   "request": {
    "max_tokens": 160,
@@ -28,7 +28,7 @@
    "temperature": 0
   },
   "plain_text": "{\n  \"species\": \"Felis catus\",\n  \"common_name\": \"Domestic cat\",\n  \"appearance\": {\n    \"coat\": \"soft fur, often patterned (tabby, calico, solid, or bicolor)\",\n    \"eyes\": \"vertical slit pupils, reflective in low light\",\n    \"whiskers\": \"sensitive to air currents and nearby movement\",\n    \"average_body_length_cm\": 46\n  },\n  \"behavior\": {\n    \"activity\": \"crepuscular \u2014 most active at dawn and dusk\",\n    \"vocalization\": \"purring, meowing, hissing, chirping\",\n    \"hunting_style\": \"stalking, pouncing, and short bursts of high speed\",\n    \"social\": \"solitary hunters but often",
-  "plain_seconds": 4.045,
+  "plain_seconds": 4.062,
   "plain_usage": {
    "prompt_tokens": 202,
    "completion_tokens": 160,
@@ -57,7 +57,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 5.518,
+  "seconds": 5.693,
   "prompt": "Describe a cat as JSON with a few fields.",
   "request": {
    "max_tokens": 160,
@@ -73,7 +73,7 @@
    "seed": 3
   },
   "plain_text": "{\n  \"species\": \"Felis catus\",\n  \"common_name\": \"Domestic cat\",\n  \"appearance\": {\n    \"coat\": \"soft fur, often patterned (tabby, calico, solid, or bicolor)\",\n    \"eyes\": \"vertical slit pupils\",\n    \"ears\": \"triangular, highly mobile\",\n    \"whiskers\": \"sensitive vibrissae used to sense nearby space\"\n  },\n  \"traits\": [\n    \"curious and independent\",\n    \"agile and nocturnal-leaning\",\n    \"communicates with purring, meowing, and body language\"\n  ],\n  \"habitat\": \"domesticated worldwide; thrives in homes, farms, and cities\",\n  \"diet\": \"carnivore \u2014 protein-rich food\",\n  \"",
-  "plain_seconds": 5.449,
+  "plain_seconds": 5.523,
   "plain_usage": {
    "prompt_tokens": 202,
    "completion_tokens": 160,
@@ -102,7 +102,7 @@
     "reasoning_tokens": 85
    }
   },
-  "seconds": 4.146,
+  "seconds": 4.426,
   "prompt": "Describe a cat as JSON with a few fields.",
   "request": {
    "max_tokens": 400,
@@ -131,7 +131,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 1.446,
+  "seconds": 1.472,
   "prompt": "Invent a person.",
   "request": {
    "max_tokens": 160,
@@ -171,7 +171,7 @@
    "temperature": 0
   },
   "plain_text": "{\n  \"name\": \"Marisol 'Sol' Vega\",\n  \"age\": 34,\n  \"hobbies\": [\n    \"Urban sketching\",\n    \"Sourdough baking\",\n    \"Competitive arm wrestling\"\n  ]\n  }",
-  "plain_seconds": 1.461,
+  "plain_seconds": 1.468,
   "plain_usage": {
    "prompt_tokens": 196,
    "completion_tokens": 51,
@@ -200,7 +200,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 2.036,
+  "seconds": 2.043,
   "prompt": "Invent a person.",
   "request": {
    "max_tokens": 160,
@@ -243,7 +243,7 @@
    "seed": 3
   },
   "plain_text": "{\n  \"name\": \"Marisol \\\"Mari\\\" Okonkwo-Vance\",\n  \"age\": 34,\n  \"hobbies\": [\n    \"Urban beekeeping\",\n    \"Letterpress printing\",\n    \"Competitive ballroom dance\"\n  ]\n}",
-  "plain_seconds": 1.806,
+  "plain_seconds": 1.823,
   "plain_usage": {
    "prompt_tokens": 196,
    "completion_tokens": 52,
@@ -272,7 +272,7 @@
     "reasoning_tokens": 400
    }
   },
-  "seconds": 9.945,
+  "seconds": 9.947,
   "prompt": "Invent a person.",
   "request": {
    "max_tokens": 400,
@@ -328,7 +328,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 1.418,
+  "seconds": 1.414,
   "prompt": "Invent a person who likes the sea.",
   "request": {
    "max_tokens": 160,
@@ -362,7 +362,7 @@
    "temperature": 0
   },
   "plain_text": "{\n  \"name\": \"Maren Ostergaard\",\n  \"age\": 34,\n  \"hobbies\": [\"sailing\", \"scuba diving\", \"collecting tide charts and nautical charts as art prints\"]\n}",
-  "plain_seconds": 1.381,
+  "plain_seconds": 1.37,
   "plain_usage": {
    "prompt_tokens": 200,
    "completion_tokens": 47,
@@ -391,7 +391,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 1.64,
+  "seconds": 1.708,
   "prompt": "Invent a person who likes the sea.",
   "request": {
    "max_tokens": 160,
@@ -428,7 +428,7 @@
    "seed": 3
   },
   "plain_text": "{\n  \"name\": \"Marisol Vega\",\n  \"age\": 34,\n  \"hobbies\": [\"sea swimming\", \"sailing\", \"collecting driftwood and seashells from the tideline\"]\n}",
-  "plain_seconds": 1.658,
+  "plain_seconds": 1.673,
   "plain_usage": {
    "prompt_tokens": 200,
    "completion_tokens": 46,
@@ -457,7 +457,7 @@
     "reasoning_tokens": 400
    }
   },
-  "seconds": 10.213,
+  "seconds": 10.04,
   "prompt": "Invent a person who likes the sea.",
   "request": {
    "max_tokens": 400,
@@ -507,7 +507,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 0.493,
+  "seconds": 0.492,
   "prompt": "Give me a US phone number.",
   "request": {
    "max_tokens": 160,
@@ -518,7 +518,7 @@
    "temperature": 0
   },
   "plain_text": "(555) 555-5555",
-  "plain_seconds": 0.482,
+  "plain_seconds": 0.472,
   "plain_usage": {
    "prompt_tokens": 199,
    "completion_tokens": 9,
@@ -547,7 +547,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 0.503,
+  "seconds": 0.492,
   "prompt": "Give me a US phone number.",
   "request": {
    "max_tokens": 160,
@@ -561,7 +561,7 @@
    "seed": 3
   },
   "plain_text": "(555) 555-5555",
-  "plain_seconds": 0.493,
+  "plain_seconds": 0.482,
   "plain_usage": {
    "prompt_tokens": 199,
    "completion_tokens": 9,
@@ -590,7 +590,7 @@
     "reasoning_tokens": 90
    }
   },
-  "seconds": 2.346,
+  "seconds": 2.358,
   "prompt": "Give me a US phone number.",
   "request": {
    "max_tokens": 400,
@@ -617,7 +617,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 0.339,
+  "seconds": 0.332,
   "prompt": "Is the sky green? Answer.",
   "request": {
    "max_tokens": 160,
@@ -632,7 +632,7 @@
    "temperature": 0
   },
   "plain_text": "no",
-  "plain_seconds": 0.316,
+  "plain_seconds": 0.309,
   "plain_usage": {
    "prompt_tokens": 199,
    "completion_tokens": 2,
@@ -661,7 +661,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 0.331,
+  "seconds": 0.323,
   "prompt": "Is the sky green? Answer.",
   "request": {
    "max_tokens": 160,
@@ -679,7 +679,7 @@
    "seed": 3
   },
   "plain_text": "no",
-  "plain_seconds": 0.319,
+  "plain_seconds": 0.311,
   "plain_usage": {
    "prompt_tokens": 199,
    "completion_tokens": 2,
@@ -708,7 +708,7 @@
     "reasoning_tokens": 104
    }
   },
-  "seconds": 2.184,
+  "seconds": 2.191,
   "prompt": "Is the sky green? Answer.",
   "request": {
    "max_tokens": 400,
@@ -739,7 +739,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 0.499,
+  "seconds": 0.495,
   "prompt": "Count to five.",
   "request": {
    "max_tokens": 160,
@@ -750,7 +750,7 @@
    "temperature": 0
   },
   "plain_text": "1, 2, 3, 4, 5",
-  "plain_seconds": 0.595,
+  "plain_seconds": 0.591,
   "plain_usage": {
    "prompt_tokens": 196,
    "completion_tokens": 14,
@@ -779,7 +779,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 0.345,
+  "seconds": 0.339,
   "prompt": "Count to five.",
   "request": {
    "max_tokens": 160,
@@ -793,7 +793,7 @@
    "seed": 3
   },
   "plain_text": "1",
-  "plain_seconds": 0.315,
+  "plain_seconds": 0.309,
   "plain_usage": {
    "prompt_tokens": 196,
    "completion_tokens": 2,
@@ -822,7 +822,7 @@
     "reasoning_tokens": 14
    }
   },
-  "seconds": 0.674,
+  "seconds": 0.667,
   "prompt": "Count to five.",
   "request": {
    "max_tokens": 400,

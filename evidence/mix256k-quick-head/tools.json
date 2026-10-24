@@ -6,7 +6,7 @@
   "finish": "tool_calls",
   "tool_calls": [
    {
-    "id": "call_58e3d97e0ca8cb9d6db749dd",
+    "id": "call_b070af43a1c36caeec5307a2",
     "type": "function",
     "function": {
      "name": "book_flight",
@@ -14,7 +14,7 @@
     }
    },
    {
-    "id": "call_bd625aa1e0377e2c697a7e60",
+    "id": "call_d2c121ce8df486c6941a7f40",
     "type": "function",
     "function": {
      "name": "get_weather",
@@ -34,7 +34,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 3.142,
+  "seconds": 2.633,
   "request": {
    "max_tokens": 600,
    "temperature": 0,
@@ -125,7 +125,7 @@
   "finish": "tool_calls",
   "tool_calls": [
    {
-    "id": "call_94dc153098d634fe63d3d2c6",
+    "id": "call_6019ecd8e984e0812bd015db",
     "type": "function",
     "function": {
      "name": "book_flight",
@@ -133,7 +133,7 @@
     }
    },
    {
-    "id": "call_036aebe73b681a85c0a0b9fe",
+    "id": "call_c2845a9bb174977ccc67c19f",
     "type": "function",
     "function": {
      "name": "get_weather",
@@ -153,7 +153,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 2.028,
+  "seconds": 1.934,
   "request": {
    "max_tokens": 600,
    "temperature": 0,
@@ -244,7 +244,7 @@
   "finish": "tool_calls",
   "tool_calls": [
    {
-    "id": "call_ed124e9ff727311beea94e8f",
+    "id": "call_98c1a6f06df3b271e77d7660",
     "type": "function",
     "function": {
      "name": "book_flight",
@@ -264,7 +264,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 2.517,
+  "seconds": 2.332,
   "request": {
    "max_tokens": 600,
    "temperature": 0,
@@ -354,7 +354,7 @@
   },
   "plain_tool_calls": [
    {
-    "id": "call_909aaae1e723eb8f8cd32bf8",
+    "id": "call_55bdfdf3363bbfc529b7c537",
     "type": "function",
     "function": {
      "name": "book_flight",
@@ -370,27 +370,27 @@
   "finish": "tool_calls",
   "tool_calls": [
    {
-    "id": "call_015cf2c69261af01a5c9cb56",
+    "id": "call_250fd5cea3712994fb2a0d9c",
     "type": "function",
     "function": {
      "name": "book_flight",
-     "arguments": "{\"from\":\"OSL\",\"to\":\"FCO\",\"cabin\":\"business\",\"passengers\":[{\"name\":\"Ana\",\"age\":31},{\"name\":\"Leo\",\"age\":6}]}"
+     "arguments": "{\"from\":\"Oslo\",\"to\":\"Rome\",\"cabin\":\"business\",\"passengers\":[{\"name\":\"Ana\",\"age\":31},{\"name\":\"Leo\",\"age\":6}]}"
     }
    }
   ],
   "text": "",
   "usage": {
    "prompt_tokens": 564,
-   "completion_tokens": 247,
-   "total_tokens": 811,
+   "completion_tokens": 238,
+   "total_tokens": 802,
    "prompt_tokens_details": {
     "cached_tokens": 527
    },
    "completion_tokens_details": {
-    "reasoning_tokens": 136
+    "reasoning_tokens": 127
    }
   },
-  "seconds": 4.913,
+  "seconds": 4.516,
   "request": {
    "max_tokens": 3000,
    "temperature": 0,
@@ -491,7 +491,7 @@
      "name": "book_flight",
      "arguments": "{\"from\":\"Oslo\",\"to\":\"Rome\",\"cabin\":\"business\",\"passengers\":[{\"name\":\"Ana\",\"age\":31},{\"name\":\"Leo\",\"age\":6}]}"
     },
-    "id": "call_b6a57e17c0ef0f2e58ae8efa"
+    "id": "call_ce47d40c750329581bace573"
    }
   ],
   "text": "",
@@ -506,7 +506,7 @@
     "reasoning_tokens": 0
    }
   },
-  "seconds": 1.831,
+  "seconds": 1.817,
   "request": {
    "max_tokens": 600,
    "temperature": 0,

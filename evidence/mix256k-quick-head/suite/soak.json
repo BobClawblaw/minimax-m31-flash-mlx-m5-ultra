@@ -3,7 +3,7 @@
  "score": 1.0,
  "cases": 60,
  "passed": 60,
- "seconds": 345.70541286468506,
+ "seconds": 343.5147430896759,
  "notes": [
   "3 chats x 20 turns at once beside a decoding stream (5.2k-5.8k-token prompts): 60/60 equal to the same request alone, 0 errors, server answers after; 60/60 concurrent turns resumed a kept state"
  ],
@@ -57,7 +57,7 @@
      {
       "chat": 2,
       "turn": 1,
-      "sha": "4ff140f76ed8",
+      "sha": "cf841fbb0bba",
       "prompt": 5205,
       "cached": 5137,
       "error": null
@@ -69,7 +69,7 @@
       "turn": 1,
       "sha": "4ff140f76ed8",
       "prompt": 5217,
-      "cached": 5149,
+      "cached": 0,
       "error": null
      },
      {
@@ -77,13 +77,13 @@
       "turn": 1,
       "sha": "4ff140f76ed8",
       "prompt": 5201,
-      "cached": 5133,
+      "cached": 0,
       "error": null
      },
      {
       "chat": 2,
       "turn": 1,
-      "sha": "4ff140f76ed8",
+      "sha": "cf841fbb0bba",
       "prompt": 5205,
       "cached": 0,
       "error": null
@@ -96,7 +96,7 @@
      {
       "chat": 0,
       "turn": 2,
-      "sha": "7fa874313f83",
+      "sha": "be05332133ca",
       "prompt": 5248,
       "cached": 5149,
       "error": null
@@ -104,7 +104,7 @@
      {
       "chat": 1,
       "turn": 2,
-      "sha": "bc2778fa8c6c",
+      "sha": "09325637dbe0",
       "prompt": 5232,
       "cached": 5133,
       "error": null
@@ -112,7 +112,7 @@
      {
       "chat": 2,
       "turn": 2,
-      "sha": "6fd79aea2a97",
+      "sha": "fe52f5cbe947",
       "prompt": 5236,
       "cached": 5137,
       "error": null
@@ -122,7 +122,7 @@
      {
       "chat": 0,
       "turn": 2,
-      "sha": "7fa874313f83",
+      "sha": "be05332133ca",
       "prompt": 5248,
       "cached": 5149,
       "error": null
@@ -130,7 +130,7 @@
      {
       "chat": 1,
       "turn": 2,
-      "sha": "bc2778fa8c6c",
+      "sha": "09325637dbe0",
       "prompt": 5232,
       "cached": 5133,
       "error": null
@@ -138,7 +138,7 @@
      {
       "chat": 2,
       "turn": 2,
-      "sha": "6fd79aea2a97",
+      "sha": "fe52f5cbe947",
       "prompt": 5236,
       "cached": 5137,
       "error": null
@@ -497,7 +497,7 @@
      {
       "chat": 2,
       "turn": 9,
-      "sha": "e6aa8eeba717",
+      "sha": "a33f20f7da87",
       "prompt": 5459,
       "cached": 5422,
       "error": null
@@ -523,7 +523,7 @@
      {
       "chat": 2,
       "turn": 9,
-      "sha": "e6aa8eeba717",
+      "sha": "a33f20f7da87",
       "prompt": 5459,
       "cached": 5422,
       "error": null
@@ -646,7 +646,7 @@
      {
       "chat": 0,
       "turn": 12,
-      "sha": "04b489ad7237",
+      "sha": "216e90b9f0e6",
       "prompt": 5566,
       "cached": 5434,
       "error": null
@@ -654,7 +654,7 @@
      {
       "chat": 1,
       "turn": 12,
-      "sha": "5e45db1b8dbd",
+      "sha": "216e90b9f0e6",
       "prompt": 5550,
       "cached": 5418,
       "error": null
@@ -672,7 +672,7 @@
      {
       "chat": 0,
       "turn": 12,
-      "sha": "04b489ad7237",
+      "sha": "216e90b9f0e6",
       "prompt": 5566,
       "cached": 5434,
       "error": null
@@ -680,7 +680,7 @@
      {
       "chat": 1,
       "turn": 12,
-      "sha": "5e45db1b8dbd",
+      "sha": "216e90b9f0e6",
       "prompt": 5550,
       "cached": 5418,
       "error": null
@@ -819,7 +819,7 @@
      {
       "chat": 1,
       "turn": 15,
-      "sha": "5e45db1b8dbd",
+      "sha": "19a934f16d6b",
       "prompt": 5645,
       "cached": 5418,
       "error": null
@@ -845,7 +845,7 @@
      {
       "chat": 1,
       "turn": 15,
-      "sha": "5e45db1b8dbd",
+      "sha": "19a934f16d6b",
       "prompt": 5645,
       "cached": 5418,
       "error": null

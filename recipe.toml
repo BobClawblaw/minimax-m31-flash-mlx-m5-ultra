@@ -15,7 +15,7 @@ revision = ""                    # empty: the variant's pinned revision (config.
 # TensorFold's native Metal engine: a worktree of tensorfold_src at tensorfold_sha, built by `python3 -m mac build`
 # under tf_cache; `binary` names a built tensorfold-native instead
 tensorfold_src = "~/github/TensorFold"
-tensorfold_sha = "5aff9a36d4d5bb1aad410d329f9fdbff04aa0631"   # branch minimax-m3 (README.md)
+tensorfold_sha = "60305dd4f3a69b49be61e0896afdab2d51e98126"   # branch minimax-m3 (README.md)
 zig = "zig"                      # Zig 0.17.0
 zig_cpu = "native"
 binary = ""

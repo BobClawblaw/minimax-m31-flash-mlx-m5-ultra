@@ -21,7 +21,7 @@ Attention, the shared expert, the dense layers and the head are 8-bit in both. E
 release's DSpark head and incoai's [DFlash2 drafter](https://huggingface.co/incoai/MiniMax-M3.1-Flash-DFlash2).
 
 The engine's `minimax_m3` family is in [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235);
-until it merges, this recipe builds the pinned commit of its branch (5aff9a36d, `minimax-m3` on
+until it merges, this recipe builds the pinned commit of its branch (60305dd4f, `minimax-m3` on
 [BobClawblaw/TensorFold](https://github.com/BobClawblaw/TensorFold/tree/minimax-m3)). Its first commit is the MoE
 routing change of [ashhart/TensorFold#1177](https://github.com/ashhart/TensorFold/pull/1177).
 
@@ -65,19 +65,20 @@ name in upper case overrides both (`VARIANT=mix34 python3 -m mac up`).
 
 **Memory.** The engine's default limit (75% of RAM) holds the weights but no caches, so the recipe sets
 `load_limit_gb = 226`. The int8 cache takes 77 KiB a token (bf16: 135 KiB) across the 60 layers, 19.6 GiB for a
-262,144-token stream with its index. At a 251,713-token prompt on mix256k the Mac showed 212 GiB wired and about
-4 GiB free: that is the edge, and other apps' memory comes out of it. mix34 at 226 GB fits 68,352 tokens; the
-recipe's 65,536 leaves room for images. Shorter windows or `parallel = 1` leave more.
+262,144-token stream with its index. At a 246,842-token prompt on mix256k the Mac showed 209 GiB wired: that is
+near the edge, and other apps' memory comes out of it. mix34 at 226 GB fits 65,664 tokens, so its 65,536 is about
+all it has, and mix34 needs the Mac nearly idle to load (with other apps holding about 36 GiB, macOS killed it
+while it mapped its weights). Shorter windows or `parallel = 1` leave more.
 
 ## What works, and how it was checked
 
-All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/config.py`. The measurements below were
-taken on the engine branch before its last rebases onto TensorFold main (mix34's decode runs one commit earlier, before
-the forced-tool-call grammar). The pinned 5aff9a36d is the same code on a newer main, plus a docs commit; after the
-rebase the harness's `quick` plan on mix34 (the same code but for main's last four CUDA-only commits) gave the same
-one-stream speed (41.9 / 65.2 / 46.8 / 56.5 tokens a second), structured 18/18, drafted == plain 12/12, tools 5/5,
-seeded sampling 9/9, turns resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and
-behaviour checks (`evidence/mix34-quick-rebased`).
+All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/config.py`. The quality, KL, image and
+decode-speed measurements below were taken on the engine branch before its prompt-speed commits and its last rebases
+onto TensorFold main. The pinned 60305dd4f reran the rest: mix34's prompt speeds on it, and mix256k's prompt speeds,
+the full-window needle and the harness's `quick` plan on both variants on the same code one commit before main's
+1.1.4 release (version and docs only). `quick` gave structured 18/18, drafted == plain 12/12, tools 5/5, seeded
+sampling 9/9, turns resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour
+checks (`evidence/*-head`). The prompt-speed commits keep the logits byte-identical.
 
 - **The math.** Four layers of the engine against transformers' own model: KL at most 0.005. The full model against
   an MLX reference (`ref/model.py`) at the same weights: KL 0.015, smaller than the reference's own bf16 noise.
@@ -91,7 +92,8 @@ behaviour checks (`evidence/mix34-quick-rebased`).
   | mix256k | int8 | 0.284 | 78.2% |
 
 - **Long context.** On mix256k with the int8 cache and images on, a needle came back at 103,770 tokens (156 s prompt)
-  and 251,713 tokens (545 s, 462 tokens a second; decode afterwards 45 tokens a second, drafted).
+  and 251,713 tokens (545 s, 462 tokens a second; decode afterwards 45 tokens a second, drafted); on the pinned
+  commit, 246,842 tokens in 219 s.
 - **Images.** The tower equals transformers' (relative error 0.030 against fp32, where torch's bf16 gives 0.039);
   86 ms for a 540-token image. Through the chat API the model reads shapes, colours and text in PNG, JPEG and WebP
   images, two images in one prompt work, and replies are identical with the cache on and off and drafted or plain.
@@ -127,12 +129,13 @@ that mostly runs two prose streams at once.
 
 | variant | 8k | 32k | 60k | 128k |
 |---|---:|---:|---:|---:|
-| mix34 | 1,177 tok/s (7.1 s) | 1,011 (32.6 s) | 886 (69.6 s) | |
-| mix256k | 1,206 (7.0 s) | 1,020 (32.3 s) | | 703 (186.8 s) |
+| mix34 | 1,393 tok/s (6.0 s) | 1,392 (23.7 s) | 1,364 (45.2 s) | |
+| mix256k | 1,429 (5.9 s) | 1,420 (23.2 s) | | 1,319 (99.6 s) |
 
-With thinking on, within 3%. A fresh server's first prompt also pays its warm-up (a 2k prompt: 4.6 s first, 2.0 s
-after). The 251,713-token needle prompt above took 545 s. A multi-turn chat's resumed turn starts in 0.33 s against
-4.25 s cold (mix34; mix256k 0.31 s against 6.2 s).
+Before the engine's prompt-speed commits: mix34 1,177 / 1,011 / 886 and mix256k 1,206 / 1,020 / 703 (186.8 s at
+128k). With thinking on, within 4%. A fresh server's first prompt also pays its warm-up (a 2k prompt: 3.4-4.0 s
+first, 1.8 s after). The 246,842-token needle prompt took 219 s (545 s at 251,713 before). A multi-turn chat's
+resumed turn starts in 0.30-0.31 s against 5.6-6.0 s cold.
 
 **Quality**, thinking off (the harness's `dsv41-quality-off` plan):
 

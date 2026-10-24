@@ -2,8 +2,8 @@
  "turn1": {
   "status": 200,
   "text": "Three rivers in Europe are:\n\n1. **Danube** \u2014 flows through ten countries (Germany, Austria, Slovakia, Hungary, Croatia, Serbia, Bulgaria, Romania, Moldova, and Ukraine) before emptying into the Black Sea.\n2.",
-  "ttft": 4.139,
-  "ttft_any": 4.139,
+  "ttft": 3.61,
+  "ttft_any": 3.61,
   "usage": {
    "prompt_tokens": 4698,
    "completion_tokens": 48,
@@ -15,15 +15,15 @@
     "reasoning_tokens": 0
    }
   },
-  "s": 5.003,
+  "s": 4.478,
   "finish": "length",
   "tool_calls": null
  },
  "turn2": {
   "status": 200,
   "text": "The Danube is the longest of the three, at roughly 2,850 km (1,770 miles). It rises in Germany's Black Forest region and flows east and southeast across central and southeastern Europe to the Black Sea, making it the second",
-  "ttft": 0.266,
-  "ttft_any": 0.266,
+  "ttft": 0.244,
+  "ttft_any": 0.244,
   "usage": {
    "prompt_tokens": 4763,
    "completion_tokens": 48,
@@ -35,15 +35,15 @@
     "reasoning_tokens": 0
    }
   },
-  "s": 1.539,
+  "s": 1.508,
   "finish": "length",
   "tool_calls": null
  },
  "turn3": {
   "status": 200,
   "text": "The shortest of the three is the **Seine**, at about 777 km (483 miles). It rises on the Langres Plateau in northeastern France and flows northwest through Paris to the English Channel at Le Havre.\n\nFor comparison:\n\n- **",
-  "ttft": 0.33,
-  "ttft_any": 0.33,
+  "ttft": 0.307,
+  "ttft_any": 0.307,
   "usage": {
    "prompt_tokens": 4826,
    "completion_tokens": 48,
@@ -55,15 +55,15 @@
     "reasoning_tokens": 0
    }
   },
-  "s": 1.531,
+  "s": 1.54,
   "finish": "length",
   "tool_calls": null
  },
  "turn3_again": {
   "status": 200,
   "text": "The shortest of the three is the **Seine**, at about 777 km (483 miles). It rises on the Langres Plateau in northeastern France and flows northwest through Paris to the English Channel at Le Havre.\n\nFor comparison:\n\n- **",
-  "ttft": 0.329,
-  "ttft_any": 0.329,
+  "ttft": 0.309,
+  "ttft_any": 0.309,
   "usage": {
    "prompt_tokens": 4826,
    "completion_tokens": 48,
@@ -75,15 +75,15 @@
     "reasoning_tokens": 0
    }
   },
-  "s": 1.528,
+  "s": 1.512,
   "finish": "length",
   "tool_calls": null
  },
  "turn3_cold": {
   "status": 200,
   "text": "The shortest of the three is the **Seine**, at about 777 km (483 miles). It rises on the Langres Plateau in northeastern France and flows northwest through Paris to the English Channel at Le Havre.\n\nFor comparison:\n\n- **",
-  "ttft": 6.843,
-  "ttft_any": 6.843,
+  "ttft": 6.041,
+  "ttft_any": 6.041,
   "usage": {
    "prompt_tokens": 4826,
    "completion_tokens": 48,
@@ -95,7 +95,7 @@
     "reasoning_tokens": 0
    }
   },
-  "s": 8.17,
+  "s": 7.368,
   "finish": "length",
   "tool_calls": null
  }

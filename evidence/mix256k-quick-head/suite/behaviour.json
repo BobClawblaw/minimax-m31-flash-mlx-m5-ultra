@@ -4,7 +4,7 @@
   "score": 1.0,
   "cases": 4,
   "passed": 4,
-  "seconds": 24.903172969818115,
+  "seconds": 24.048131227493286,
   "notes": [
    "identical"
   ],
@@ -15,7 +15,7 @@
   "score": 1.0,
   "cases": 8,
   "passed": 8,
-  "seconds": 25.207545042037964,
+  "seconds": 17.806164979934692,
   "notes": [
    "recalled 8/8 facts"
   ],
@@ -28,7 +28,7 @@
   "score": 1.0,
   "cases": 3,
   "passed": 3,
-  "seconds": 1.7246179580688477,
+  "seconds": 1.6728768348693848,
   "notes": [
    "3/3 stopped before the string"
   ],
@@ -39,7 +39,7 @@
   "score": 1.0,
   "cases": 10,
   "passed": 10,
-  "seconds": 21.831297159194946,
+  "seconds": 22.78538703918457,
   "notes": [
    "0 replies without reasoning_content, 0 with think tags in content"
   ],
@@ -50,7 +50,7 @@
   "score": 1.0,
   "cases": 2,
   "passed": 2,
-  "seconds": 2.5195536613464355,
+  "seconds": 2.4612808227539062,
   "notes": [
    "2/2 byte-identical"
   ],
@@ -61,7 +61,7 @@
   "score": 1.0,
   "cases": 3,
   "passed": 3,
-  "seconds": 1.8656020164489746,
+  "seconds": 1.7751491069793701,
   "notes": [
    "3/3 exact"
   ],
