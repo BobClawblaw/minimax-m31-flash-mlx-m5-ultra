@@ -21,7 +21,7 @@ class Settings:
     source_repo: str = ""
     source_revision: str = ""
     served_name: str = ""
-    variant: str = "mix34"
+    variant: str = "mix256k"
     model_dir: str = ""
     revision: str = ""
     tensorfold_src: str = ""

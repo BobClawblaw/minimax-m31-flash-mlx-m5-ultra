@@ -10,8 +10,12 @@ of it to MLX-style affine groups (`tools/convert.py`), both public:
 
 | variant | checkpoint | experts | on disk | window on 256 GB |
 |---|---|---|---:|---:|
-| `mix34` (default) | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34) | 4-bit (g128) on 26 of the 60 layers (`tools/requant_study.py`), 3-bit (g64) on the rest | 203.7 GiB | 65,536 |
-| `mix256k` | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k) | 4-bit on 3 layers, 3-bit on the rest | 189.2 GiB | 262,144 |
+| `mix34` | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34) | 4-bit (g128) on 26 of the 60 layers (`tools/requant_study.py`), 3-bit (g64) on the rest | 203.7 GiB | 65,536 |
+| `mix256k` (default) | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k) | 4-bit on 3 layers, 3-bit on the rest | 189.2 GiB | 262,144 |
+
+mix256k is the default: on the quality suites below it scores level with mix34, and its window is four times
+as long. mix34 stays a little closer to the release (KL 0.250 against 0.284) and drafts code faster (66 against 58
+tokens a second) for work that fits in 65,536 tokens.
 
 Attention, the shared expert, the dense layers and the head are 8-bit in both. Each checkpoint also carries the
 release's DSpark head and incoai's [DFlash2 drafter](https://huggingface.co/incoai/MiniMax-M3.1-Flash-DFlash2).
@@ -44,11 +48,11 @@ Run one copy of the model at a time: two need more memory than the Mac has. Stop
 ## Settings
 
 `recipe.toml` holds the defaults; `local.toml` overrides them for one Mac, and an environment variable of the same
-name in upper case overrides both (`VARIANT=mix256k python3 -m mac up`).
+name in upper case overrides both (`VARIANT=mix34 python3 -m mac up`).
 
 | setting | default | |
 |---|---|---|
-| `variant` | mix34 | `mix34` for quality, `mix256k` for the 262,144-token window |
+| `variant` | mix256k | `mix256k` for the 262,144-token window, `mix34` for a little more fidelity at 65,536 |
 | `context` | 0 | a stream's window; 0 takes the variant's (65,536 or 262,144) |
 | `parallel` | 2 | streams decoded together; they share the cache memory |
 | `kv_cache` | int8 | keys and values cached as int8 with a scale a row; `bf16` keeps the full width (and needs 1.75x the memory) |
@@ -146,7 +150,12 @@ IFEval is low for a model this size: the suite caps replies at 1,200 tokens, Min
 150 replies hit the cap, 23 of them failing), and many of the rest break the format they were asked for. Thinking
 does not rescue many (3 of 12 failed prompts pass with it on). No thinking-on quality run was made.
 
-**TensorFold leaderboard.** Not submitted yet.
+**TensorFold leaderboard.** The board's community-v1 suite on mix256k:
+[result](https://tensorfold.dev/benchmarks?result=bc110e01-c245-4dec-aa40-63d3e432c456) (code 32.0 / 51.4 and chat
+28.1 / 45.7 tokens a second at temperature 1 / 0, as the client receives them; the engine commit plus the client's
+`--suite community-v1` protocol). mix34 could not complete the suite: its code fixture is an instruction sent as a raw
+completion, and at temperature 0 mix34 ends it at the first token (an empty reply), as it did on 10 of 12 tries at
+temperature 1.
 
 ## Limits
 

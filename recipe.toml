@@ -1,5 +1,5 @@
 # The recipe's defaults. `local.toml` next to this file overrides them for one Mac (copy local.example.toml); an
-# environment variable of the same name in upper case overrides both (VARIANT=mix256k python3 -m mac up).
+# environment variable of the same name in upper case overrides both (VARIANT=mix34 python3 -m mac up).
 
 [model]
 # MiniMax's release (nvfp4 experts, mxfp8 rest), converted by tools/convert.py; both conversions are public:
@@ -7,7 +7,7 @@
 source_repo = "MiniMaxAI/MiniMax-M3.1-Flash"
 source_revision = "54e4e69dfc452b1e94a426c24a4fdeeaa8e3ad5e"
 served_name = "MiniMax-M3.1-Flash"
-variant = "mix34"                # mix34: best quality, 65k context; mix256k: a 262,144-token window, a little less quality
+variant = "mix256k"              # mix256k: a 262,144-token window; mix34: a little closer to the release, 65,536 tokens
 model_dir = ""                   # empty: ~/models/MiniMax-M3.1-Flash-MLX-<variant>
 revision = ""                    # empty: the variant's pinned revision (config.py)
 
