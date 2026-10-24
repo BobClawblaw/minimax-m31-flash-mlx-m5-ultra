@@ -17,8 +17,11 @@ tags:
 converted for [TensorFold](https://github.com/ashhart/TensorFold)'s native Metal engine (its `minimax_m3` family), to
 serve on one Apple M5 Ultra with 256 GB. The higher-quality of two conversions: about 65k tokens of context fit beside it with images and the drafter.
 
-**Status:** the engine support is not published yet (a TensorFold pull request and a serving recipe follow). This
-checkpoint does not load in mlx-lm or mlx-vlm: the layout is MLX affine quantization, but the model is TensorFold's.
+**Serving:** the engine's `minimax_m3` family is in
+[ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235); the serving recipe, with its launcher,
+settings and measurements, is [BobClawblaw/minimax-m31-flash-mlx-m5-ultra](https://github.com/BobClawblaw/minimax-m31-flash-mlx-m5-ultra).
+This checkpoint does not load in mlx-lm or mlx-vlm: the layout is MLX affine quantization, but the model is
+TensorFold's.
 
 ## What is in it
 
@@ -44,7 +47,9 @@ transformers' modeling code), over the 1,024 positions of one chat, the engine's
 | mix256k | 0.284 | 78.2% |
 | all experts 3-bit (not published) | 0.300 | 77.3% |
 
-No benchmark suite has been run on it yet; the recipe will report one.
+Through the recipe harness's suite, thinking off: GSM8K 0.964, MGSM 0.829, MMLU 0.830, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
+mix256k, JSON 30/30 on both. Speeds, the other variant's numbers and how they were measured are in the
+[recipe's README](https://github.com/BobClawblaw/minimax-m31-flash-mlx-m5-ultra#measured).
 
 ## License
 
