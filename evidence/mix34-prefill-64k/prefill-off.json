@@ -1,0 +1,34 @@
+{
+ "2048": {
+  "status": 200,
+  "prompt_tokens": 2257,
+  "cached_tokens": 0,
+  "ttft": 4.641,
+  "tok_s": 486.3,
+  "error": ""
+ },
+ "8192": {
+  "status": 200,
+  "prompt_tokens": 8404,
+  "cached_tokens": 0,
+  "ttft": 7.142,
+  "tok_s": 1176.7,
+  "error": ""
+ },
+ "32768": {
+  "status": 200,
+  "prompt_tokens": 32978,
+  "cached_tokens": 0,
+  "ttft": 32.622,
+  "tok_s": 1010.9,
+  "error": ""
+ },
+ "61440": {
+  "status": 200,
+  "prompt_tokens": 61655,
+  "cached_tokens": 0,
+  "ttft": 69.567,
+  "tok_s": 886.3,
+  "error": ""
+ }
+}

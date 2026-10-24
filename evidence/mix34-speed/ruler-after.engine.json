@@ -1,0 +1,17 @@
+{
+ "levels": {
+  "1": {
+   "requests": 13,
+   "prompt": 7424,
+   "cached": 0,
+   "tokens": 2766,
+   "rounds": 1128,
+   "accepted": 1633,
+   "proposed": 2428,
+   "tokens_a_round": 2.452,
+   "drafts_a_round": 2.152,
+   "accept_rate": 0.6726,
+   "ms_a_round": 46.29
+  }
+ }
+}

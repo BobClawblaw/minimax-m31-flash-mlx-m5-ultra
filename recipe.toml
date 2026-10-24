@@ -1,0 +1,44 @@
+# The recipe's defaults. `local.toml` next to this file overrides them for one Mac (copy local.example.toml); an
+# environment variable of the same name in upper case overrides both (VARIANT=mix256k python3 -m mac up).
+
+[model]
+# MiniMax's release (nvfp4 experts, mxfp8 rest), converted by tools/convert.py; both conversions are public:
+# `python3 -m mac download` fetches the variant's (README: what each holds and costs)
+source_repo = "MiniMaxAI/MiniMax-M3.1-Flash"
+source_revision = "54e4e69dfc452b1e94a426c24a4fdeeaa8e3ad5e"
+served_name = "MiniMax-M3.1-Flash"
+variant = "mix34"                # mix34: best quality, 65k context; mix256k: a 262,144-token window, a little less quality
+model_dir = ""                   # empty: ~/models/MiniMax-M3.1-Flash-MLX-<variant>
+revision = ""                    # empty: the variant's pinned revision (config.py)
+
+[engine]
+# TensorFold's native Metal engine: a worktree of tensorfold_src at tensorfold_sha, built by `python3 -m mac build`
+# under tf_cache; `binary` names a built tensorfold-native instead
+tensorfold_src = "~/github/TensorFold"
+tensorfold_sha = "5aff9a36d4d5bb1aad410d329f9fdbff04aa0631"   # branch minimax-m3 (README.md)
+zig = "zig"                      # Zig 0.17.0
+zig_cpu = "native"
+binary = ""
+
+[local]
+host = "127.0.0.1"
+port = 8897
+tf_cache = "~/.cache/minimax-m31-flash"
+
+[serve]
+context = 0                      # a stream's window; 0: the variant's (mix34 65536, mix256k 262144)
+parallel = 2                     # streams decoded together; they share the cache memory (README)
+drafts = true                    # incoai's DFlash2 drafts one stream (greedy replies are identical with them off)
+drafter = "dflash2"              # or "dspark", the release's own DSpark head (both ship in the checkpoint)
+kv_cache = "int8"                # keys and values cached as int8 (57% of bf16's bytes); "bf16" for the full width
+load_limit_gb = 226              # MINIMAX_LOAD_LIMIT_GB: weights, scratch and caches together (README: memory)
+thinking = false                 # the template's thinking block off by default; a request's chat_template_kwargs turns it on
+max_tokens = 32768               # a reply's default ceiling
+temperature = ""                 # empty: the server's default sampling (1.0, top_p 0.95)
+prompt_cache_gib = 4             # kept prompt states between turns (they take what the streams leave)
+vision = true
+vision_image_tokens = 4096       # image tokens a request holds in all (an image takes at most 576)
+vision_max_images = 4
+keep_warm = 86400
+api_key = ""
+extra_args = ""

@@ -1,0 +1,102 @@
+{
+ "turn1": {
+  "status": 200,
+  "text": "Three rivers in Europe are:\n\n1. **Danube** \u2014 flows through or along ten countries (Germany, Austria, Slovakia, Hungary, Croatia, Serbia, Bulgaria, Romania, Moldova, and Ukraine) before emptying into the Black Sea.\n",
+  "ttft": 4.454,
+  "ttft_any": 4.454,
+  "usage": {
+   "prompt_tokens": 4698,
+   "completion_tokens": 48,
+   "total_tokens": 4746,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 5.39,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn2": {
+  "status": 200,
+  "text": "The **Danube** is the longest of the three, at roughly **2,850 km (1,770 miles)**. It rises in the Black Forest region of southwestern Germany and flows east through Central and Eastern Europe to the Black Sea",
+  "ttft": 0.257,
+  "ttft_any": 0.257,
+  "usage": {
+   "prompt_tokens": 4763,
+   "completion_tokens": 48,
+   "total_tokens": 4811,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.337,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3": {
+  "status": 200,
+  "text": "The **shortest** of the three is the one I mentioned as the third river \u2014 the **Seine**, at about **777 km (483 miles)**. It rises on the Langres Plateau in northeastern France and flows northwest through Paris",
+  "ttft": 0.309,
+  "ttft_any": 0.309,
+  "usage": {
+   "prompt_tokens": 4826,
+   "completion_tokens": 48,
+   "total_tokens": 4874,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.558,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3_again": {
+  "status": 200,
+  "text": "The **shortest** of the three is the one I mentioned as the third river \u2014 the **Seine**, at about **777 km (483 miles)**. It rises on the Langres Plateau in northeastern France and flows northwest through Paris",
+  "ttft": 0.315,
+  "ttft_any": 0.315,
+  "usage": {
+   "prompt_tokens": 4826,
+   "completion_tokens": 48,
+   "total_tokens": 4874,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.568,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3_cold": {
+  "status": 200,
+  "text": "The **shortest** of the three is the one I mentioned as the third river \u2014 the **Seine**, at about **777 km (483 miles)**. It rises on the Langres Plateau in northeastern France and flows northwest through Paris",
+  "ttft": 6.217,
+  "ttft_any": 6.217,
+  "usage": {
+   "prompt_tokens": 4826,
+   "completion_tokens": 48,
+   "total_tokens": 4874,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 7.478,
+  "finish": "length",
+  "tool_calls": null
+ }
+}

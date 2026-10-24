@@ -1,0 +1,269 @@
+{
+ "name": "math500",
+ "score": 0.908,
+ "cases": 500,
+ "passed": 454,
+ "seconds": 5993.411902189255,
+ "notes": [
+  "L1 43/43 L2 87/90 L3 95/105 L4 117/128 L5 112/134, 17 without a boxed answer"
+ ],
+ "details": {
+  "n": 500,
+  "thinking": false,
+  "by_level": {
+   "2": [
+    87,
+    90
+   ],
+   "5": [
+    112,
+    134
+   ],
+   "3": [
+    95,
+    105
+   ],
+   "4": [
+    117,
+    128
+   ],
+   "1": [
+    43,
+    43
+   ]
+  },
+  "unboxed": 17,
+  "misses": [
+   {
+    "i": 17,
+    "gold": "\\pi",
+    "got": "\\dfrac{3\\pi}{2}"
+   },
+   {
+    "i": 20,
+    "gold": "6+9i",
+    "got": "117 + 41i"
+   },
+   {
+    "i": 21,
+    "gold": "13535",
+    "got": "14543"
+   },
+   {
+    "i": 43,
+    "gold": "70 \\sqrt{2}",
+    "got": null
+   },
+   {
+    "i": 47,
+    "gold": "5",
+    "got": "7"
+   },
+   {
+    "i": 94,
+    "gold": "80",
+    "got": "130^\\circ"
+   },
+   {
+    "i": 96,
+    "gold": "1 \\pm \\sqrt{19}",
+    "got": "1-\\sqrt{19},\\ 1+\\sqrt{19}"
+   },
+   {
+    "i": 99,
+    "gold": "\\begin{pmatrix} -1/3 \\\\ 2/3 \\\\ 5/3 \\end{pmatrix}",
+    "got": "\\mathbf{v} = \\begin{pmatrix} -\\tfrac{1}{3} \\\\[2pt] \\tfrac{2}{3} \\\\[2pt] \\tfrac{5}{3} \\end{pmatrix}"
+   },
+   {
+    "i": 101,
+    "gold": "850",
+    "got": null
+   },
+   {
+    "i": 103,
+    "gold": "(3,4]",
+    "got": "3 < \\lambda \\le 4"
+   },
+   {
+    "i": 104,
+    "gold": "40",
+    "got": null
+   },
+   {
+    "i": 110,
+    "gold": "504",
+    "got": null
+   },
+   {
+    "i": 127,
+    "gold": "4210_{5}",
+    "got": "4210_5"
+   },
+   {
+    "i": 138,
+    "gold": "\\frac{1}{3}",
+    "got": "\\frac{1}{15}"
+   },
+   {
+    "i": 154,
+    "gold": "2\\sqrt{113}",
+    "got": null
+   },
+   {
+    "i": 157,
+    "gold": "\\frac65",
+    "got": null
+   },
+   {
+    "i": 163,
+    "gold": "-\\frac{35}{9}",
+    "got": "-\\frac{99}{25}"
+   },
+   {
+    "i": 166,
+    "gold": "\\frac{270}7\\text{ degrees}",
+    "got": "\\frac{270}{7}"
+   },
+   {
+    "i": 168,
+    "gold": "19",
+    "got": null
+   },
+   {
+    "i": 176,
+    "gold": ".0000672",
+    "got": "0.0002688"
+   },
+   {
+    "i": 189,
+    "gold": "160",
+    "got": "150"
+   },
+   {
+    "i": 204,
+    "gold": "0",
+    "got": null
+   },
+   {
+    "i": 217,
+    "gold": "11,\\! 111,\\! 111,\\! 100",
+    "got": "11111111100"
+   },
+   {
+    "i": 236,
+    "gold": "12",
+    "got": null
+   },
+   {
+    "i": 264,
+    "gold": "1\\frac{4}{5}",
+    "got": null
+   },
+   {
+    "i": 284,
+    "gold": "3 \\pm 2 \\sqrt{2}",
+    "got": "3+2\\sqrt{2},\\ 3-2\\sqrt{2},\\ -3+2\\sqrt{2},\\ -3-2\\sqrt{2}"
+   },
+   {
+    "i": 296,
+    "gold": "\\text{(B)}",
+    "got": "\\textbf{(B)}"
+   },
+   {
+    "i": 308,
+    "gold": "1+2\\sqrt{3}",
+    "got": "2\\sqrt3 + 1"
+   },
+   {
+    "i": 309,
+    "gold": "14",
+    "got": null
+   },
+   {
+    "i": 318,
+    "gold": "\\frac{11+9a}{20}",
+    "got": "\\frac{9a+11}{20}"
+   },
+   {
+    "i": 352,
+    "gold": "11 \\sqrt{5} + 11",
+    "got": "11 + 11\\sqrt{5}"
+   },
+   {
+    "i": 379,
+    "gold": "12",
+    "got": "12^{\\mathrm{th}}\\text{ grade}"
+   },
+   {
+    "i": 383,
+    "gold": "x \\in [-2,7]",
+    "got": "[-2,\\, 7]"
+   },
+   {
+    "i": 396,
+    "gold": "2",
+    "got": null
+   },
+   {
+    "i": 408,
+    "gold": "\\begin{pmatrix} 1/5 \\\\ -18/5 \\end{pmatrix}",
+    "got": "\\begin{pmatrix}\\tfrac{1}{5}\\\\[2pt]-\\tfrac{18}{5}\\end{pmatrix}"
+   },
+   {
+    "i": 419,
+    "gold": "\\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}",
+    "got": "\\mathbf{v} = \\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}"
+   },
+   {
+    "i": 420,
+    "gold": "\\begin{pmatrix} 16/49 \\\\ 48/49 \\\\ 24/49 \\end{pmatrix}",
+    "got": "\\text{proj}_{\\mathbf{b}}\\mathbf{a} = \\begin{pmatrix} \\frac{16}{49} \\\\[2pt] \\frac{48}{49} \\\\[2pt] \\frac{24}{49} \\end{pmatrix}"
+   },
+   {
+    "i": 421,
+    "gold": "27",
+    "got": null
+   },
+   {
+    "i": 422,
+    "gold": "\\{1\\pm\\sqrt{5},-2\\}",
+    "got": null
+   },
+   {
+    "i": 425,
+    "gold": "3R^2",
+    "got": "AF^2+BF^2+CF^2 = \\frac{8}{9}\\left(a^2+b^2+c^2\\right) + \\frac{1}{3}R^2"
+   },
+   {
+    "i": 439,
+    "gold": "x^8 + x^7 + x^6 + x^5 + x^4 + x^3 + x^2 + x + 1",
+    "got": "x^8 + 2x^7 + 2x^6 + 2x^5 + 2x^4 + 2x^3 + 2x^2 + 2x + 2"
+   },
+   {
+    "i": 444,
+    "gold": "\\frac{1}{2}",
+    "got": null
+   },
+   {
+    "i": 460,
+    "gold": "75^\\circ",
+    "got": "70"
+   },
+   {
+    "i": 478,
+    "gold": "\\frac{2}{1005}",
+    "got": null
+   },
+   {
+    "i": 483,
+    "gold": "\\frac{8}{15}",
+    "got": "\\tan A = \\frac{8}{15}"
+   },
+   {
+    "i": 497,
+    "gold": "\\frac{7}{2}",
+    "got": null
+   }
+  ]
+ }
+}

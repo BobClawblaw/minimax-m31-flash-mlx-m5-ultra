@@ -1,0 +1,14 @@
+{
+ "name": "tools",
+ "score": 0.9166666666666666,
+ "cases": 60,
+ "passed": 55,
+ "seconds": 73.98137092590332,
+ "notes": [
+  "\"How do you say 'where is the station' in\": got []",
+  "'Set a timer for 5 minutes.': got [('set_timer', {'seconds': 300, 'label': '5-minute timer'})]",
+  "'Directions from Berlin Hauptbahnhof to A': got [('get_directions', {'origin': 'berlin hauptbahnhof', 'destination': 'alexanderplatz', 'mode': 'transit'}), ('get_directions', {'origin': 'berlin hauptbahnhof', 'destination': 'alexanderplatz', 'mode': 'walking'})]",
+  "'Walking directions from the Louvre to No': got [('get_directions', {'origin': 'louvre museum, paris', 'destination': 'notre-dame de paris', 'mode': 'walking'})]"
+ ],
+ "details": {}
+}
