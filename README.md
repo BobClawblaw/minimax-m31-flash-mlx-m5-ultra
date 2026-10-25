@@ -6,22 +6,24 @@ OpenAI-compatible server with images, tool calls, structured output, thinking on
 cache and two streams.
 
 MiniMax's release stores its experts in NVFP4, which Metal has no kernels for, so this recipe serves two conversions
-of it to MLX-style affine groups (`tools/convert.py`), both public:
+of it to MLX-style affine groups, both public (the engine's `tools/zig/minimax_m3_convert.py` rebuilds them from
+the pinned release and checks every file against the published hashes):
 
 | variant | checkpoint | experts | on disk | window on 256 GB |
 |---|---|---|---:|---:|
-| `mix34` | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34) | 4-bit (g128) on 26 of the 60 layers (`tools/requant_study.py`), 3-bit (g64) on the rest | 203.7 GiB | 65,536 |
-| `mix256k` (default) | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k) | 4-bit on 3 layers, 3-bit on the rest | 189.2 GiB | 262,144 |
+| `mix34` | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34) | 4-bit (g128) on 26 of the 60 layers (`tools/requant_study.py`), 3-bit (g64) on the rest | 203.7 GiB | 32,768 |
+| `mix256k` (default) | [`BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k`](https://huggingface.co/BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k) | 4-bit on 3 layers, 3-bit on the rest | 189.2 GiB | 147,456 |
 
-mix256k is the default: on the quality suites below it scores level with mix34, and its window is four times
-as long. mix34 stays a little closer to the release (KL 0.250 against 0.284) and drafts code faster (66 against 58
-tokens a second) for work that fits in 65,536 tokens.
+The key/value cache is bf16, exact (TensorFold ships no lossy caches), and it is what limits the window: the
+weights take 189-204 GiB of the 256. mix256k is the default: on the quality suites below it scores level with mix34,
+and its window is four and a half times as long. mix34 stays a little closer to the release (KL 0.246 against 0.301)
+for work that fits in 32,768 tokens. (mix256k is named for the 262,144-token window an earlier int8 cache gave it.)
 
 Attention, the shared expert, the dense layers and the head are 8-bit in both. Each checkpoint also carries the
 release's DSpark head and incoai's [DFlash2 drafter](https://huggingface.co/incoai/MiniMax-M3.1-Flash-DFlash2).
 
 The engine's `minimax_m3` family is in [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235);
-until it merges, this recipe builds the pinned commit of its branch (60305dd4f, `minimax-m3` on
+until it merges, this recipe builds the pinned commit of its branch (e6b3b3bd0, `minimax-m3` on
 [BobClawblaw/TensorFold](https://github.com/BobClawblaw/TensorFold/tree/minimax-m3)). Its first commit is the MoE
 routing change of [ashhart/TensorFold#1177](https://github.com/ashhart/TensorFold/pull/1177).
 
@@ -52,10 +54,9 @@ name in upper case overrides both (`VARIANT=mix34 python3 -m mac up`).
 
 | setting | default | |
 |---|---|---|
-| `variant` | mix256k | `mix256k` for the 262,144-token window, `mix34` for a little more fidelity at 65,536 |
-| `context` | 0 | a stream's window; 0 takes the variant's (65,536 or 262,144) |
+| `variant` | mix256k | `mix256k` for the 147,456-token window, `mix34` for a little more fidelity at 32,768 |
+| `context` | 0 | a stream's window; 0 takes the variant's (32,768 or 147,456) |
 | `parallel` | 2 | streams decoded together; they share the cache memory |
-| `kv_cache` | int8 | keys and values cached as int8 with a scale a row; `bf16` keeps the full width (and needs 1.75x the memory) |
 | `load_limit_gb` | 226 | weights, scratch and caches together (`MINIMAX_LOAD_LIMIT_GB`) |
 | `drafts`, `drafter` | true, dflash2 | DFlash2 drafts one stream; `dspark` uses the release's own head; greedy replies are identical with drafts off |
 | `thinking` | false | the default for requests; `chat_template_kwargs: {"enable_thinking": true}` turns it on for one |
@@ -64,36 +65,29 @@ name in upper case overrides both (`VARIANT=mix34 python3 -m mac up`).
 | `vision`, `vision_image_tokens`, `vision_max_images` | true, 4096, 4 | images a request may hold, and their tokens in all |
 
 **Memory.** The engine's default limit (75% of RAM) holds the weights but no caches, so the recipe sets
-`load_limit_gb = 226`. The int8 cache takes 77 KiB a token (bf16: 135 KiB) across the 60 layers, 19.6 GiB for a
-262,144-token stream with its index. At a 246,842-token prompt on mix256k the Mac showed 209 GiB wired: that is
-near the edge, and other apps' memory comes out of it. mix34 at 226 GB fits 65,664 tokens, so its 65,536 is about
-all it has, and mix34 needs the Mac nearly idle to load (with other apps holding about 36 GiB, macOS killed it
-while it mapped its weights). Shorter windows or `parallel = 1` leave more.
+`load_limit_gb = 226`. The bf16 cache takes 135 KiB a token across the 60 layers. Under 226 GB the caches fit
+150,400 tokens on mix256k and 37,376 on mix34 (the engine's own fit, with images and the drafter); the windows
+leave a little of that spare. At a 145,203-token prompt on mix256k the Mac showed 210 GiB wired: near the edge, and
+other apps' memory comes out of it. mix34 needs the Mac nearly idle to load (with other apps holding about 36 GiB,
+macOS killed it while it mapped its weights). Shorter windows or `parallel = 1` leave more.
 
 ## What works, and how it was checked
 
-All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/config.py`. The quality, KL, image and
-decode-speed measurements below were taken on the engine branch before its prompt-speed commits and its last rebases
-onto TensorFold main. The pinned 60305dd4f reran the rest: mix34's prompt speeds on it, and mix256k's prompt speeds,
-the full-window needle and the harness's `quick` plan on both variants on the same code one commit before main's
-1.1.4 release (version and docs only). `quick` gave structured 18/18, drafted == plain 12/12, tools 5/5, seeded
-sampling 9/9, turns resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour
-checks (`evidence/*-head`). The prompt-speed commits keep the logits byte-identical.
+All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/config.py`. The engine's bf16-only
+commit was measured for KL, the window, the needle, decode and prompt speed and the harness's `quick` plan on both
+variants (`evidence/*-bf16`): structured 18/18, drafted == plain 12/12, tools 5/5, seeded sampling 9/9, turns
+resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour checks. The pinned
+e6b3b3bd0 is that code rebased onto newer TensorFold main: its prompt logits and greedy tokens are byte-identical,
+and `quick` on mix256k passed again (`evidence/mix256k-quick-pinned`). The bf16 path is also byte-identical to the
+earlier engine's bf16 option, so the quality suites, the math and image checks below (run on that engine, the
+quality suites with its int8 cache) were not repeated.
 
 - **The math.** Four layers of the engine against transformers' own model: KL at most 0.005. The full model against
   an MLX reference (`ref/model.py`) at the same weights: KL 0.015, smaller than the reference's own bf16 noise.
-- **The conversion's cost.** 1,024 rows teacher-forced against the NVFP4 release (the int8 cache and bf16 cache):
-
-  | checkpoint | cache | mean KL | top-1 agreement |
-  |---|---|---:|---:|
-  | mix34 | bf16 | 0.246 | 81.1% |
-  | mix34 | int8 | 0.250 | 80.0% |
-  | mix256k | bf16 | 0.301 | 78.3% |
-  | mix256k | int8 | 0.284 | 78.2% |
-
-- **Long context.** On mix256k with the int8 cache and images on, a needle came back at 103,770 tokens (156 s prompt)
-  and 251,713 tokens (545 s, 462 tokens a second; decode afterwards 45 tokens a second, drafted); on the pinned
-  commit, 246,842 tokens in 219 s.
+- **The conversion's cost.** 1,024 rows teacher-forced against the NVFP4 release, on the pinned engine: mix34 mean
+  KL 0.246 (81.1% top-1 agreement), mix256k 0.301 (78.3%).
+- **Long context.** On mix256k with images on, a needle came back from a 145,203-token prompt (115 s cold, 210 GiB
+  wired at the peak; `evidence/mix256k-needle-bf16`).
 - **Images.** The tower equals transformers' (relative error 0.030 against fp32, where torch's bf16 gives 0.039);
   86 ms for a 540-token image. Through the chat API the model reads shapes, colours and text in PNG, JPEG and WebP
   images, two images in one prompt work, and replies are identical with the cache on and off and drafted or plain.
@@ -110,32 +104,32 @@ checks (`evidence/*-head`). The prompt-speed commits keep the logits byte-identi
 
 Through [recipe-harness](https://github.com/BobClawblaw/recipe-harness) (targets `minimax-m31-mix34-m5` and
 `minimax-m31-mix256k-m5`, the qwen Spark recipe's ruler and suite at commit 277c842a1481), greedy, 256-token replies,
-the int8 cache; the raw results are in `evidence/`.
+the bf16 cache; the raw results are in `evidence/*-bf16`.
 
 **Decode**, tokens a second, all streams together (prose / code / structured / list):
 
-| variant | streams | DFlash2 drafts | plain |
-|---|---:|---|---|
-| mix34 | 1 | 42.1 / 65.9 / 47.5 / 56.8 | 43.4 / 43.3 / 43.4 / 43.5 |
-| mix34 | 2 | 49.7 / 65.8 / 53.9 / 76.1 | 62.2 / 61.6 / 61.8 / 62.1 |
-| mix256k | 1 | 42.8 / 57.9 / 48.7 / 47.9 | 44.1 / 44.0 / 44.0 / 44.1 |
-| mix256k | 2 | 52.2 / 65.5 / 58.1 / 74.7 | 63.3 / 62.8 / 64.1 / 63.6 |
+| variant | streams | DFlash2 drafts |
+|---|---:|---|
+| mix34 | 1 | 42.7 / 58.5 / 50.3 / 55.8 |
+| mix34 | 2 | 51.0 / 65.1 / 57.9 / 83.3 |
+| mix256k | 1 | 43.1 / 58.9 / 49.6 / 50.3 |
+| mix256k | 2 | 57.6 / 63.3 / 61.3 / 75.5 |
 
-Drafts help one stream on code and lists and roughly break even on prose. With two streams they cost speed on prose
-and structured text; `drafts = false` is the faster choice for a server
-that mostly runs two prose streams at once.
+Against the earlier int8 cache: mix256k level or faster (two streams' prose +10%, their code -3%), mix34's code
+slower (58.5 against 65.9 with one stream). Plain decode (`drafts = false`) was not measured again on the bf16 cache; on the int8 cache it ran 43-44
+tokens a second with one stream and 62-64 with two, faster than drafts for two prose streams.
 
 **Prompts**, cold, thinking off (a fresh server, each prompt starting with words no earlier one did):
 
-| variant | 8k | 32k | 60k | 128k |
-|---|---:|---:|---:|---:|
-| mix34 | 1,393 tok/s (6.0 s) | 1,392 (23.7 s) | 1,364 (45.2 s) | |
-| mix256k | 1,429 (5.9 s) | 1,420 (23.2 s) | | 1,319 (99.6 s) |
+| variant | 8k | 16k | 31k | 32k | 128k |
+|---|---:|---:|---:|---:|---:|
+| mix34 | 1,441 tok/s (5.8 s) | 1,452 (11.4 s) | 1,451 (21.3 s) | | |
+| mix256k | 1,483 (5.7 s) | | | 1,491 (22.1 s) | 1,379 (95.2 s) |
 
-Before the engine's prompt-speed commits: mix34 1,177 / 1,011 / 886 and mix256k 1,206 / 1,020 / 703 (186.8 s at
-128k). With thinking on, within 4%. A fresh server's first prompt also pays its warm-up (a 2k prompt: 3.4-4.0 s
-first, 1.8 s after). The 246,842-token needle prompt took 219 s (545 s at 251,713 before). A multi-turn chat's
-resumed turn starts in 0.30-0.31 s against 5.6-6.0 s cold.
+With the int8 cache: mix256k 1,429 / 1,420 / 1,319, and before the engine's prompt-speed commits 1,206 / 1,020 / 703
+(186.8 s at 128k). With thinking on, within 2%. A fresh server's first prompt also pays its warm-up (a 2k prompt:
+3.9-4.1 s first, 1.7 s after). The 145,203-token needle prompt took 115 s. A multi-turn chat's resumed turn starts in
+0.26-0.30 s against 3.6-5.6 s cold.
 
 **Quality**, thinking off (the harness's `dsv41-quality-off` plan):
 
@@ -166,14 +160,17 @@ temperature 1.
   Each image is encoded on its own. JPEG and WebP need the pinned decoders `python3 -m mac build` makes
   (libjpeg-turbo 3.1.4.1, libwebp 1.6.0); PNG works without them. Images come as data URLs: the server's
   `--vision-urls` (fetching public HTTPS images) is off in this recipe and was not checked. Video is not served.
-- **Context:** the model's window is 1,048,576 tokens; on 256 GB only mix256k's 262,144 fits, and only just.
+- **Context:** the model's window is 1,048,576 tokens; on 256 GB the exact cache fits 150,400 beside mix256k and
+  37,376 beside mix34.
 - **Streams:** two were checked. More fit only with shorter windows.
 - Only the M5 Ultra was checked.
 
 ## Reproducing the checkpoints
 
-`tools/convert.py` converts the release (revision 54e4e69d) to either variant; `tools/compare.py` and `ref/` hold
-the KL checks above.
+The engine's `tools/zig/minimax_m3_convert.py` (from this recipe's `tools/convert.py`) converts the release at revision
+54e4e69d and incoai's DFlash2 at ac07a7c1 to either variant (`--variant mix34|mix256k`), and `--check` compares a
+folder with the published files' hashes; a full mix256k rebuild checks 74/74 (the commands are on the engine's
+recipe page). `tools/requant_study.py` ranked the 4-bit layers; `tools/compare.py` and `ref/` hold the KL checks.
 
 ## License
 

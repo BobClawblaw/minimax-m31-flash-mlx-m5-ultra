@@ -1,0 +1,184 @@
+{
+ "name": "concurrent",
+ "score": 1.0,
+ "cases": 12,
+ "passed": 12,
+ "seconds": 71.52126598358154,
+ "notes": [
+  "16 streams together vs alone"
+ ],
+ "details": {
+  "alone": [
+   {
+    "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+    "sha": "1571975d714f",
+    "tokens": 187,
+    "tok_s": 40.21026888852652,
+    "text": "The sky looks blue because of Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~700 nm)\u2014about four times more. Blue light is therefore scattered in all directions across the sky, reaching your eyes from wherever you look, while red light travels more directly.\n\nSunsets are red because sunlight must pass through much more atmosphere to reach you at a low sun angle. Along that long path, nearly all the blue light gets scattered out of the beam and away from your line of sight, leaving the direct light dominated by red and orange wavelengths. The scattered blue light also adds to the sky's brightness, but the sun's disk itself appears deep red or orange. Dust, water droplets, and pollution can enhance this effect, making sunsets even more vivid."
+   },
+   {
+    "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+    "sha": "d4b666e8f9ad",
+    "tokens": 300,
+    "tok_s": 51.84689066432459,
+    "text": "```python\ndef day_of_week(date_string: str) -> str:\n    \"\"\"\n    Parse an ISO-8601 date string and return the name of its day of the week.\n\n    Accepts dates in the form \"YYYY-MM-DD\" (the ISO-8601 calendar date\n    format). The string is parsed with datetime.date.fromisoformat, so\n    any other ISO-8601 variant supported by Python (e.g. \"YYYYMMDD\" or\n    \"YYYY-Www-D\") is also accepted.\n\n    Args:\n        date_string: An ISO-8601 formatted date string.\n\n    Returns:\n        The English name of the day of the week, e.g. \"Monday\".\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n        TypeError: If the argument is not a string.\n\n    Examples:\n        >>> day_of_week(\"2024-09-17\")\n        'Tuesday'\n        >>> day_of_week(\"2000-01-01\")\n        'Saturday'\n    \"\"\"\n    from datetime import date\n\n    parsed = date.fromisoformat(date_string)\n    return parsed.strftime(\"%A\")\n```\n\n**Example usage:**\n\n```python\nprint(day_of_week(\"2024-09-17\"))  # Tuesday\nprint(day_of_week(\"2000-01-01\"))  # Saturday\n```\n\nNotes:\n- `date.fromisoformat` handles validation, so malformed strings like `\"2024-"
+   },
+   {
+    "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+    "sha": "8f72a74780e6",
+    "tokens": 186,
+    "tok_s": 42.103410559837904,
+    "text": "1. TCP is connection-oriented, establishing a handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP guarantees reliable, ordered delivery of data through acknowledgments and retransmissions, whereas UDP makes no such guarantees and can drop or reorder packets.\n\n3. TCP provides flow control and congestion control (using windowing and rate adjustment), while UDP offers neither, simply sending data as fast as the application requests.\n\n4. TCP uses a 20-byte header (plus options) with fields for sequence numbers, flags, and checksums, whereas UDP uses a minimal 8-byte header containing only source/destination ports, length, and checksum.\n\n5. TCP is suited for applications like web browsing, email, and file transfer that need complete and accurate data, while UDP is favored for real-time applications like video streaming, online gaming, and VoIP where low latency matters more than perfect reliability."
+   },
+   {
+    "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+    "sha": "f46510fe1149",
+    "tokens": 19,
+    "tok_s": 30.016447812261053,
+    "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+   },
+   {
+    "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+    "sha": "1171c98cdad9",
+    "tokens": 300,
+    "tok_s": 51.38887719698833,
+    "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Recursive** directory tree traversal\n2. **Rename** `.jpeg` \u2192 `.jpg`\n3. **Skip** files whose target name already exists (don't overwrite)\n4. **Print a summary** of what happened\n\nLet me write it carefully:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 recursively rename *.jpeg to *.jpg in a directory tree.\n#\n# Files whose target name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed counts is printed at the end.\n\nset -uo pipefail\n\nusage() {\n    cat <<EOF\nUsage: ${0##*/} [DIRECTORY]\n\nRecursively rename every *.jpeg file under DIRECTORY (default: current\ndirectory) to *.jpg. Files are never overwritten: if the target name\nalready exists, the file is skipped and reported.\n\nOptions:\n  -n, --dry-run   Show what would be done without changing anything.\n  -h, --help      Show this help message.\nEOF\n}\n\ndry_run=0\ntarget_dir=\".\"\n\nwhile [[ $# -gt 0 ]]; do\n    case \"$1\" in\n        -n|--dry-run) dry_run=1; shift ;;\n        -h|--help)    usage; exit 0 ;;\n        -*)           echo \"Unknown option: $1\" >&2; usage >&"
+   },
+   {
+    "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+    "sha": "e7f3f95c80c0",
+    "tokens": 239,
+    "tok_s": 50.61290632768637,
+    "text": "**Moving time = 3 hours 40 minutes (220 minutes)**\n\nSteps:\n1. Total elapsed: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min... \n\nWait \u2014 let me redo that: 4 h 25 min = 265 min; 265 \u2212 25 = 240 min = 4 h 00 min.\n\n**Moving time = 4 hours (240 minutes)**\n\nCorrection to my opening line: the moving time is 4 hours, not 3 h 40 min. The train travels 09:40 \u2192 14:05 (4 h 25 min total) minus the 25-minute stop = 4 hours of actual movement.</mm:think>**Moving time = 4 hours (240 minutes)**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min = 4 h 00 min\n\nSo the train was actually moving for **4 hours**."
+   },
+   {
+    "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+    "sha": "e29dc07deb5e",
+    "tokens": 144,
+    "tok_s": 38.33120825801324,
+    "text": "A crew of unemployed mechanics calling themselves the Gasket Kings pull off a daring daylight robbery of a corrupt bank's gold vault, drilling through the floor of a laundromat beneath it. The plan unravels when a retired safecracker, hired for advice, recognizes the vault's alarm code and demands a bigger cut. Complications escalate as the getaway truck turns out to be a neighbor's daughter's rusty bicycle, and the police, led by a detective who once arrested their leader, close in. In the final twist, the crew discovers the gold was counterfeit all along, planted by the bank to entrap thieves, and they escape with nothing but the vault door itself, which they install as a trophy in their garage."
+   },
+   {
+    "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+    "sha": "932341ead296",
+    "tokens": 85,
+    "tok_s": 47.01415738516979,
+    "text": "[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]"
+   },
+   {
+    "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+    "sha": "683625c7bc99",
+    "tokens": 27,
+    "tok_s": 38.952300944582305,
+    "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+   },
+   {
+    "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+    "sha": "fcd878b8ca9d",
+    "tokens": 58,
+    "tok_s": 51.54156676247684,
+    "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+   },
+   {
+    "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+    "sha": "ab8ff9c46318",
+    "tokens": 196,
+    "tok_s": 47.48808282373902,
+    "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt wind worries the lantern\u2014\nThe sea forgets my name.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi-gil (2) = **5 syllables** \u2713\n\nLine 2: \"Salt wind worries the lantern\"\n- Salt (1) wind (1) wor-ries (2) the (1) lan-tern (2) = **7 syllables** \u2713\n\nLine 3: \"The sea forgets my name\"\n- The (1) sea (1) for-gets (2) my (1) name (1) = **5 syllables** \u2713\n\nTotal: 5\u20137\u20135, the traditional Japanese haiku pattern, with a kigo (\"lantern,\" \"sea\") and a seasonal feel (the cold, windswept coast of winter)."
+   },
+   {
+    "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+    "sha": "2f193c0f0914",
+    "tokens": 27,
+    "tok_s": 35.236874998669094,
+    "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune"
+   }
+  ],
+  "together": [
+   {
+    "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+    "sha": "1571975d714f",
+    "tokens": 187,
+    "tok_s": 21.760625439985837,
+    "text": "The sky looks blue because of Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~700 nm)\u2014about four times more. Blue light is therefore scattered in all directions across the sky, reaching your eyes from wherever you look, while red light travels more directly.\n\nSunsets are red because sunlight must pass through much more atmosphere to reach you at a low sun angle. Along that long path, nearly all the blue light gets scattered out of the beam and away from your line of sight, leaving the direct light dominated by red and orange wavelengths. The scattered blue light also adds to the sky's brightness, but the sun's disk itself appears deep red or orange. Dust, water droplets, and pollution can enhance this effect, making sunsets even more vivid."
+   },
+   {
+    "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+    "sha": "d4b666e8f9ad",
+    "tokens": 300,
+    "tok_s": 21.08262185416029,
+    "text": "```python\ndef day_of_week(date_string: str) -> str:\n    \"\"\"\n    Parse an ISO-8601 date string and return the name of its day of the week.\n\n    Accepts dates in the form \"YYYY-MM-DD\" (the ISO-8601 calendar date\n    format). The string is parsed with datetime.date.fromisoformat, so\n    any other ISO-8601 variant supported by Python (e.g. \"YYYYMMDD\" or\n    \"YYYY-Www-D\") is also accepted.\n\n    Args:\n        date_string: An ISO-8601 formatted date string.\n\n    Returns:\n        The English name of the day of the week, e.g. \"Monday\".\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n        TypeError: If the argument is not a string.\n\n    Examples:\n        >>> day_of_week(\"2024-09-17\")\n        'Tuesday'\n        >>> day_of_week(\"2000-01-01\")\n        'Saturday'\n    \"\"\"\n    from datetime import date\n\n    parsed = date.fromisoformat(date_string)\n    return parsed.strftime(\"%A\")\n```\n\n**Example usage:**\n\n```python\nprint(day_of_week(\"2024-09-17\"))  # Tuesday\nprint(day_of_week(\"2000-01-01\"))  # Saturday\n```\n\nNotes:\n- `date.fromisoformat` handles validation, so malformed strings like `\"2024-"
+   },
+   {
+    "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+    "sha": "8f72a74780e6",
+    "tokens": 186,
+    "tok_s": 27.72295703789534,
+    "text": "1. TCP is connection-oriented, establishing a handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP guarantees reliable, ordered delivery of data through acknowledgments and retransmissions, whereas UDP makes no such guarantees and can drop or reorder packets.\n\n3. TCP provides flow control and congestion control (using windowing and rate adjustment), while UDP offers neither, simply sending data as fast as the application requests.\n\n4. TCP uses a 20-byte header (plus options) with fields for sequence numbers, flags, and checksums, whereas UDP uses a minimal 8-byte header containing only source/destination ports, length, and checksum.\n\n5. TCP is suited for applications like web browsing, email, and file transfer that need complete and accurate data, while UDP is favored for real-time applications like video streaming, online gaming, and VoIP where low latency matters more than perfect reliability."
+   },
+   {
+    "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+    "sha": "f46510fe1149",
+    "tokens": 19,
+    "tok_s": 2.01849122989481,
+    "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+   },
+   {
+    "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+    "sha": "1171c98cdad9",
+    "tokens": 300,
+    "tok_s": 12.8541825846106,
+    "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Recursive** directory tree traversal\n2. **Rename** `.jpeg` \u2192 `.jpg`\n3. **Skip** files whose target name already exists (don't overwrite)\n4. **Print a summary** of what happened\n\nLet me write it carefully:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 recursively rename *.jpeg to *.jpg in a directory tree.\n#\n# Files whose target name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed counts is printed at the end.\n\nset -uo pipefail\n\nusage() {\n    cat <<EOF\nUsage: ${0##*/} [DIRECTORY]\n\nRecursively rename every *.jpeg file under DIRECTORY (default: current\ndirectory) to *.jpg. Files are never overwritten: if the target name\nalready exists, the file is skipped and reported.\n\nOptions:\n  -n, --dry-run   Show what would be done without changing anything.\n  -h, --help      Show this help message.\nEOF\n}\n\ndry_run=0\ntarget_dir=\".\"\n\nwhile [[ $# -gt 0 ]]; do\n    case \"$1\" in\n        -n|--dry-run) dry_run=1; shift ;;\n        -h|--help)    usage; exit 0 ;;\n        -*)           echo \"Unknown option: $1\" >&2; usage >&"
+   },
+   {
+    "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+    "sha": "e7f3f95c80c0",
+    "tokens": 239,
+    "tok_s": 8.612799507909914,
+    "text": "**Moving time = 3 hours 40 minutes (220 minutes)**\n\nSteps:\n1. Total elapsed: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min... \n\nWait \u2014 let me redo that: 4 h 25 min = 265 min; 265 \u2212 25 = 240 min = 4 h 00 min.\n\n**Moving time = 4 hours (240 minutes)**\n\nCorrection to my opening line: the moving time is 4 hours, not 3 h 40 min. The train travels 09:40 \u2192 14:05 (4 h 25 min total) minus the 25-minute stop = 4 hours of actual movement.</mm:think>**Moving time = 4 hours (240 minutes)**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min = 4 h 00 min\n\nSo the train was actually moving for **4 hours**."
+   },
+   {
+    "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+    "sha": "e29dc07deb5e",
+    "tokens": 144,
+    "tok_s": 7.70329239389236,
+    "text": "A crew of unemployed mechanics calling themselves the Gasket Kings pull off a daring daylight robbery of a corrupt bank's gold vault, drilling through the floor of a laundromat beneath it. The plan unravels when a retired safecracker, hired for advice, recognizes the vault's alarm code and demands a bigger cut. Complications escalate as the getaway truck turns out to be a neighbor's daughter's rusty bicycle, and the police, led by a detective who once arrested their leader, close in. In the final twist, the crew discovers the gold was counterfeit all along, planted by the bank to entrap thieves, and they escape with nothing but the vault door itself, which they install as a trophy in their garage."
+   },
+   {
+    "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+    "sha": "932341ead296",
+    "tokens": 85,
+    "tok_s": 3.2997700084265222,
+    "text": "[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]"
+   },
+   {
+    "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+    "sha": "683625c7bc99",
+    "tokens": 27,
+    "tok_s": 0.9307099872550327,
+    "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+   },
+   {
+    "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+    "sha": "fcd878b8ca9d",
+    "tokens": 58,
+    "tok_s": 2.0548353509816732,
+    "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+   },
+   {
+    "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+    "sha": "ab8ff9c46318",
+    "tokens": 196,
+    "tok_s": 5.904645636600919,
+    "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt wind worries the lantern\u2014\nThe sea forgets my name.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi-gil (2) = **5 syllables** \u2713\n\nLine 2: \"Salt wind worries the lantern\"\n- Salt (1) wind (1) wor-ries (2) the (1) lan-tern (2) = **7 syllables** \u2713\n\nLine 3: \"The sea forgets my name\"\n- The (1) sea (1) for-gets (2) my (1) name (1) = **5 syllables** \u2713\n\nTotal: 5\u20137\u20135, the traditional Japanese haiku pattern, with a kigo (\"lantern,\" \"sea\") and a seasonal feel (the cold, windswept coast of winter)."
+   },
+   {
+    "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+    "sha": "2f193c0f0914",
+    "tokens": 27,
+    "tok_s": 0.9037740688685372,
+    "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune"
+   }
+  ]
+ }
+}

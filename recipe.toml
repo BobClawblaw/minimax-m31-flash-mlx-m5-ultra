@@ -15,7 +15,7 @@ revision = ""                    # empty: the variant's pinned revision (config.
 # TensorFold's native Metal engine: a worktree of tensorfold_src at tensorfold_sha, built by `python3 -m mac build`
 # under tf_cache; `binary` names a built tensorfold-native instead
 tensorfold_src = "~/github/TensorFold"
-tensorfold_sha = "60305dd4f3a69b49be61e0896afdab2d51e98126"   # branch minimax-m3 (README.md)
+tensorfold_sha = "e6b3b3bd00d755e7121f4ddca5f6d36994c34284"   # branch minimax-m3 (README.md)
 zig = "zig"                      # Zig 0.17.0
 zig_cpu = "native"
 binary = ""
@@ -30,7 +30,6 @@ context = 0                      # a stream's window; 0: the variant's (mix34 65
 parallel = 2                     # streams decoded together; they share the cache memory (README)
 drafts = true                    # incoai's DFlash2 drafts one stream (greedy replies are identical with them off)
 drafter = "dflash2"              # or "dspark", the release's own DSpark head (both ship in the checkpoint)
-kv_cache = "int8"                # keys and values cached as int8 (57% of bf16's bytes); "bf16" for the full width
 load_limit_gb = 226              # MINIMAX_LOAD_LIMIT_GB: weights, scratch and caches together (README: memory)
 thinking = false                 # the template's thinking block off by default; a request's chat_template_kwargs turns it on
 max_tokens = 32768               # a reply's default ceiling

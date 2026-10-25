@@ -11,11 +11,11 @@ tags:
 - minimax
 ---
 
-# MiniMax-M3.1-Flash, mixed 3-bit sized for a 256k window (mix256k)
+# MiniMax-M3.1-Flash, mixed 3-bit for a long window (mix256k)
 
 [MiniMaxAI/MiniMax-M3.1-Flash](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash) (revision `54e4e69d`)
 converted for [TensorFold](https://github.com/ashhart/TensorFold)'s native Metal engine (its `minimax_m3` family), to
-serve on one Apple M5 Ultra with 256 GB. Sized so a 262,144-token window fits beside it on 256 GB with images, the drafter and an int8 key/value cache; mix34 trades that window for quality.
+serve on one Apple M5 Ultra with 256 GB. Sized for the longest window: beside it, the exact bf16 key/value cache fits 150,400 tokens on 256 GB with images and the drafter (the recipe serves 147,456; the name is from the 262,144 an earlier int8 cache gave it). mix34 trades that window for quality.
 
 **Serving:** the engine's `minimax_m3` family is in
 [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235); the serving recipe, with its launcher,
@@ -39,15 +39,14 @@ TensorFold's.
 ## Quality
 
 Next-token KL divergence and top-1 agreement against the release's own NVFP4 weights (an MLX reference of
-transformers' modeling code), over the 1,024 positions of one chat, the engine's default int8 key/value cache:
+transformers' modeling code), over the 1,024 positions of one chat, with the engine's exact bf16 key/value cache:
 
 | Checkpoint | Mean KL | Top-1 agreement |
 |---|---|---|
-| mix34 | 0.250 | 80.0% |
-| mix256k | 0.284 | 78.2% |
-| all experts 3-bit (not published) | 0.300 | 77.3% |
+| mix34 | 0.246 | 81.1% |
+| mix256k | 0.301 | 78.3% |
 
-Through the recipe harness's suite, thinking off: GSM8K 0.976, MGSM 0.875, MMLU 0.819, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
+Through the recipe harness's suite, thinking off (with the earlier int8 cache): GSM8K 0.976, MGSM 0.875, MMLU 0.819, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
 mix256k, JSON 30/30 on both. Speeds, the other variant's numbers and how they were measured are in the
 [recipe's README](https://github.com/BobClawblaw/minimax-m31-flash-mlx-m5-ultra#measured).
 

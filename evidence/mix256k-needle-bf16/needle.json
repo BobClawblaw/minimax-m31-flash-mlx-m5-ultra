@@ -1,0 +1,10 @@
+{
+ "variant": "mix256k",
+ "server": "--context 147456 --parallel 2 --prompt-cache-gib 4 --vision, MINIMAX_LOAD_LIMIT_GB=226, bf16 cache",
+ "prompt": "TensorFold's recipe docs, docs and Zig sources (540,000 characters) with 'the secret launch code is PURPLE-HARBOR-7349' two fifths in, then the question; thinking off, greedy",
+ "prompt_tokens": 145203,
+ "cached_tokens": 0,
+ "reply": "PURPLE-HARBOR-7349",
+ "seconds": 115,
+ "peak_wired_gib": 210.1
+}

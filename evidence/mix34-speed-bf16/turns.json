@@ -1,0 +1,102 @@
+{
+ "turn1": {
+  "status": 200,
+  "text": "Three rivers in Europe are:\n\n1. **Danube** \u2014 flows through or borders ten countries, from Germany's Black Forest to the Black Sea in Romania.\n2. **Rhine** \u2014 rises in the Swiss Alps and empties into the",
+  "ttft": 3.512,
+  "ttft_any": 3.512,
+  "usage": {
+   "prompt_tokens": 4698,
+   "completion_tokens": 48,
+   "total_tokens": 4746,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 4.465,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn2": {
+  "status": 200,
+  "text": "The **Danube** is the longest of the three, at roughly 2,850 km (1,770 miles). It rises in the Black Forest region of southwestern Germany and flows east through Austria, Slovakia, Hungary, Croatia, Serbia",
+  "ttft": 0.258,
+  "ttft_any": 0.258,
+  "usage": {
+   "prompt_tokens": 4763,
+   "completion_tokens": 48,
+   "total_tokens": 4811,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.205,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3": {
+  "status": 200,
+  "text": "The **Rhine** is the shortest of the three, at about 1,230 km (765 miles). It rises in the Swiss Alps and flows north through Switzerland, Germany, and the Netherlands, where it empties into the North",
+  "ttft": 0.297,
+  "ttft_any": 0.297,
+  "usage": {
+   "prompt_tokens": 4826,
+   "completion_tokens": 48,
+   "total_tokens": 4874,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.272,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3_again": {
+  "status": 200,
+  "text": "The **Rhine** is the shortest of the three, at about 1,230 km (765 miles). It rises in the Swiss Alps and flows north through Switzerland, Germany, and the Netherlands, where it empties into the North",
+  "ttft": 0.3,
+  "ttft_any": 0.3,
+  "usage": {
+   "prompt_tokens": 4826,
+   "completion_tokens": 48,
+   "total_tokens": 4874,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.276,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3_cold": {
+  "status": 200,
+  "text": "The **Rhine** is the shortest of the three, at about 1,230 km (765 miles). It rises in the Swiss Alps and flows north through Switzerland, Germany, and the Netherlands, where it empties into the North",
+  "ttft": 3.661,
+  "ttft_any": 3.661,
+  "usage": {
+   "prompt_tokens": 4826,
+   "completion_tokens": 48,
+   "total_tokens": 4874,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 4.643,
+  "finish": "length",
+  "tool_calls": null
+ }
+}

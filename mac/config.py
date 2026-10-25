@@ -11,8 +11,8 @@ WEBP_VERSION = "1.6.0"  # the libwebp release its WebP decoder pins
 
 # Each conversion: its public repo, the revision the README measured, and the window its memory allows on 256 GB
 VARIANTS = {
-    "mix34": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34", "136e775c89e996cac20c05befbcb26886ad24782", 65536),
-    "mix256k": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k", "c7defa69b0e8b57426a9945eb3f9eb91cfef9f8c", 262144),
+    "mix34": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34", "136e775c89e996cac20c05befbcb26886ad24782", 32768),
+    "mix256k": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k", "c7defa69b0e8b57426a9945eb3f9eb91cfef9f8c", 147456),
 }
 
 
@@ -36,7 +36,6 @@ class Settings:
     parallel: int = 2
     drafts: bool = True
     drafter: str = "dflash2"
-    kv_cache: str = "int8"
     load_limit_gb: float = 226
     thinking: bool = False
     max_tokens: int = 32768
@@ -134,7 +133,6 @@ class Settings:
     def server_env(self) -> dict[str, str]:
         env = dict(os.environ)
         env["MINIMAX_LOAD_LIMIT_GB"] = f"{self.load_limit_gb:g}"
-        env["MINIMAX_KV_CACHE"] = self.kv_cache
         env["MINIMAX_DRAFTER"] = self.drafter
         return env
 
@@ -173,12 +171,10 @@ def validate(s: Settings) -> list[str]:
         out.append(f"no checkpoint at {s.model}: python3 -m mac download")
     if s.drafter not in ("dflash2", "dspark"):
         out.append('drafter must be "dflash2" or "dspark"')
-    if s.kv_cache not in ("int8", "bf16"):
-        out.append('kv_cache must be "int8" or "bf16"')
     if s.parallel < 1 or s.parallel > 32:
         out.append("parallel must be 1 to 32 (the streams share the cache memory, README)")
     if s.window < 1 or s.window > 1048576:
-        out.append("context must be 1 to 1048576 (what fits depends on the variant and kv_cache, README)")
+        out.append("context must be 1 to 1048576 (what fits depends on the variant, README)")
     if not s.run_binary.exists():
         out.append(f"no engine binary at {s.run_binary}: python3 -m mac build")
     if s.vision and not (s.jpeg_lib.exists() and s.webp_lib.exists()):

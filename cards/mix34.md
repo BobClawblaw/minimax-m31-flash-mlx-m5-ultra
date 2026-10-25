@@ -39,15 +39,14 @@ TensorFold's.
 ## Quality
 
 Next-token KL divergence and top-1 agreement against the release's own NVFP4 weights (an MLX reference of
-transformers' modeling code), over the 1,024 positions of one chat, the engine's default int8 key/value cache:
+transformers' modeling code), over the 1,024 positions of one chat, with the engine's exact bf16 key/value cache:
 
 | Checkpoint | Mean KL | Top-1 agreement |
 |---|---|---|
-| mix34 | 0.250 | 80.0% |
-| mix256k | 0.284 | 78.2% |
-| all experts 3-bit (not published) | 0.300 | 77.3% |
+| mix34 | 0.246 | 81.1% |
+| mix256k | 0.301 | 78.3% |
 
-Through the recipe harness's suite, thinking off: GSM8K 0.964, MGSM 0.829, MMLU 0.830, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
+Through the recipe harness's suite, thinking off (with the earlier int8 cache): GSM8K 0.964, MGSM 0.829, MMLU 0.830, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
 mix256k, JSON 30/30 on both. Speeds, the other variant's numbers and how they were measured are in the
 [recipe's README](https://github.com/BobClawblaw/minimax-m31-flash-mlx-m5-ultra#measured).
 

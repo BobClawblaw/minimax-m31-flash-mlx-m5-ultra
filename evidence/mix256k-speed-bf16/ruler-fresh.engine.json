@@ -1,0 +1,30 @@
+{
+ "levels": {
+  "1": {
+   "requests": 12,
+   "prompt": 2598,
+   "cached": 0,
+   "tokens": 2754,
+   "rounds": 1304,
+   "accepted": 1443,
+   "proposed": 2174,
+   "tokens_a_round": 2.112,
+   "drafts_a_round": 1.667,
+   "accept_rate": 0.6638,
+   "ms_a_round": 41.83
+  },
+  "2": {
+   "requests": 25,
+   "prompt": 5387,
+   "cached": 0,
+   "tokens": 5728,
+   "rounds": 3134,
+   "accepted": 2582,
+   "proposed": 3395,
+   "tokens_a_round": 1.828,
+   "drafts_a_round": 1.083,
+   "accept_rate": 0.7605,
+   "ms_a_round": 56.74
+  }
+ }
+}
