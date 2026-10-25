@@ -131,21 +131,24 @@ With the int8 cache: mix256k 1,429 / 1,420 / 1,319, and before the engine's prom
 3.9-4.1 s first, 1.7 s after). The 145,203-token needle prompt took 115 s. A multi-turn chat's resumed turn starts in
 0.26-0.30 s against 3.6-5.6 s cold.
 
-**Quality**, thinking off (the harness's `dsv41-quality-off` plan). mix256k was run again on the pinned bf16 cache
-(`evidence/mix256k-quality-off-bf16`); mix34 only with the earlier int8 cache:
+**Quality**, thinking off (the harness's `dsv41-quality-off` plan). Both variants were run again on the pinned bf16
+cache (`evidence/mix256k-quality-off-bf16`, `evidence/mix34-quality-off-bf16`); the int8 columns are the earlier
+engine's int8 cache, kept for comparison:
 
-| | mix256k, bf16 | mix256k, int8 | mix34, int8 |
-|---|---:|---:|---:|
-| GSM8K (250) | 0.976 | 0.976 | 0.964 |
-| MGSM (240) | 0.821 | 0.875 | 0.829 |
-| MMLU (342) | 0.819 | 0.819 | 0.830 |
-| MATH-500 | 0.900 | 0.908 | 0.908 |
-| IFEval, loose (150) | 0.593 | 0.573 | 0.573 |
-| tools (60) | 0.933 | 0.917 | 0.95 |
-| JSON (30) | 1.0 | 1.0 | 1.0 |
+| | mix256k, bf16 | mix256k, int8 | mix34, bf16 | mix34, int8 |
+|---|---:|---:|---:|---:|
+| GSM8K (250) | 0.976 | 0.976 | 0.968 | 0.964 |
+| MGSM (240) | 0.821 | 0.875 | 0.846 | 0.829 |
+| MMLU (342) | 0.819 | 0.819 | 0.827 | 0.830 |
+| MATH-500 | 0.900 | 0.908 | 0.890 | 0.908 |
+| IFEval, loose (150) | 0.593 | 0.573 | 0.580 | 0.573 |
+| tools (60) | 0.933 | 0.917 | 0.95 | 0.95 |
+| JSON (30) | 1.0 | 1.0 | 1.0 | 1.0 |
 
-The bf16 run's MGSM loss is nearly all in two languages, Japanese (22/30 against 27) and Swahili (15/30 against 20),
-with 30 questions each; the other six moved by one at most.
+The cache swap moves MGSM in opposite directions on the two variants. mix256k's bf16 loss is nearly all in Japanese
+(22/30 against 27) and Swahili (15/30 against 20); mix34's bf16 gain is mostly Bengali (26/30 against 21), with
+Swahili level at 17. With 30 questions a language, these read as greedy paths diverging, not as a cost of either cache.
+mix34's MATH-500 drop is mostly unfinished replies: 27 of 500 give no boxed answer, against 17 with int8.
 
 IFEval is low for a model this size: the suite caps replies at 1,200 tokens, MiniMax writes long (on mix34, 34 of
 150 replies hit the cap, 23 of them failing), and many of the rest break the format they were asked for. Thinking

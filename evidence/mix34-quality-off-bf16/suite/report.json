@@ -1,0 +1,900 @@
+{
+ "url": "http://127.0.0.1:8897",
+ "model": "MiniMax-M3.1-Flash",
+ "results": [
+  {
+   "name": "drafts",
+   "score": 1.0,
+   "cases": 12,
+   "passed": 12,
+   "seconds": 86.01089191436768,
+   "notes": [
+    "drafted 43 tok/s vs undrafted 36 tok/s"
+   ],
+   "details": {
+    "drafted": [
+     {
+      "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+      "sha": "1571975d714f",
+      "tokens": 187,
+      "tok_s": 25.735763574215753,
+      "text": "The sky looks blue because of Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~700 nm)\u2014about four times more. Blue light is therefore scattered in all directions across the sky, reaching your eyes from wherever you look, while red light travels more directly.\n\nSunsets are red because sunlight must pass through much more atmosphere to reach you at a low sun angle. Along that long path, nearly all the blue light gets scattered out of the beam and away from your line of sight, leaving the direct light dominated by red and orange wavelengths. The scattered blue light also adds to the sky's brightness, but the sun's disk itself appears deep red or orange. Dust, water droplets, and pollution can enhance this effect, making sunsets even more vivid."
+     },
+     {
+      "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+      "sha": "d4b666e8f9ad",
+      "tokens": 300,
+      "tok_s": 52.88319782398532,
+      "text": "```python\ndef day_of_week(date_string: str) -> str:\n    \"\"\"\n    Parse an ISO-8601 date string and return the name of its day of the week.\n\n    Accepts dates in the form \"YYYY-MM-DD\" (the ISO-8601 calendar date\n    format). The string is parsed with datetime.date.fromisoformat, so\n    any other ISO-8601 variant supported by Python (e.g. \"YYYYMMDD\" or\n    \"YYYY-Www-D\") is also accepted.\n\n    Args:\n        date_string: An ISO-8601 formatted date string.\n\n    Returns:\n        The English name of the day of the week, e.g. \"Monday\".\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n        TypeError: If the argument is not a string.\n\n    Examples:\n        >>> day_of_week(\"2024-09-17\")\n        'Tuesday'\n        >>> day_of_week(\"2000-01-01\")\n        'Saturday'\n    \"\"\"\n    from datetime import date\n\n    parsed = date.fromisoformat(date_string)\n    return parsed.strftime(\"%A\")\n```\n\n**Example usage:**\n\n```python\nprint(day_of_week(\"2024-09-17\"))  # Tuesday\nprint(day_of_week(\"2000-01-01\"))  # Saturday\n```\n\nNotes:\n- `date.fromisoformat` handles validation, so malformed strings like `\"2024-"
+     },
+     {
+      "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+      "sha": "8f72a74780e6",
+      "tokens": 186,
+      "tok_s": 41.924942797009294,
+      "text": "1. TCP is connection-oriented, establishing a handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP guarantees reliable, ordered delivery of data through acknowledgments and retransmissions, whereas UDP makes no such guarantees and can drop or reorder packets.\n\n3. TCP provides flow control and congestion control (using windowing and rate adjustment), while UDP offers neither, simply sending data as fast as the application requests.\n\n4. TCP uses a 20-byte header (plus options) with fields for sequence numbers, flags, and checksums, whereas UDP uses a minimal 8-byte header containing only source/destination ports, length, and checksum.\n\n5. TCP is suited for applications like web browsing, email, and file transfer that need complete and accurate data, while UDP is favored for real-time applications like video streaming, online gaming, and VoIP where low latency matters more than perfect reliability."
+     },
+     {
+      "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+      "sha": "f46510fe1149",
+      "tokens": 19,
+      "tok_s": 30.831171865152136,
+      "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+     },
+     {
+      "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+      "sha": "1171c98cdad9",
+      "tokens": 300,
+      "tok_s": 51.128653305174765,
+      "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Recursive** directory tree traversal\n2. **Rename** `.jpeg` \u2192 `.jpg`\n3. **Skip** files whose target name already exists (don't overwrite)\n4. **Print a summary** of what happened\n\nLet me write it carefully:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 recursively rename *.jpeg to *.jpg in a directory tree.\n#\n# Files whose target name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed counts is printed at the end.\n\nset -uo pipefail\n\nusage() {\n    cat <<EOF\nUsage: ${0##*/} [DIRECTORY]\n\nRecursively rename every *.jpeg file under DIRECTORY (default: current\ndirectory) to *.jpg. Files are never overwritten: if the target name\nalready exists, the file is skipped and reported.\n\nOptions:\n  -n, --dry-run   Show what would be done without changing anything.\n  -h, --help      Show this help message.\nEOF\n}\n\ndry_run=0\ntarget_dir=\".\"\n\nwhile [[ $# -gt 0 ]]; do\n    case \"$1\" in\n        -n|--dry-run) dry_run=1; shift ;;\n        -h|--help)    usage; exit 0 ;;\n        -*)           echo \"Unknown option: $1\" >&2; usage >&"
+     },
+     {
+      "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+      "sha": "e7f3f95c80c0",
+      "tokens": 239,
+      "tok_s": 50.43448038736191,
+      "text": "**Moving time = 3 hours 40 minutes (220 minutes)**\n\nSteps:\n1. Total elapsed: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min... \n\nWait \u2014 let me redo that: 4 h 25 min = 265 min; 265 \u2212 25 = 240 min = 4 h 00 min.\n\n**Moving time = 4 hours (240 minutes)**\n\nCorrection to my opening line: the moving time is 4 hours, not 3 h 40 min. The train travels 09:40 \u2192 14:05 (4 h 25 min total) minus the 25-minute stop = 4 hours of actual movement.</mm:think>**Moving time = 4 hours (240 minutes)**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min = 4 h 00 min\n\nSo the train was actually moving for **4 hours**."
+     },
+     {
+      "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+      "sha": "e29dc07deb5e",
+      "tokens": 144,
+      "tok_s": 37.60012788705305,
+      "text": "A crew of unemployed mechanics calling themselves the Gasket Kings pull off a daring daylight robbery of a corrupt bank's gold vault, drilling through the floor of a laundromat beneath it. The plan unravels when a retired safecracker, hired for advice, recognizes the vault's alarm code and demands a bigger cut. Complications escalate as the getaway truck turns out to be a neighbor's daughter's rusty bicycle, and the police, led by a detective who once arrested their leader, close in. In the final twist, the crew discovers the gold was counterfeit all along, planted by the bank to entrap thieves, and they escape with nothing but the vault door itself, which they install as a trophy in their garage."
+     },
+     {
+      "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+      "sha": "932341ead296",
+      "tokens": 85,
+      "tok_s": 47.52215965040758,
+      "text": "[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]"
+     },
+     {
+      "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+      "sha": "683625c7bc99",
+      "tokens": 27,
+      "tok_s": 37.73153584847434,
+      "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+     },
+     {
+      "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+      "sha": "fcd878b8ca9d",
+      "tokens": 58,
+      "tok_s": 50.960562674203466,
+      "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+     },
+     {
+      "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+      "sha": "ab8ff9c46318",
+      "tokens": 196,
+      "tok_s": 47.93165239370852,
+      "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt wind worries the lantern\u2014\nThe sea forgets my name.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi-gil (2) = **5 syllables** \u2713\n\nLine 2: \"Salt wind worries the lantern\"\n- Salt (1) wind (1) wor-ries (2) the (1) lan-tern (2) = **7 syllables** \u2713\n\nLine 3: \"The sea forgets my name\"\n- The (1) sea (1) for-gets (2) my (1) name (1) = **5 syllables** \u2713\n\nTotal: 5\u20137\u20135, the traditional Japanese haiku pattern, with a kigo (\"lantern,\" \"sea\") and a seasonal feel (the cold, windswept coast of winter)."
+     },
+     {
+      "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+      "sha": "2f193c0f0914",
+      "tokens": 27,
+      "tok_s": 35.43124192909276,
+      "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune"
+     }
+    ],
+    "undrafted": [
+     {
+      "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+      "sha": "1571975d714f",
+      "tokens": 187,
+      "tok_s": 40.01433882772322,
+      "text": "The sky looks blue because of Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~700 nm)\u2014about four times more. Blue light is therefore scattered in all directions across the sky, reaching your eyes from wherever you look, while red light travels more directly.\n\nSunsets are red because sunlight must pass through much more atmosphere to reach you at a low sun angle. Along that long path, nearly all the blue light gets scattered out of the beam and away from your line of sight, leaving the direct light dominated by red and orange wavelengths. The scattered blue light also adds to the sky's brightness, but the sun's disk itself appears deep red or orange. Dust, water droplets, and pollution can enhance this effect, making sunsets even more vivid."
+     },
+     {
+      "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+      "sha": "d4b666e8f9ad",
+      "tokens": 300,
+      "tok_s": 40.63586229523506,
+      "text": "```python\ndef day_of_week(date_string: str) -> str:\n    \"\"\"\n    Parse an ISO-8601 date string and return the name of its day of the week.\n\n    Accepts dates in the form \"YYYY-MM-DD\" (the ISO-8601 calendar date\n    format). The string is parsed with datetime.date.fromisoformat, so\n    any other ISO-8601 variant supported by Python (e.g. \"YYYYMMDD\" or\n    \"YYYY-Www-D\") is also accepted.\n\n    Args:\n        date_string: An ISO-8601 formatted date string.\n\n    Returns:\n        The English name of the day of the week, e.g. \"Monday\".\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n        TypeError: If the argument is not a string.\n\n    Examples:\n        >>> day_of_week(\"2024-09-17\")\n        'Tuesday'\n        >>> day_of_week(\"2000-01-01\")\n        'Saturday'\n    \"\"\"\n    from datetime import date\n\n    parsed = date.fromisoformat(date_string)\n    return parsed.strftime(\"%A\")\n```\n\n**Example usage:**\n\n```python\nprint(day_of_week(\"2024-09-17\"))  # Tuesday\nprint(day_of_week(\"2000-01-01\"))  # Saturday\n```\n\nNotes:\n- `date.fromisoformat` handles validation, so malformed strings like `\"2024-"
+     },
+     {
+      "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+      "sha": "8f72a74780e6",
+      "tokens": 186,
+      "tok_s": 39.960602283556575,
+      "text": "1. TCP is connection-oriented, establishing a handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP guarantees reliable, ordered delivery of data through acknowledgments and retransmissions, whereas UDP makes no such guarantees and can drop or reorder packets.\n\n3. TCP provides flow control and congestion control (using windowing and rate adjustment), while UDP offers neither, simply sending data as fast as the application requests.\n\n4. TCP uses a 20-byte header (plus options) with fields for sequence numbers, flags, and checksums, whereas UDP uses a minimal 8-byte header containing only source/destination ports, length, and checksum.\n\n5. TCP is suited for applications like web browsing, email, and file transfer that need complete and accurate data, while UDP is favored for real-time applications like video streaming, online gaming, and VoIP where low latency matters more than perfect reliability."
+     },
+     {
+      "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+      "sha": "f46510fe1149",
+      "tokens": 19,
+      "tok_s": 26.110814764412268,
+      "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+     },
+     {
+      "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+      "sha": "1171c98cdad9",
+      "tokens": 300,
+      "tok_s": 40.711080080135154,
+      "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Recursive** directory tree traversal\n2. **Rename** `.jpeg` \u2192 `.jpg`\n3. **Skip** files whose target name already exists (don't overwrite)\n4. **Print a summary** of what happened\n\nLet me write it carefully:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 recursively rename *.jpeg to *.jpg in a directory tree.\n#\n# Files whose target name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed counts is printed at the end.\n\nset -uo pipefail\n\nusage() {\n    cat <<EOF\nUsage: ${0##*/} [DIRECTORY]\n\nRecursively rename every *.jpeg file under DIRECTORY (default: current\ndirectory) to *.jpg. Files are never overwritten: if the target name\nalready exists, the file is skipped and reported.\n\nOptions:\n  -n, --dry-run   Show what would be done without changing anything.\n  -h, --help      Show this help message.\nEOF\n}\n\ndry_run=0\ntarget_dir=\".\"\n\nwhile [[ $# -gt 0 ]]; do\n    case \"$1\" in\n        -n|--dry-run) dry_run=1; shift ;;\n        -h|--help)    usage; exit 0 ;;\n        -*)           echo \"Unknown option: $1\" >&2; usage >&"
+     },
+     {
+      "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+      "sha": "e7f3f95c80c0",
+      "tokens": 239,
+      "tok_s": 40.28955207617798,
+      "text": "**Moving time = 3 hours 40 minutes (220 minutes)**\n\nSteps:\n1. Total elapsed: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min... \n\nWait \u2014 let me redo that: 4 h 25 min = 265 min; 265 \u2212 25 = 240 min = 4 h 00 min.\n\n**Moving time = 4 hours (240 minutes)**\n\nCorrection to my opening line: the moving time is 4 hours, not 3 h 40 min. The train travels 09:40 \u2192 14:05 (4 h 25 min total) minus the 25-minute stop = 4 hours of actual movement.</mm:think>**Moving time = 4 hours (240 minutes)**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min = 4 h 00 min\n\nSo the train was actually moving for **4 hours**."
+     },
+     {
+      "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+      "sha": "e29dc07deb5e",
+      "tokens": 144,
+      "tok_s": 39.228804388970424,
+      "text": "A crew of unemployed mechanics calling themselves the Gasket Kings pull off a daring daylight robbery of a corrupt bank's gold vault, drilling through the floor of a laundromat beneath it. The plan unravels when a retired safecracker, hired for advice, recognizes the vault's alarm code and demands a bigger cut. Complications escalate as the getaway truck turns out to be a neighbor's daughter's rusty bicycle, and the police, led by a detective who once arrested their leader, close in. In the final twist, the crew discovers the gold was counterfeit all along, planted by the bank to entrap thieves, and they escape with nothing but the vault door itself, which they install as a trophy in their garage."
+     },
+     {
+      "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+      "sha": "932341ead296",
+      "tokens": 85,
+      "tok_s": 37.163387827764765,
+      "text": "[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]"
+     },
+     {
+      "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+      "sha": "683625c7bc99",
+      "tokens": 27,
+      "tok_s": 29.239350480849243,
+      "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+     },
+     {
+      "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+      "sha": "fcd878b8ca9d",
+      "tokens": 58,
+      "tok_s": 35.31584979598982,
+      "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+     },
+     {
+      "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+      "sha": "ab8ff9c46318",
+      "tokens": 196,
+      "tok_s": 40.0118705335343,
+      "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt wind worries the lantern\u2014\nThe sea forgets my name.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi-gil (2) = **5 syllables** \u2713\n\nLine 2: \"Salt wind worries the lantern\"\n- Salt (1) wind (1) wor-ries (2) the (1) lan-tern (2) = **7 syllables** \u2713\n\nLine 3: \"The sea forgets my name\"\n- The (1) sea (1) for-gets (2) my (1) name (1) = **5 syllables** \u2713\n\nTotal: 5\u20137\u20135, the traditional Japanese haiku pattern, with a kigo (\"lantern,\" \"sea\") and a seasonal feel (the cold, windswept coast of winter)."
+     },
+     {
+      "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+      "sha": "2f193c0f0914",
+      "tokens": 27,
+      "tok_s": 29.1548691789871,
+      "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune"
+     }
+    ]
+   }
+  },
+  {
+   "name": "streaming",
+   "score": 1.0,
+   "cases": 4,
+   "passed": 4,
+   "seconds": 24.539566040039062,
+   "notes": [
+    "identical"
+   ],
+   "details": {}
+  },
+  {
+   "name": "multiturn",
+   "score": 1.0,
+   "cases": 8,
+   "passed": 8,
+   "seconds": 14.798103094100952,
+   "notes": [
+    "recalled 8/8 facts"
+   ],
+   "details": {
+    "reply": "- **Name:** Odile\n- **City:** Lyon\n- **Cat:** Pistache, 7 years old\n- **Job:** Luthier \u2014 violin repair\n- **Favourite number:** 314\n- **Travel:** Flying to Montreal on 14 November"
+   }
+  },
+  {
+   "name": "stop",
+   "score": 1.0,
+   "cases": 3,
+   "passed": 3,
+   "seconds": 1.7160239219665527,
+   "notes": [
+    "3/3 stopped before the string"
+   ],
+   "details": {}
+  },
+  {
+   "name": "thinking",
+   "score": 1.0,
+   "cases": 10,
+   "passed": 10,
+   "seconds": 22.24514675140381,
+   "notes": [
+    "0 replies without reasoning_content, 0 with think tags in content"
+   ],
+   "details": {}
+  },
+  {
+   "name": "copy",
+   "score": 1.0,
+   "cases": 2,
+   "passed": 2,
+   "seconds": 2.554849147796631,
+   "notes": [
+    "2/2 byte-identical"
+   ],
+   "details": {}
+  },
+  {
+   "name": "max-tokens",
+   "score": 1.0,
+   "cases": 3,
+   "passed": 3,
+   "seconds": 1.8965702056884766,
+   "notes": [
+    "3/3 exact"
+   ],
+   "details": {}
+  },
+  {
+   "name": "tools",
+   "score": 0.95,
+   "cases": 60,
+   "passed": 57,
+   "seconds": 70.45670175552368,
+   "notes": [
+    "\"How do you say 'where is the station' in\": got []",
+    "'Set a timer for 5 minutes.': got [('set_timer', {'seconds': 300, 'label': '5-minute timer'})]",
+    "'Timer, 45 seconds.': got [('set_timer', {'seconds': 45, 'label': '45-second timer'})]"
+   ],
+   "details": {}
+  },
+  {
+   "name": "json",
+   "score": 1.0,
+   "cases": 30,
+   "passed": 30,
+   "seconds": 23.116880893707275,
+   "notes": [
+    "all valid"
+   ],
+   "details": {}
+  },
+  {
+   "name": "ifeval",
+   "score": 0.58,
+   "cases": 150,
+   "passed": 87,
+   "seconds": 1739.6794986724854,
+   "notes": [
+    "loose 87/150, strict 75/150, 150 covered prompts"
+   ],
+   "details": {
+    "strict": 75,
+    "loose": 87,
+    "n": 150
+   }
+  },
+  {
+   "name": "gsm8k",
+   "score": 0.968,
+   "cases": 250,
+   "passed": 242,
+   "seconds": 442.8346121311188,
+   "notes": [
+    "misses at [12, 37, 87, 89, 93, 119, 122, 187]"
+   ],
+   "details": {
+    "n": 250,
+    "thinking": false,
+    "misses": [
+     12,
+     37,
+     87,
+     89,
+     93,
+     119,
+     122,
+     187
+    ]
+   }
+  },
+  {
+   "name": "mgsm",
+   "score": 0.8458333333333333,
+   "cases": 240,
+   "passed": 203,
+   "seconds": 788.6556453704834,
+   "notes": [
+    "de 28/30, es 29/30, fr 26/30, ja 25/30, zh 25/30, ru 27/30, sw 17/30, bn 26/30"
+   ],
+   "details": {
+    "per_language": {
+     "de": 28,
+     "es": 29,
+     "fr": 26,
+     "ja": 25,
+     "zh": 25,
+     "ru": 27,
+     "sw": 17,
+     "bn": 26
+    },
+    "n": 30
+   }
+  },
+  {
+   "name": "mmlu",
+   "score": 0.827485380116959,
+   "cases": 342,
+   "passed": 283,
+   "seconds": 773.284295797348,
+   "notes": [
+    "57 subjects x 6; weakest business_ethics 3/6, high_school_physics 3/6, high_school_us_history 3/6"
+   ],
+   "details": {
+    "per_subject": {
+     "abstract_algebra": [
+      5,
+      6
+     ],
+     "anatomy": [
+      5,
+      6
+     ],
+     "astronomy": [
+      6,
+      6
+     ],
+     "business_ethics": [
+      3,
+      6
+     ],
+     "clinical_knowledge": [
+      6,
+      6
+     ],
+     "college_biology": [
+      6,
+      6
+     ],
+     "college_chemistry": [
+      4,
+      6
+     ],
+     "college_computer_science": [
+      5,
+      6
+     ],
+     "college_mathematics": [
+      4,
+      6
+     ],
+     "college_medicine": [
+      5,
+      6
+     ],
+     "college_physics": [
+      6,
+      6
+     ],
+     "computer_security": [
+      6,
+      6
+     ],
+     "conceptual_physics": [
+      5,
+      6
+     ],
+     "econometrics": [
+      5,
+      6
+     ],
+     "electrical_engineering": [
+      5,
+      6
+     ],
+     "elementary_mathematics": [
+      5,
+      6
+     ],
+     "formal_logic": [
+      4,
+      6
+     ],
+     "global_facts": [
+      5,
+      6
+     ],
+     "high_school_biology": [
+      5,
+      6
+     ],
+     "high_school_chemistry": [
+      6,
+      6
+     ],
+     "high_school_computer_science": [
+      6,
+      6
+     ],
+     "high_school_european_history": [
+      5,
+      6
+     ],
+     "high_school_geography": [
+      6,
+      6
+     ],
+     "high_school_government_and_politics": [
+      4,
+      6
+     ],
+     "high_school_macroeconomics": [
+      6,
+      6
+     ],
+     "high_school_mathematics": [
+      6,
+      6
+     ],
+     "high_school_microeconomics": [
+      5,
+      6
+     ],
+     "high_school_physics": [
+      3,
+      6
+     ],
+     "high_school_psychology": [
+      6,
+      6
+     ],
+     "high_school_statistics": [
+      6,
+      6
+     ],
+     "high_school_us_history": [
+      3,
+      6
+     ],
+     "high_school_world_history": [
+      6,
+      6
+     ],
+     "human_aging": [
+      5,
+      6
+     ],
+     "human_sexuality": [
+      5,
+      6
+     ],
+     "international_law": [
+      3,
+      6
+     ],
+     "jurisprudence": [
+      4,
+      6
+     ],
+     "logical_fallacies": [
+      3,
+      6
+     ],
+     "machine_learning": [
+      4,
+      6
+     ],
+     "management": [
+      5,
+      6
+     ],
+     "marketing": [
+      5,
+      6
+     ],
+     "medical_genetics": [
+      6,
+      6
+     ],
+     "miscellaneous": [
+      6,
+      6
+     ],
+     "moral_disputes": [
+      5,
+      6
+     ],
+     "moral_scenarios": [
+      6,
+      6
+     ],
+     "nutrition": [
+      4,
+      6
+     ],
+     "philosophy": [
+      6,
+      6
+     ],
+     "prehistory": [
+      5,
+      6
+     ],
+     "professional_accounting": [
+      5,
+      6
+     ],
+     "professional_law": [
+      5,
+      6
+     ],
+     "professional_medicine": [
+      6,
+      6
+     ],
+     "professional_psychology": [
+      6,
+      6
+     ],
+     "public_relations": [
+      3,
+      6
+     ],
+     "security_studies": [
+      5,
+      6
+     ],
+     "sociology": [
+      6,
+      6
+     ],
+     "us_foreign_policy": [
+      4,
+      6
+     ],
+     "virology": [
+      3,
+      6
+     ],
+     "world_religions": [
+      5,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "name": "math500",
+   "score": 0.89,
+   "cases": 500,
+   "passed": 445,
+   "seconds": 6191.518256902695,
+   "notes": [
+    "L1 41/43 L2 85/90 L3 98/105 L4 112/128 L5 109/134, 27 without a boxed answer"
+   ],
+   "details": {
+    "n": 500,
+    "thinking": false,
+    "by_level": {
+     "2": [
+      85,
+      90
+     ],
+     "5": [
+      109,
+      134
+     ],
+     "3": [
+      98,
+      105
+     ],
+     "4": [
+      112,
+      128
+     ],
+     "1": [
+      41,
+      43
+     ]
+    },
+    "unboxed": 27,
+    "misses": [
+     {
+      "i": 7,
+      "gold": "90^\\circ",
+      "got": "\\theta = \\arccos\\!\\left(\\frac{9}{7\\sqrt{46}}\\right) \\approx 79.1^\\circ"
+     },
+     {
+      "i": 9,
+      "gold": "4",
+      "got": null
+     },
+     {
+      "i": 11,
+      "gold": "\\frac{3}{56}",
+      "got": null
+     },
+     {
+      "i": 18,
+      "gold": "28",
+      "got": null
+     },
+     {
+      "i": 20,
+      "gold": "6+9i",
+      "got": "117 + 41i"
+     },
+     {
+      "i": 43,
+      "gold": "70 \\sqrt{2}",
+      "got": null
+     },
+     {
+      "i": 71,
+      "gold": "2516_8",
+      "got": "5236_8"
+     },
+     {
+      "i": 96,
+      "gold": "1 \\pm \\sqrt{19}",
+      "got": "1-\\sqrt{19},\\ 1+\\sqrt{19}"
+     },
+     {
+      "i": 99,
+      "gold": "\\begin{pmatrix} -1/3 \\\\ 2/3 \\\\ 5/3 \\end{pmatrix}",
+      "got": "\\mathbf{v} = \\begin{pmatrix} -\\tfrac{1}{3} \\\\ \\tfrac{2}{3} \\\\ \\tfrac{5}{3} \\end{pmatrix}"
+     },
+     {
+      "i": 100,
+      "gold": "145^\\circ",
+      "got": null
+     },
+     {
+      "i": 101,
+      "gold": "850",
+      "got": null
+     },
+     {
+      "i": 103,
+      "gold": "(3,4]",
+      "got": "3 < \\lambda \\le 4"
+     },
+     {
+      "i": 104,
+      "gold": "40",
+      "got": null
+     },
+     {
+      "i": 110,
+      "gold": "504",
+      "got": null
+     },
+     {
+      "i": 120,
+      "gold": "\\text{even}",
+      "got": null
+     },
+     {
+      "i": 123,
+      "gold": "8",
+      "got": null
+     },
+     {
+      "i": 126,
+      "gold": "1+274i",
+      "got": null
+     },
+     {
+      "i": 127,
+      "gold": "4210_{5}",
+      "got": "4210_5"
+     },
+     {
+      "i": 136,
+      "gold": "64",
+      "got": null
+     },
+     {
+      "i": 154,
+      "gold": "2\\sqrt{113}",
+      "got": null
+     },
+     {
+      "i": 164,
+      "gold": "-\\sqrt{3}",
+      "got": null
+     },
+     {
+      "i": 166,
+      "gold": "\\frac{270}7\\text{ degrees}",
+      "got": "\\frac{270}{7}"
+     },
+     {
+      "i": 193,
+      "gold": "4",
+      "got": "2"
+     },
+     {
+      "i": 217,
+      "gold": "11,\\! 111,\\! 111,\\! 100",
+      "got": "11111111100"
+     },
+     {
+      "i": 237,
+      "gold": "22",
+      "got": "20"
+     },
+     {
+      "i": 240,
+      "gold": "116",
+      "got": null
+     },
+     {
+      "i": 264,
+      "gold": "1\\frac{4}{5}",
+      "got": null
+     },
+     {
+      "i": 280,
+      "gold": "8",
+      "got": "16"
+     },
+     {
+      "i": 284,
+      "gold": "3 \\pm 2 \\sqrt{2}",
+      "got": "3+2\\sqrt2,\\ 3-2\\sqrt2,\\ -3+2\\sqrt2,\\ -3-2\\sqrt2"
+     },
+     {
+      "i": 286,
+      "gold": "\\frac{17}{21}",
+      "got": null
+     },
+     {
+      "i": 296,
+      "gold": "\\text{(B)}",
+      "got": "\\textbf{(B)}"
+     },
+     {
+      "i": 303,
+      "gold": "28",
+      "got": null
+     },
+     {
+      "i": 308,
+      "gold": "1+2\\sqrt{3}",
+      "got": null
+     },
+     {
+      "i": 318,
+      "gold": "\\frac{11+9a}{20}",
+      "got": "\\frac{9a+11}{20}"
+     },
+     {
+      "i": 349,
+      "gold": "10080",
+      "got": null
+     },
+     {
+      "i": 352,
+      "gold": "11 \\sqrt{5} + 11",
+      "got": "11 + 11\\sqrt5"
+     },
+     {
+      "i": 379,
+      "gold": "12",
+      "got": "12^{\\mathrm{th}}"
+     },
+     {
+      "i": 380,
+      "gold": "(0,9) \\cup (9,36)",
+      "got": "x \\in (0,9)\\cup(9,36)"
+     },
+     {
+      "i": 383,
+      "gold": "x \\in [-2,7]",
+      "got": "[-2, 7]"
+     },
+     {
+      "i": 396,
+      "gold": "2",
+      "got": null
+     },
+     {
+      "i": 400,
+      "gold": "\\frac{14}{3}",
+      "got": null
+     },
+     {
+      "i": 408,
+      "gold": "\\begin{pmatrix} 1/5 \\\\ -18/5 \\end{pmatrix}",
+      "got": "\\begin{pmatrix} \\tfrac{1}{5}\\\\[2pt] -\\tfrac{18}{5}\\end{pmatrix}"
+     },
+     {
+      "i": 419,
+      "gold": "\\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}",
+      "got": "\\mathbf{v} = \\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}"
+     },
+     {
+      "i": 420,
+      "gold": "\\begin{pmatrix} 16/49 \\\\ 48/49 \\\\ 24/49 \\end{pmatrix}",
+      "got": "\\text{proj}_{\\mathbf{b}}\\mathbf{a} = \\begin{pmatrix} \\frac{16}{49} \\\\ \\frac{48}{49} \\\\ \\frac{24}{49} \\end{pmatrix}"
+     },
+     {
+      "i": 421,
+      "gold": "27",
+      "got": null
+     },
+     {
+      "i": 422,
+      "gold": "\\{1\\pm\\sqrt{5},-2\\}",
+      "got": null
+     },
+     {
+      "i": 425,
+      "gold": "3R^2",
+      "got": "AF^2+BF^2+CF^2 = 3R^2"
+     },
+     {
+      "i": 432,
+      "gold": "331",
+      "got": null
+     },
+     {
+      "i": 433,
+      "gold": ".35625",
+      "got": "3.5625"
+     },
+     {
+      "i": 444,
+      "gold": "\\frac{1}{2}",
+      "got": null
+     },
+     {
+      "i": 478,
+      "gold": "\\frac{2}{1005}",
+      "got": null
+     },
+     {
+      "i": 481,
+      "gold": "8n^2 + 4n + 1",
+      "got": "64n^4+1"
+     },
+     {
+      "i": 483,
+      "gold": "\\frac{8}{15}",
+      "got": "\\tan A = \\frac{8}{15}"
+     },
+     {
+      "i": 495,
+      "gold": "(2,12) \\cup (12,102)",
+      "got": "(2,\\ 2+10^{-8})\\ \\cup\\ (2+10^{-8},\\ 102)"
+     },
+     {
+      "i": 497,
+      "gold": "\\frac{7}{2}",
+      "got": "3"
+     }
+    ]
+   }
+  }
+ ]
+}
