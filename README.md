@@ -23,7 +23,7 @@ Attention, the shared expert, the dense layers and the head are 8-bit in both. E
 release's DSpark head and incoai's [DFlash2 drafter](https://huggingface.co/incoai/MiniMax-M3.1-Flash-DFlash2).
 
 The engine's `minimax_m3` family is in [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235);
-until it merges, this recipe builds the pinned commit of its branch (e6b3b3bd0, `minimax-m3` on
+until it merges, this recipe builds the pinned commit of its branch (c1ace3229, `minimax-m3` on
 [BobClawblaw/TensorFold](https://github.com/BobClawblaw/TensorFold/tree/minimax-m3)). Its first commit is the MoE
 routing change of [ashhart/TensorFold#1177](https://github.com/ashhart/TensorFold/pull/1177).
 
@@ -77,10 +77,11 @@ All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/con
 commit was measured for KL, the window, the needle, decode and prompt speed and the harness's `quick` plan on both
 variants (`evidence/*-bf16`): structured 18/18, drafted == plain 12/12, tools 5/5, seeded sampling 9/9, turns
 resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour checks. The pinned
-e6b3b3bd0 is that code rebased onto newer TensorFold main: its prompt logits and greedy tokens are byte-identical,
-and `quick` on mix256k passed again (`evidence/mix256k-quick-pinned`). The bf16 path is also byte-identical to the
+c1ace3229 is that code rebased onto newer TensorFold main twice (first as e6b3b3bd0, then onto main faccd11c8):
+each time its prompt logits and greedy tokens are byte-identical, and `quick` on mix256k passed again
+(`evidence/mix256k-quick-pinned`, `evidence/mix256k-quick-c1ace3229`). The bf16 path is also byte-identical to the
 earlier engine's bf16 option, so the math and image checks below (run on that engine) were not repeated; the
-quality suite was, on mix256k.
+quality suite was, on both variants (on e6b3b3bd0).
 
 - **The math.** Four layers of the engine against transformers' own model: KL at most 0.005. The full model against
   an MLX reference (`ref/model.py`) at the same weights: KL 0.015, smaller than the reference's own bf16 noise.
