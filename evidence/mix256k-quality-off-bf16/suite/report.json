@@ -1,0 +1,874 @@
+{
+ "url": "http://127.0.0.1:8897",
+ "model": "MiniMax-M3.1-Flash",
+ "results": [
+  {
+   "name": "drafts",
+   "score": 1.0,
+   "cases": 12,
+   "passed": 12,
+   "seconds": 88.75499701499939,
+   "notes": [
+    "drafted 46 tok/s vs undrafted 38 tok/s"
+   ],
+   "details": {
+    "drafted": [
+     {
+      "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+      "sha": "2f6024675d75",
+      "tokens": 202,
+      "tok_s": 43.738686971879886,
+      "text": "The sky looks blue because of a phenomenon called Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~650 nm)\u2014roughly inversely with the fourth power of wavelength. So blue light bounces around the atmosphere in every direction, reaching your eyes from all overhead, while red light mostly travels straight through.\n\nSunsets are red because sunlight must pass through much more atmosphere to reach you when the sun is low. That long path scatters away nearly all the blue light, which gets scattered out of the line of sight, leaving the direct beam dominated by red and orange. The same effect makes the sun's disc turn deep red near the horizon, and adds pink hues to clouds and the \"belt of Venus\" opposite the sun. Dust, water droplets, and pollutants can enhance this by scattering longer wavelengths more evenly, making sunsets especially vivid."
+     },
+     {
+      "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+      "sha": "3c3531605d28",
+      "tokens": 300,
+      "tok_s": 61.41632441242723,
+      "text": "I'll write a function that parses an ISO-8601 date string and returns the day of the week.\n\n```python\nfrom datetime import date\n\n\ndef day_of_week(iso_date: str) -> str:\n    \"\"\"Return the day of the week for an ISO-8601 date string.\n\n    The input must be a date in ISO-8601 format, e.g. \"2024-03-15\".\n    The return value is the English name of the weekday, e.g. \"Friday\".\n\n    Args:\n        iso_date: A date string in ISO-8601 format (\"YYYY-MM-DD\").\n\n    Returns:\n        The name of the weekday (Monday ... Sunday).\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n\n    Examples:\n        >>> day_of_week(\"2024-03-15\")\n        'Friday'\n        >>> day_of_week(\"2000-01-01\")\n        'Saturday'\n    \"\"\"\n    try:\n        parsed = date.fromisoformat(iso_date)\n    except ValueError as exc:\n        raise ValueError(f\"Invalid ISO-8601 date: {iso_date!r}\") from exc\n    return parsed.strftime(\"%A\")\n```\n\n**Examples:**\n\n```python\nprint(day_of_week(\"2024-03-15\"))  # Friday\nprint(day_of_week(\"2000-01-01\"))  # Saturday\n```\n\n**Notes:**\n\n- `date.fromisoformat` handles the standard"
+     },
+     {
+      "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+      "sha": "19c107ec05f1",
+      "tokens": 190,
+      "tok_s": 45.035891676559444,
+      "text": "1. TCP is connection-oriented, establishing a session via a three-way handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP provides reliable delivery with acknowledgments, retransmissions, and sequence numbers, whereas UDP makes no guarantee that packets arrive or arrive in order.\n\n3. TCP uses flow control and congestion control mechanisms (e.g., sliding windows), while UDP offers no such mechanisms and simply relies on application-level design.\n\n4. TCP sends data in segments with a 20-byte (minimum) header including checksums, sequence numbers, and flags, whereas UDP uses a smaller 8-byte header with only source/destination ports, length, and checksum.\n\n5. TCP is suited for applications like web browsing, email, and file transfer that need accuracy and ordered delivery, while UDP is favored for real-time applications like video streaming, VoIP, and gaming where low latency matters more than perfect reliability."
+     },
+     {
+      "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+      "sha": "f46510fe1149",
+      "tokens": 19,
+      "tok_s": 31.193353027608012,
+      "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+     },
+     {
+      "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+      "sha": "56f8542461f6",
+      "tokens": 300,
+      "tok_s": 52.63442690445078,
+      "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Rename every `.jpeg` file** in a directory tree (recursively) to `.jpg`\n2. **Skip files whose target name exists** (don't overwrite)\n3. **Print a summary**\n\nLet me write a robust version:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 Recursively rename .jpeg files to .jpg in a directory tree.\n#\n# Files whose target .jpg name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed files is printed at the end.\n#\n# Usage: ./rename-jpeg-to-jpg.sh [DIRECTORY]\n\nset -uo pipefail\n\nTARGET_DIR=\"${1:-.}\"\n\nif [[ ! -d \"$TARGET_DIR\" ]]; then\n    echo \"Error: '$TARGET_DIR' is not a directory.\" >&2\n    exit 1\nfi\n\nrenamed=0\nskipped=0\nfailed=0\n\n# -print0 / read -d '' handles filenames with spaces, newlines, etc.\nwhile IFS= read -r -d '' src; do\n    dir=\"$(dirname -- \"$src\")\"\n    base=\"$(basename -- \"$src\")\"\n    stem=\"${base%.jpeg}\"          # strip the .jpeg extension\n    dest=\"$dir/$stem.jpg\"\n\n    if [[ -e \"$dest\" ]]; then\n        echo \"SKIP:"
+     },
+     {
+      "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+      "sha": "ce9ac79b6c72",
+      "tokens": 231,
+      "tok_s": 55.60390139521337,
+      "text": "**Moving time = 3 hours 40 minutes**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min\n2. Subtract the stop: 4 h 25 min \u2212 25 min = 4 h 00 min\n\nWait \u2014 let me redo that: 4 h 25 min \u2212 25 min = 4 h 0 min. So the moving time is **4 hours**.\n\nLet me double-check the elapsed time: from 09:40 to 14:05 is 4 hours 25 minutes (09:40 + 4 h = 13:40, plus 25 min = 14:05). \u2713 Subtracting the 25-minute stop gives 4 hours of moving time.</mm:think>**Moving time = 4 hours**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min\n2. Subtract the stop: 4 h 25 min \u2212 25 min = **4 h 00 min**\n\nSo the train was actually moving for 4 hours."
+     },
+     {
+      "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+      "sha": "867e1ce54392",
+      "tokens": 210,
+      "tok_s": 37.835027479372734,
+      "text": "In *The Gilded Hour*, a retired stage magician known only as the Sparrow agrees to one last job: lifting the Crown Jewels from a London museum during the televised reopening gala. She assembles a ragtag crew \u2014 a pickpocket, a disillusioned security guard, and her estranged daughter, a safecracker with a grudge \u2014 each of whom wants a different version of the payout. The plan unfolds over a single night of tight corridors, laser beams, and one very convincing fake fire alarm, complicated by the fact that the Sparrow's real target isn't the jewels at all but a ledger proving who has been laundering money through the museum's charity fund. When the crew realizes they've been set up as patsies for a frame job, the Sparrow must choose between the money and the only person in the room who still believes in her. In the end, she walks out empty-handed but with the ledger, and the closing shot shows her back on a small stage, conjuring a single coin that she refuses to pocket."
+     },
+     {
+      "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+      "sha": "833ac0cc4ba6",
+      "tokens": 89,
+      "tok_s": 48.40681631664228,
+      "text": "```json\n[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]\n```"
+     },
+     {
+      "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+      "sha": "683625c7bc99",
+      "tokens": 27,
+      "tok_s": 39.90392264291253,
+      "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+     },
+     {
+      "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+      "sha": "fcd878b8ca9d",
+      "tokens": 58,
+      "tok_s": 52.43502298406046,
+      "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+     },
+     {
+      "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+      "sha": "cdf744bbc2af",
+      "tokens": 268,
+      "tok_s": 49.00462404711667,
+      "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt wind worries the hinges\u2014\nGulls drift, and the beam swings.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi (2) gil (1) = **7 syllables**\n\nLine 2: \"Salt wind worries the hinges\"\n- Salt (1) wind (1) wor (2) ries (2) the (1) hin (2) ges (1) = **8 syllables**\n\nLine 3: \"Gulls drift, and the beam swings\"\n- Gulls (1) drift (1) and (1) the (1) beam (1) swings (1) = **6 syllables**\n\nTotal: 7 \u2013 8 \u2013 6, matching the traditional 5-7-5 haiku form.\n\nA note on the middle line: \"worries\" is the only place the count gets interesting \u2014 it's two syllables (wor-ries), which brings the line to 8 rather than 7. If you'd prefer a strict 5-7-5, \"Salt wind worries the hinges\" could become \"Salt wind worries hinges\" (7 syllables), though the article gives the line a nicer rhythm."
+     },
+     {
+      "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+      "sha": "9e89d8b19606",
+      "tokens": 48,
+      "tok_s": 36.99136392021073,
+      "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune\n\n(The four marked planets are the gas giants; Pluto is not included as it is a dwarf planet.)"
+     }
+    ],
+    "undrafted": [
+     {
+      "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+      "sha": "2f6024675d75",
+      "tokens": 202,
+      "tok_s": 40.5882724278443,
+      "text": "The sky looks blue because of a phenomenon called Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~650 nm)\u2014roughly inversely with the fourth power of wavelength. So blue light bounces around the atmosphere in every direction, reaching your eyes from all overhead, while red light mostly travels straight through.\n\nSunsets are red because sunlight must pass through much more atmosphere to reach you when the sun is low. That long path scatters away nearly all the blue light, which gets scattered out of the line of sight, leaving the direct beam dominated by red and orange. The same effect makes the sun's disc turn deep red near the horizon, and adds pink hues to clouds and the \"belt of Venus\" opposite the sun. Dust, water droplets, and pollutants can enhance this by scattering longer wavelengths more evenly, making sunsets especially vivid."
+     },
+     {
+      "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+      "sha": "3c3531605d28",
+      "tokens": 300,
+      "tok_s": 41.08466786938232,
+      "text": "I'll write a function that parses an ISO-8601 date string and returns the day of the week.\n\n```python\nfrom datetime import date\n\n\ndef day_of_week(iso_date: str) -> str:\n    \"\"\"Return the day of the week for an ISO-8601 date string.\n\n    The input must be a date in ISO-8601 format, e.g. \"2024-03-15\".\n    The return value is the English name of the weekday, e.g. \"Friday\".\n\n    Args:\n        iso_date: A date string in ISO-8601 format (\"YYYY-MM-DD\").\n\n    Returns:\n        The name of the weekday (Monday ... Sunday).\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n\n    Examples:\n        >>> day_of_week(\"2024-03-15\")\n        'Friday'\n        >>> day_of_week(\"2000-01-01\")\n        'Saturday'\n    \"\"\"\n    try:\n        parsed = date.fromisoformat(iso_date)\n    except ValueError as exc:\n        raise ValueError(f\"Invalid ISO-8601 date: {iso_date!r}\") from exc\n    return parsed.strftime(\"%A\")\n```\n\n**Examples:**\n\n```python\nprint(day_of_week(\"2024-03-15\"))  # Friday\nprint(day_of_week(\"2000-01-01\"))  # Saturday\n```\n\n**Notes:**\n\n- `date.fromisoformat` handles the standard"
+     },
+     {
+      "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+      "sha": "19c107ec05f1",
+      "tokens": 190,
+      "tok_s": 40.38821972172419,
+      "text": "1. TCP is connection-oriented, establishing a session via a three-way handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP provides reliable delivery with acknowledgments, retransmissions, and sequence numbers, whereas UDP makes no guarantee that packets arrive or arrive in order.\n\n3. TCP uses flow control and congestion control mechanisms (e.g., sliding windows), while UDP offers no such mechanisms and simply relies on application-level design.\n\n4. TCP sends data in segments with a 20-byte (minimum) header including checksums, sequence numbers, and flags, whereas UDP uses a smaller 8-byte header with only source/destination ports, length, and checksum.\n\n5. TCP is suited for applications like web browsing, email, and file transfer that need accuracy and ordered delivery, while UDP is favored for real-time applications like video streaming, VoIP, and gaming where low latency matters more than perfect reliability."
+     },
+     {
+      "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+      "sha": "f46510fe1149",
+      "tokens": 19,
+      "tok_s": 26.529377900028013,
+      "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+     },
+     {
+      "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+      "sha": "56f8542461f6",
+      "tokens": 300,
+      "tok_s": 41.137693774643026,
+      "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Rename every `.jpeg` file** in a directory tree (recursively) to `.jpg`\n2. **Skip files whose target name exists** (don't overwrite)\n3. **Print a summary**\n\nLet me write a robust version:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 Recursively rename .jpeg files to .jpg in a directory tree.\n#\n# Files whose target .jpg name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed files is printed at the end.\n#\n# Usage: ./rename-jpeg-to-jpg.sh [DIRECTORY]\n\nset -uo pipefail\n\nTARGET_DIR=\"${1:-.}\"\n\nif [[ ! -d \"$TARGET_DIR\" ]]; then\n    echo \"Error: '$TARGET_DIR' is not a directory.\" >&2\n    exit 1\nfi\n\nrenamed=0\nskipped=0\nfailed=0\n\n# -print0 / read -d '' handles filenames with spaces, newlines, etc.\nwhile IFS= read -r -d '' src; do\n    dir=\"$(dirname -- \"$src\")\"\n    base=\"$(basename -- \"$src\")\"\n    stem=\"${base%.jpeg}\"          # strip the .jpeg extension\n    dest=\"$dir/$stem.jpg\"\n\n    if [[ -e \"$dest\" ]]; then\n        echo \"SKIP:"
+     },
+     {
+      "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+      "sha": "ce9ac79b6c72",
+      "tokens": 231,
+      "tok_s": 40.6913011686876,
+      "text": "**Moving time = 3 hours 40 minutes**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min\n2. Subtract the stop: 4 h 25 min \u2212 25 min = 4 h 00 min\n\nWait \u2014 let me redo that: 4 h 25 min \u2212 25 min = 4 h 0 min. So the moving time is **4 hours**.\n\nLet me double-check the elapsed time: from 09:40 to 14:05 is 4 hours 25 minutes (09:40 + 4 h = 13:40, plus 25 min = 14:05). \u2713 Subtracting the 25-minute stop gives 4 hours of moving time.</mm:think>**Moving time = 4 hours**\n\nSteps:\n1. Total elapsed time: 09:40 \u2192 14:05 = 4 h 25 min\n2. Subtract the stop: 4 h 25 min \u2212 25 min = **4 h 00 min**\n\nSo the train was actually moving for 4 hours."
+     },
+     {
+      "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+      "sha": "867e1ce54392",
+      "tokens": 210,
+      "tok_s": 40.64706777153133,
+      "text": "In *The Gilded Hour*, a retired stage magician known only as the Sparrow agrees to one last job: lifting the Crown Jewels from a London museum during the televised reopening gala. She assembles a ragtag crew \u2014 a pickpocket, a disillusioned security guard, and her estranged daughter, a safecracker with a grudge \u2014 each of whom wants a different version of the payout. The plan unfolds over a single night of tight corridors, laser beams, and one very convincing fake fire alarm, complicated by the fact that the Sparrow's real target isn't the jewels at all but a ledger proving who has been laundering money through the museum's charity fund. When the crew realizes they've been set up as patsies for a frame job, the Sparrow must choose between the money and the only person in the room who still believes in her. In the end, she walks out empty-handed but with the ledger, and the closing shot shows her back on a small stage, conjuring a single coin that she refuses to pocket."
+     },
+     {
+      "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+      "sha": "833ac0cc4ba6",
+      "tokens": 89,
+      "tok_s": 37.86187000722456,
+      "text": "```json\n[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]\n```"
+     },
+     {
+      "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+      "sha": "683625c7bc99",
+      "tokens": 27,
+      "tok_s": 29.78641623726434,
+      "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+     },
+     {
+      "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+      "sha": "fcd878b8ca9d",
+      "tokens": 58,
+      "tok_s": 35.83796236781902,
+      "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+     },
+     {
+      "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+      "sha": "cdf744bbc2af",
+      "tokens": 268,
+      "tok_s": 41.07222412672446,
+      "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt wind worries the hinges\u2014\nGulls drift, and the beam swings.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi (2) gil (1) = **7 syllables**\n\nLine 2: \"Salt wind worries the hinges\"\n- Salt (1) wind (1) wor (2) ries (2) the (1) hin (2) ges (1) = **8 syllables**\n\nLine 3: \"Gulls drift, and the beam swings\"\n- Gulls (1) drift (1) and (1) the (1) beam (1) swings (1) = **6 syllables**\n\nTotal: 7 \u2013 8 \u2013 6, matching the traditional 5-7-5 haiku form.\n\nA note on the middle line: \"worries\" is the only place the count gets interesting \u2014 it's two syllables (wor-ries), which brings the line to 8 rather than 7. If you'd prefer a strict 5-7-5, \"Salt wind worries the hinges\" could become \"Salt wind worries hinges\" (7 syllables), though the article gives the line a nicer rhythm."
+     },
+     {
+      "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+      "sha": "9e89d8b19606",
+      "tokens": 48,
+      "tok_s": 34.42307773176365,
+      "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune\n\n(The four marked planets are the gas giants; Pluto is not included as it is a dwarf planet.)"
+     }
+    ]
+   }
+  },
+  {
+   "name": "streaming",
+   "score": 1.0,
+   "cases": 4,
+   "passed": 4,
+   "seconds": 23.868699073791504,
+   "notes": [
+    "identical"
+   ],
+   "details": {}
+  },
+  {
+   "name": "multiturn",
+   "score": 1.0,
+   "cases": 8,
+   "passed": 8,
+   "seconds": 13.417200326919556,
+   "notes": [
+    "recalled 8/8 facts"
+   ],
+   "details": {
+    "reply": "- **Name:** Odile\n- **City:** Lyon\n- **Cat:** Pistache, 7 years old\n- **Job:** Luthier \u2014 repairs violins\n- **Favourite number:** 314\n- **Travel:** Flying to Montreal on 14 November"
+   }
+  },
+  {
+   "name": "stop",
+   "score": 1.0,
+   "cases": 3,
+   "passed": 3,
+   "seconds": 1.6407268047332764,
+   "notes": [
+    "3/3 stopped before the string"
+   ],
+   "details": {}
+  },
+  {
+   "name": "thinking",
+   "score": 1.0,
+   "cases": 10,
+   "passed": 10,
+   "seconds": 22.390225887298584,
+   "notes": [
+    "0 replies without reasoning_content, 0 with think tags in content"
+   ],
+   "details": {}
+  },
+  {
+   "name": "copy",
+   "score": 1.0,
+   "cases": 2,
+   "passed": 2,
+   "seconds": 2.544008731842041,
+   "notes": [
+    "2/2 byte-identical"
+   ],
+   "details": {}
+  },
+  {
+   "name": "max-tokens",
+   "score": 1.0,
+   "cases": 3,
+   "passed": 3,
+   "seconds": 1.7579710483551025,
+   "notes": [
+    "3/3 exact"
+   ],
+   "details": {}
+  },
+  {
+   "name": "tools",
+   "score": 0.9333333333333333,
+   "cases": 60,
+   "passed": 56,
+   "seconds": 69.08394312858582,
+   "notes": [
+    "\"How do you say 'where is the station' in\": got []",
+    "'Set a timer for 5 minutes.': got [('set_timer', {'seconds': 300, 'label': '5 minute timer'})]",
+    "'Directions from Berlin Hauptbahnhof to A': got [('get_directions', {'origin': 'berlin hauptbahnhof', 'destination': 'alexanderplatz'}), ('get_directions', {'origin': 'berlin hauptbahnhof', 'destination': 'alexanderplatz', 'mode': 'transit'})]",
+    "'Timer, 45 seconds.': got [('set_timer', {'seconds': 45, 'label': '45-second timer'})]"
+   ],
+   "details": {}
+  },
+  {
+   "name": "json",
+   "score": 1.0,
+   "cases": 30,
+   "passed": 30,
+   "seconds": 23.4974946975708,
+   "notes": [
+    "all valid"
+   ],
+   "details": {}
+  },
+  {
+   "name": "ifeval",
+   "score": 0.5933333333333334,
+   "cases": 150,
+   "passed": 89,
+   "seconds": 1597.3113310337067,
+   "notes": [
+    "loose 89/150, strict 75/150, 150 covered prompts"
+   ],
+   "details": {
+    "strict": 75,
+    "loose": 89,
+    "n": 150
+   }
+  },
+  {
+   "name": "gsm8k",
+   "score": 0.976,
+   "cases": 250,
+   "passed": 244,
+   "seconds": 449.4199390411377,
+   "notes": [
+    "misses at [89, 93, 100, 119, 191, 236]"
+   ],
+   "details": {
+    "n": 250,
+    "thinking": false,
+    "misses": [
+     89,
+     93,
+     100,
+     119,
+     191,
+     236
+    ]
+   }
+  },
+  {
+   "name": "mgsm",
+   "score": 0.8208333333333333,
+   "cases": 240,
+   "passed": 197,
+   "seconds": 779.068039894104,
+   "notes": [
+    "de 27/30, es 28/30, fr 26/30, ja 22/30, zh 26/30, ru 29/30, sw 15/30, bn 24/30"
+   ],
+   "details": {
+    "per_language": {
+     "de": 27,
+     "es": 28,
+     "fr": 26,
+     "ja": 22,
+     "zh": 26,
+     "ru": 29,
+     "sw": 15,
+     "bn": 24
+    },
+    "n": 30
+   }
+  },
+  {
+   "name": "mmlu",
+   "score": 0.8187134502923976,
+   "cases": 342,
+   "passed": 280,
+   "seconds": 772.1905846595764,
+   "notes": [
+    "57 subjects x 6; weakest business_ethics 3/6, global_facts 3/6, international_law 3/6"
+   ],
+   "details": {
+    "per_subject": {
+     "abstract_algebra": [
+      5,
+      6
+     ],
+     "anatomy": [
+      5,
+      6
+     ],
+     "astronomy": [
+      5,
+      6
+     ],
+     "business_ethics": [
+      3,
+      6
+     ],
+     "clinical_knowledge": [
+      5,
+      6
+     ],
+     "college_biology": [
+      6,
+      6
+     ],
+     "college_chemistry": [
+      4,
+      6
+     ],
+     "college_computer_science": [
+      5,
+      6
+     ],
+     "college_mathematics": [
+      5,
+      6
+     ],
+     "college_medicine": [
+      5,
+      6
+     ],
+     "college_physics": [
+      5,
+      6
+     ],
+     "computer_security": [
+      6,
+      6
+     ],
+     "conceptual_physics": [
+      6,
+      6
+     ],
+     "econometrics": [
+      5,
+      6
+     ],
+     "electrical_engineering": [
+      4,
+      6
+     ],
+     "elementary_mathematics": [
+      5,
+      6
+     ],
+     "formal_logic": [
+      4,
+      6
+     ],
+     "global_facts": [
+      3,
+      6
+     ],
+     "high_school_biology": [
+      5,
+      6
+     ],
+     "high_school_chemistry": [
+      6,
+      6
+     ],
+     "high_school_computer_science": [
+      6,
+      6
+     ],
+     "high_school_european_history": [
+      5,
+      6
+     ],
+     "high_school_geography": [
+      6,
+      6
+     ],
+     "high_school_government_and_politics": [
+      5,
+      6
+     ],
+     "high_school_macroeconomics": [
+      6,
+      6
+     ],
+     "high_school_mathematics": [
+      5,
+      6
+     ],
+     "high_school_microeconomics": [
+      5,
+      6
+     ],
+     "high_school_physics": [
+      4,
+      6
+     ],
+     "high_school_psychology": [
+      6,
+      6
+     ],
+     "high_school_statistics": [
+      5,
+      6
+     ],
+     "high_school_us_history": [
+      4,
+      6
+     ],
+     "high_school_world_history": [
+      6,
+      6
+     ],
+     "human_aging": [
+      5,
+      6
+     ],
+     "human_sexuality": [
+      5,
+      6
+     ],
+     "international_law": [
+      3,
+      6
+     ],
+     "jurisprudence": [
+      5,
+      6
+     ],
+     "logical_fallacies": [
+      3,
+      6
+     ],
+     "machine_learning": [
+      4,
+      6
+     ],
+     "management": [
+      6,
+      6
+     ],
+     "marketing": [
+      5,
+      6
+     ],
+     "medical_genetics": [
+      6,
+      6
+     ],
+     "miscellaneous": [
+      6,
+      6
+     ],
+     "moral_disputes": [
+      5,
+      6
+     ],
+     "moral_scenarios": [
+      6,
+      6
+     ],
+     "nutrition": [
+      4,
+      6
+     ],
+     "philosophy": [
+      6,
+      6
+     ],
+     "prehistory": [
+      5,
+      6
+     ],
+     "professional_accounting": [
+      5,
+      6
+     ],
+     "professional_law": [
+      3,
+      6
+     ],
+     "professional_medicine": [
+      6,
+      6
+     ],
+     "professional_psychology": [
+      6,
+      6
+     ],
+     "public_relations": [
+      4,
+      6
+     ],
+     "security_studies": [
+      4,
+      6
+     ],
+     "sociology": [
+      6,
+      6
+     ],
+     "us_foreign_policy": [
+      4,
+      6
+     ],
+     "virology": [
+      3,
+      6
+     ],
+     "world_religions": [
+      5,
+      6
+     ]
+    }
+   }
+  },
+  {
+   "name": "math500",
+   "score": 0.9,
+   "cases": 500,
+   "passed": 450,
+   "seconds": 5814.438007116318,
+   "notes": [
+    "L1 42/43 L2 87/90 L3 96/105 L4 114/128 L5 111/134, 19 without a boxed answer"
+   ],
+   "details": {
+    "n": 500,
+    "thinking": false,
+    "by_level": {
+     "2": [
+      87,
+      90
+     ],
+     "5": [
+      111,
+      134
+     ],
+     "3": [
+      96,
+      105
+     ],
+     "4": [
+      114,
+      128
+     ],
+     "1": [
+      42,
+      43
+     ]
+    },
+    "unboxed": 19,
+    "misses": [
+     {
+      "i": 17,
+      "gold": "\\pi",
+      "got": "\\dfrac{\\pi}{2}"
+     },
+     {
+      "i": 18,
+      "gold": "28",
+      "got": "62"
+     },
+     {
+      "i": 20,
+      "gold": "6+9i",
+      "got": "117 + 41i"
+     },
+     {
+      "i": 43,
+      "gold": "70 \\sqrt{2}",
+      "got": "10\\sqrt{32+17\\sqrt3}"
+     },
+     {
+      "i": 47,
+      "gold": "5",
+      "got": "7"
+     },
+     {
+      "i": 50,
+      "gold": "203",
+      "got": "207"
+     },
+     {
+      "i": 60,
+      "gold": "(6,31,-1)",
+      "got": null
+     },
+     {
+      "i": 71,
+      "gold": "2516_8",
+      "got": "2516"
+     },
+     {
+      "i": 88,
+      "gold": "2",
+      "got": "\\sqrt{3}"
+     },
+     {
+      "i": 96,
+      "gold": "1 \\pm \\sqrt{19}",
+      "got": "1-\\sqrt{19},\\ 1+\\sqrt{19}"
+     },
+     {
+      "i": 99,
+      "gold": "\\begin{pmatrix} -1/3 \\\\ 2/3 \\\\ 5/3 \\end{pmatrix}",
+      "got": "\\mathbf{v} = \\begin{pmatrix} -\\dfrac13 \\\\[4pt] \\dfrac23 \\\\[4pt] \\dfrac53 \\end{pmatrix}"
+     },
+     {
+      "i": 100,
+      "gold": "145^\\circ",
+      "got": null
+     },
+     {
+      "i": 103,
+      "gold": "(3,4]",
+      "got": "3 < \\lambda \\le 4"
+     },
+     {
+      "i": 104,
+      "gold": "40",
+      "got": null
+     },
+     {
+      "i": 110,
+      "gold": "504",
+      "got": null
+     },
+     {
+      "i": 119,
+      "gold": "-9",
+      "got": null
+     },
+     {
+      "i": 127,
+      "gold": "4210_{5}",
+      "got": "4210_5"
+     },
+     {
+      "i": 138,
+      "gold": "\\frac{1}{3}",
+      "got": "\\dfrac{1}{15}"
+     },
+     {
+      "i": 154,
+      "gold": "2\\sqrt{113}",
+      "got": null
+     },
+     {
+      "i": 163,
+      "gold": "-\\frac{35}{9}",
+      "got": "-\\frac{99}{25}"
+     },
+     {
+      "i": 166,
+      "gold": "\\frac{270}7\\text{ degrees}",
+      "got": "\\frac{270}{7}"
+     },
+     {
+      "i": 168,
+      "gold": "19",
+      "got": null
+     },
+     {
+      "i": 189,
+      "gold": "160",
+      "got": null
+     },
+     {
+      "i": 204,
+      "gold": "0",
+      "got": null
+     },
+     {
+      "i": 217,
+      "gold": "11,\\! 111,\\! 111,\\! 100",
+      "got": "11111111100"
+     },
+     {
+      "i": 219,
+      "gold": "\\frac{1}{2}",
+      "got": "\\dfrac{11}{18}"
+     },
+     {
+      "i": 236,
+      "gold": "12",
+      "got": null
+     },
+     {
+      "i": 240,
+      "gold": "116",
+      "got": null
+     },
+     {
+      "i": 264,
+      "gold": "1\\frac{4}{5}",
+      "got": null
+     },
+     {
+      "i": 284,
+      "gold": "3 \\pm 2 \\sqrt{2}",
+      "got": "-3-2\\sqrt{2},\\ -3+2\\sqrt{2},\\ 3-2\\sqrt{2},\\ 3+2\\sqrt{2}"
+     },
+     {
+      "i": 296,
+      "gold": "\\text{(B)}",
+      "got": "\\textbf{(B)}"
+     },
+     {
+      "i": 309,
+      "gold": "14",
+      "got": null
+     },
+     {
+      "i": 318,
+      "gold": "\\frac{11+9a}{20}",
+      "got": "\\frac{9a+11}{20}"
+     },
+     {
+      "i": 352,
+      "gold": "11 \\sqrt{5} + 11",
+      "got": "11 + 11\\sqrt5"
+     },
+     {
+      "i": 371,
+      "gold": "17",
+      "got": null
+     },
+     {
+      "i": 372,
+      "gold": "90^\\circ",
+      "got": null
+     },
+     {
+      "i": 379,
+      "gold": "12",
+      "got": "12^{\\mathrm{th}}\\text{ grade}"
+     },
+     {
+      "i": 383,
+      "gold": "x \\in [-2,7]",
+      "got": "[-2,\\, 7]"
+     },
+     {
+      "i": 392,
+      "gold": "\\sqrt{66}",
+      "got": null
+     },
+     {
+      "i": 396,
+      "gold": "2",
+      "got": null
+     },
+     {
+      "i": 408,
+      "gold": "\\begin{pmatrix} 1/5 \\\\ -18/5 \\end{pmatrix}",
+      "got": "\\begin{pmatrix} \\frac{58}{25} \\\\ -\\frac{69}{25} \\end{pmatrix}"
+     },
+     {
+      "i": 419,
+      "gold": "\\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}",
+      "got": "\\mathbf{v} = \\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}"
+     },
+     {
+      "i": 420,
+      "gold": "\\begin{pmatrix} 16/49 \\\\ 48/49 \\\\ 24/49 \\end{pmatrix}",
+      "got": "\\text{proj}_{\\mathbf{b}}\\mathbf{a} = \\begin{pmatrix} \\frac{16}{49} \\\\[2pt] \\frac{48}{49} \\\\[2pt] \\frac{24}{49} \\end{pmatrix}"
+     },
+     {
+      "i": 422,
+      "gold": "\\{1\\pm\\sqrt{5},-2\\}",
+      "got": null
+     },
+     {
+      "i": 425,
+      "gold": "3R^2",
+      "got": "AF^2+BF^2+CF^2 = 12R^2 - (a^2+b^2+c^2)"
+     },
+     {
+      "i": 477,
+      "gold": "2",
+      "got": "3"
+     },
+     {
+      "i": 478,
+      "gold": "\\frac{2}{1005}",
+      "got": null
+     },
+     {
+      "i": 481,
+      "gold": "8n^2 + 4n + 1",
+      "got": "\\dfrac{(4n+1)^2+1}{2}"
+     },
+     {
+      "i": 483,
+      "gold": "\\frac{8}{15}",
+      "got": "\\tan A = \\frac{8}{15}"
+     },
+     {
+      "i": 495,
+      "gold": "(2,12) \\cup (12,102)",
+      "got": "(2,\\ 2+10^{-8})\\ \\cup\\ (2+10^{-8},\\ 102)"
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -79,8 +79,8 @@ variants (`evidence/*-bf16`): structured 18/18, drafted == plain 12/12, tools 5/
 resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour checks. The pinned
 e6b3b3bd0 is that code rebased onto newer TensorFold main: its prompt logits and greedy tokens are byte-identical,
 and `quick` on mix256k passed again (`evidence/mix256k-quick-pinned`). The bf16 path is also byte-identical to the
-earlier engine's bf16 option, so the quality suites, the math and image checks below (run on that engine, the
-quality suites with its int8 cache) were not repeated.
+earlier engine's bf16 option, so the math and image checks below (run on that engine) were not repeated; the
+quality suite was, on mix256k.
 
 - **The math.** Four layers of the engine against transformers' own model: KL at most 0.005. The full model against
   an MLX reference (`ref/model.py`) at the same weights: KL 0.015, smaller than the reference's own bf16 noise.
@@ -131,17 +131,21 @@ With the int8 cache: mix256k 1,429 / 1,420 / 1,319, and before the engine's prom
 3.9-4.1 s first, 1.7 s after). The 145,203-token needle prompt took 115 s. A multi-turn chat's resumed turn starts in
 0.26-0.30 s against 3.6-5.6 s cold.
 
-**Quality**, thinking off (the harness's `dsv41-quality-off` plan):
+**Quality**, thinking off (the harness's `dsv41-quality-off` plan). mix256k was run again on the pinned bf16 cache
+(`evidence/mix256k-quality-off-bf16`); mix34 only with the earlier int8 cache:
 
-| | mix34 | mix256k |
-|---|---:|---:|
-| GSM8K (250) | 0.964 | 0.976 |
-| MGSM (240) | 0.829 | 0.875 |
-| MMLU (342) | 0.830 | 0.819 |
-| MATH-500 | 0.908 | 0.908 |
-| IFEval, loose (150) | 0.573 | 0.573 |
-| tools (60) | 0.95 | 0.917 |
-| JSON (30) | 1.0 | 1.0 |
+| | mix256k, bf16 | mix256k, int8 | mix34, int8 |
+|---|---:|---:|---:|
+| GSM8K (250) | 0.976 | 0.976 | 0.964 |
+| MGSM (240) | 0.821 | 0.875 | 0.829 |
+| MMLU (342) | 0.819 | 0.819 | 0.830 |
+| MATH-500 | 0.900 | 0.908 | 0.908 |
+| IFEval, loose (150) | 0.593 | 0.573 | 0.573 |
+| tools (60) | 0.933 | 0.917 | 0.95 |
+| JSON (30) | 1.0 | 1.0 | 1.0 |
+
+The bf16 run's MGSM loss is nearly all in two languages, Japanese (22/30 against 27) and Swahili (15/30 against 20),
+with 30 questions each; the other six moved by one at most.
 
 IFEval is low for a model this size: the suite caps replies at 1,200 tokens, MiniMax writes long (on mix34, 34 of
 150 replies hit the cap, 23 of them failing), and many of the rest break the format they were asked for. Thinking

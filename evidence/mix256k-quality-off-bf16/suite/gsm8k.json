@@ -1,0 +1,22 @@
+{
+ "name": "gsm8k",
+ "score": 0.976,
+ "cases": 250,
+ "passed": 244,
+ "seconds": 449.4199390411377,
+ "notes": [
+  "misses at [89, 93, 100, 119, 191, 236]"
+ ],
+ "details": {
+  "n": 250,
+  "thinking": false,
+  "misses": [
+   89,
+   93,
+   100,
+   119,
+   191,
+   236
+  ]
+ }
+}

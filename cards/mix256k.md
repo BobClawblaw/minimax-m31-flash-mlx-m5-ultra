@@ -46,8 +46,7 @@ transformers' modeling code), over the 1,024 positions of one chat, with the eng
 | mix34 | 0.246 | 81.1% |
 | mix256k | 0.301 | 78.3% |
 
-Through the recipe harness's suite, thinking off (with the earlier int8 cache): GSM8K 0.976, MGSM 0.875, MMLU 0.819, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
-mix256k, JSON 30/30 on both. Speeds, the other variant's numbers and how they were measured are in the
+Through the recipe harness's suite, thinking off, with the engine's bf16 cache: GSM8K 0.976, MGSM 0.821, MMLU 0.819, MATH-500 0.900, IFEval 89/150 (loose), tools 56/60, JSON 30/30 (with the earlier int8 cache: MGSM 0.875, MATH-500 0.908, IFEval 86/150, tools 55/60, the rest the same). Speeds, the other variant's numbers and how they were measured are in the
 [recipe's README](https://github.com/BobClawblaw/minimax-m31-flash-mlx-m5-ultra#measured).
 
 ## License
