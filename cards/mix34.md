@@ -15,7 +15,7 @@ tags:
 
 [MiniMaxAI/MiniMax-M3.1-Flash](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash) (revision `54e4e69d`)
 converted for [TensorFold](https://github.com/ashhart/TensorFold)'s native Metal engine (its `minimax_m3` family), to
-serve on one Apple M5 Ultra with 256 GB. The higher-quality of two conversions: about 65k tokens of context fit beside it with images and the drafter.
+serve on one Apple M5 Ultra with 256 GB. The higher-quality of two conversions: beside it, the exact bf16 key/value cache fits 37,376 tokens on 256 GB with images and the drafter (the recipe serves 32,768). mix256k trades quality for a longer window.
 
 **Serving:** the engine's `minimax_m3` family is in
 [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235); the serving recipe, with its launcher,
@@ -46,8 +46,7 @@ transformers' modeling code), over the 1,024 positions of one chat, with the eng
 | mix34 | 0.246 | 81.1% |
 | mix256k | 0.301 | 78.3% |
 
-Through the recipe harness's suite, thinking off (with the earlier int8 cache): GSM8K 0.964, MGSM 0.829, MMLU 0.830, MATH-500 0.908, IFEval 86/150 (loose); tools 57/60 on mix34 and 55/60 on
-mix256k, JSON 30/30 on both. Speeds, the other variant's numbers and how they were measured are in the
+Through the recipe harness's suite, thinking off, with the engine's bf16 cache: GSM8K 0.968, MGSM 0.846, MMLU 0.827, MATH-500 0.890, IFEval 87/150 (loose), tools 57/60, JSON 30/30 (with the earlier int8 cache: GSM8K 0.964, MGSM 0.829, MMLU 0.830, MATH-500 0.908, IFEval 86/150, the rest the same). Speeds, the other variant's numbers and how they were measured are in the
 [recipe's README](https://github.com/BobClawblaw/minimax-m31-flash-mlx-m5-ultra#measured).
 
 ## License
