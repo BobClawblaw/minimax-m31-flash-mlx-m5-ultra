@@ -1,0 +1,17 @@
+{
+ "public": {
+  "url": "https://upload.wikimedia.org/wikipedia/commons/4/47/PNG_transparency_demonstration_1.png",
+  "status": 400,
+  "text": "{\"error\": {\"message\": \"image URLs are off on this server; send the image as a data URL, or start the server with --vision-urls\", \"type\": \"invalid_request_error\"}}"
+ },
+ "loopback": {
+  "url": "https://127.0.0.1/x.png",
+  "status": 400,
+  "text": "{\"error\": {\"message\": \"image URLs are off on this server; send the image as a data URL, or start the server with --vision-urls\", \"type\": \"invalid_request_error\"}}"
+ },
+ "http": {
+  "url": "http://example.com/x.png",
+  "status": 400,
+  "text": "{\"error\": {\"message\": \"images require data URLs or public HTTPS URLs\", \"type\": \"invalid_request_error\"}}"
+ }
+}

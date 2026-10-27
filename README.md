@@ -16,16 +16,16 @@ the pinned release and checks every file against the published hashes):
 
 The key/value cache is bf16, exact (TensorFold ships no lossy caches), and it is what limits the window: the
 weights take 189-204 GiB of the 256. mix256k is the default: on the quality suites below it scores level with mix34,
-and its window is four and a half times as long. mix34 stays a little closer to the release (KL 0.246 against 0.301)
+and its window is four and a half times as long. mix34 stays a little closer to the release (KL 0.244 against 0.295)
 for work that fits in 32,768 tokens. (mix256k is named for the 262,144-token window an earlier int8 cache gave it.)
 
 Attention, the shared expert, the dense layers and the head are 8-bit in both. Each checkpoint also carries the
 release's DSpark head and incoai's [DFlash2 drafter](https://huggingface.co/incoai/MiniMax-M3.1-Flash-DFlash2).
 
 The engine's `minimax_m3` family is in [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235);
-until it merges, this recipe builds the pinned commit of its branch (c1ace3229, `minimax-m3` on
-[BobClawblaw/TensorFold](https://github.com/BobClawblaw/TensorFold/tree/minimax-m3)). Its first commit is the MoE
-routing change of [ashhart/TensorFold#1177](https://github.com/ashhart/TensorFold/pull/1177).
+until it merges, this recipe builds the pinned commit of its branch (cb35b7c28, `minimax-m3` on
+[BobClawblaw/TensorFold](https://github.com/BobClawblaw/TensorFold/tree/minimax-m3)). Every one of the family's
+Metal kernels is registered with TensorFold's kernel contract (50 kernels, gates 1-4 and launch limits).
 
 ## Quick start
 
@@ -73,25 +73,28 @@ macOS killed it while it mapped its weights). Shorter windows or `parallel = 1` 
 
 ## What works, and how it was checked
 
-All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/config.py`. The engine's bf16-only
-commit was measured for KL, the window, the needle, decode and prompt speed and the harness's `quick` plan on both
-variants (`evidence/*-bf16`): structured 18/18, drafted == plain 12/12, tools 5/5, seeded sampling 9/9, turns
-resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour checks. The pinned
-c1ace3229 is that code rebased onto newer TensorFold main twice (first as e6b3b3bd0, then onto main faccd11c8):
-each time its prompt logits and greedy tokens are byte-identical, and `quick` on mix256k passed again
-(`evidence/mix256k-quick-pinned`, `evidence/mix256k-quick-c1ace3229`). The bf16 path is also byte-identical to the
-earlier engine's bf16 option, so the math and image checks below (run on that engine) were not repeated; the
-quality suite was, on both variants (on e6b3b3bd0).
+All on one M5 Ultra (256 GB, macOS 27), checkpoints at the revisions in `mac/config.py`. The pinned cb35b7c28 adds
+kernel fixes that registering the kernels with the contract turned up: NaN and infinities kept where they had been
+dropped, a stable expert sort, thread caps, and a sigmoid computed without cancellation below 0. Only the sigmoid
+changes the served bits: on mix256k, 55 of 64 forced greedy steps keep their top token (the 9 that change sit on
+nearly flat rows), and the KL to the release goes down. On the pinned engine, both variants pass the harness's
+`quick` plan (`evidence/*-quick-cb35b7c28`): structured 18/18, drafted == plain 12/12, tools 5/5, seeded sampling
+9/9, turns resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour checks. Its
+logits are byte-identical to the build the quality suite ran on (`evidence/kl-cb35b7c28`). The math and image
+checks below ran on earlier engines and were not repeated.
 
 - **The math.** Four layers of the engine against transformers' own model: KL at most 0.005. The full model against
   an MLX reference (`ref/model.py`) at the same weights: KL 0.015, smaller than the reference's own bf16 noise.
 - **The conversion's cost.** 1,024 rows teacher-forced against the NVFP4 release, on the pinned engine: mix34 mean
-  KL 0.246 (81.1% top-1 agreement), mix256k 0.301 (78.3%).
+  KL 0.244 (80.7% top-1 agreement), mix256k 0.295 (78.4%) (`evidence/kl-cb35b7c28`).
 - **Long context.** On mix256k with images on, a needle came back from a 145,203-token prompt (115 s cold, 210 GiB
   wired at the peak; `evidence/mix256k-needle-bf16`).
 - **Images.** The tower equals transformers' (relative error 0.030 against fp32, where torch's bf16 gives 0.039);
   86 ms for a 540-token image. Through the chat API the model reads shapes, colours and text in PNG, JPEG and WebP
-  images, two images in one prompt work, and replies are identical with the cache on and off and drafted or plain.
+  images, and replies are identical with the cache on and off and drafted or plain. The harness's vision suite
+  passes shapes, text and counting on both variants (`evidence/*-vision-cb35b7c28`). Its two-image case (red, then
+  yellow) comes back "red and green": a transformers reference given the release's own NVFP4 experts on the same prompt
+  answers green too, so the model makes that near-tie itself. Its video cases are refused (video is not served).
 - **Tools and structured output.** The harness's structured check (json_object, json_schema, regex, choice, grammar)
   18/18 on both variants, drafted == plain 12/12; its tool cases (auto, required, named, thinking, streamed) 5/5.
   Forced tool calls (`tool_choice: required` or a named tool) are constrained in MiniMax's own call markup.
@@ -116,6 +119,9 @@ the bf16 cache; the raw results are in `evidence/*-bf16`.
 | mix256k | 1 | 43.1 / 58.9 / 49.6 / 50.3 |
 | mix256k | 2 | 57.6 / 63.3 / 61.3 / 75.5 |
 
+On the pinned cb35b7c28, one stream (the `quick` plan's ruler, `evidence/*-quick-cb35b7c28`): mix34 41.2 / 61.3 /
+49.3 / 55.3, mix256k 44.0 / 55.8 / 47.8 / 50.9. Two streams were not measured again on it.
+
 Against the earlier int8 cache: mix256k level or faster (two streams' prose +10%, their code -3%), mix34's code
 slower (58.5 against 65.9 with one stream). Plain decode (`drafts = false`) was not measured again on the bf16 cache; on the int8 cache it ran 43-44
 tokens a second with one stream and 62-64 with two, faster than drafts for two prose streams.
@@ -127,24 +133,31 @@ tokens a second with one stream and 62-64 with two, faster than drafts for two p
 | mix34 | 1,441 tok/s (5.8 s) | 1,452 (11.4 s) | 1,451 (21.3 s) | | |
 | mix256k | 1,483 (5.7 s) | | | 1,491 (22.1 s) | 1,379 (95.2 s) |
 
+On the pinned cb35b7c28 (`evidence/mix256k-prefill-cb35b7c28`), mix256k: 8,403 tokens 1,478 tok/s, 16,598 tokens
+1,486, 30,929 tokens 1,484 (1,464 / 1,477 / 1,479 with thinking on); 128k was not run again.
+
 With the int8 cache: mix256k 1,429 / 1,420 / 1,319, and before the engine's prompt-speed commits 1,206 / 1,020 / 703
 (186.8 s at 128k). With thinking on, within 2%. A fresh server's first prompt also pays its warm-up (a 2k prompt:
 3.9-4.1 s first, 1.7 s after). The 145,203-token needle prompt took 115 s. A multi-turn chat's resumed turn starts in
 0.26-0.30 s against 3.6-5.6 s cold.
 
-**Quality**, thinking off (the harness's `dsv41-quality-off` plan). Both variants were run again on the pinned bf16
-cache (`evidence/mix256k-quality-off-bf16`, `evidence/mix34-quality-off-bf16`); the int8 columns are the earlier
-engine's int8 cache, kept for comparison:
+**Quality**, thinking off (the harness's `dsv41-quality-off` plan). mix256k was run on the pinned engine's kernels
+(`evidence/mix256k-quality-off-95c1c7f54`: the same tree before its rebase, with byte-identical logits); mix34 was
+not run again on them. The other columns are earlier engines: the bf16 cache before the kernel fixes
+(`evidence/*-quality-off-bf16`) and the int8 cache, kept for comparison:
 
-| | mix256k, bf16 | mix256k, int8 | mix34, bf16 | mix34, int8 |
-|---|---:|---:|---:|---:|
-| GSM8K (250) | 0.976 | 0.976 | 0.968 | 0.964 |
-| MGSM (240) | 0.821 | 0.875 | 0.846 | 0.829 |
-| MMLU (342) | 0.819 | 0.819 | 0.827 | 0.830 |
-| MATH-500 | 0.900 | 0.908 | 0.890 | 0.908 |
-| IFEval, loose (150) | 0.593 | 0.573 | 0.580 | 0.573 |
-| tools (60) | 0.933 | 0.917 | 0.95 | 0.95 |
-| JSON (30) | 1.0 | 1.0 | 1.0 | 1.0 |
+| | mix256k, pinned | mix256k, bf16 | mix256k, int8 | mix34, bf16 | mix34, int8 |
+|---|---:|---:|---:|---:|---:|
+| GSM8K (250) | 0.984 | 0.976 | 0.976 | 0.968 | 0.964 |
+| MGSM (240) | 0.842 | 0.821 | 0.875 | 0.846 | 0.829 |
+| MMLU (342) | 0.819 | 0.819 | 0.819 | 0.827 | 0.830 |
+| MATH-500 | 0.918 | 0.900 | 0.908 | 0.890 | 0.908 |
+| IFEval, loose (150) | 0.587 | 0.593 | 0.573 | 0.580 | 0.573 |
+| tools (60) | 0.917 | 0.933 | 0.917 | 0.95 | 0.95 |
+| JSON (30) | 1.0 | 1.0 | 1.0 | 1.0 | 1.0 |
+
+The pinned engine's sigmoid fix moves a few greedy paths: mix256k gains on GSM8K, MGSM and MATH-500 and loses one
+IFEval and one tools case, all within what 30- to 500-question sets swing.
 
 The cache swap moves MGSM in opposite directions on the two variants. mix256k's bf16 loss is nearly all in Japanese
 (22/30 against 27) and Swahili (15/30 against 20); mix34's bf16 gain is mostly Bengali (26/30 against 21), with

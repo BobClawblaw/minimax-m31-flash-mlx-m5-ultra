@@ -1,0 +1,11 @@
+{
+ "name": "json",
+ "score": 1.0,
+ "cases": 30,
+ "passed": 30,
+ "seconds": 23.236489057540894,
+ "notes": [
+  "all valid"
+ ],
+ "details": {}
+}

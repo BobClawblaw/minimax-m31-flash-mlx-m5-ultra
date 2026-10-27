@@ -1,0 +1,244 @@
+{
+ "name": "math500",
+ "score": 0.918,
+ "cases": 500,
+ "passed": 459,
+ "seconds": 8058.138720035553,
+ "notes": [
+  "L1 43/43 L2 88/90 L3 98/105 L4 118/128 L5 112/134, 18 without a boxed answer"
+ ],
+ "details": {
+  "n": 500,
+  "thinking": false,
+  "by_level": {
+   "2": [
+    88,
+    90
+   ],
+   "5": [
+    112,
+    134
+   ],
+   "3": [
+    98,
+    105
+   ],
+   "4": [
+    118,
+    128
+   ],
+   "1": [
+    43,
+    43
+   ]
+  },
+  "unboxed": 18,
+  "misses": [
+   {
+    "i": 17,
+    "gold": "\\pi",
+    "got": "\\dfrac{3\\pi}{2}"
+   },
+   {
+    "i": 20,
+    "gold": "6+9i",
+    "got": "117 + 41i"
+   },
+   {
+    "i": 43,
+    "gold": "70 \\sqrt{2}",
+    "got": null
+   },
+   {
+    "i": 47,
+    "gold": "5",
+    "got": "7"
+   },
+   {
+    "i": 50,
+    "gold": "203",
+    "got": "207"
+   },
+   {
+    "i": 96,
+    "gold": "1 \\pm \\sqrt{19}",
+    "got": "1-\\sqrt{19},\\ 1+\\sqrt{19}"
+   },
+   {
+    "i": 99,
+    "gold": "\\begin{pmatrix} -1/3 \\\\ 2/3 \\\\ 5/3 \\end{pmatrix}",
+    "got": "\\mathbf{v} = \\begin{pmatrix} -\\tfrac{1}{3} \\\\[2pt] \\tfrac{2}{3} \\\\[2pt] \\tfrac{5}{3} \\end{pmatrix}"
+   },
+   {
+    "i": 103,
+    "gold": "(3,4]",
+    "got": "\\,3 < \\lambda \\le 4\\,"
+   },
+   {
+    "i": 110,
+    "gold": "504",
+    "got": null
+   },
+   {
+    "i": 119,
+    "gold": "-9",
+    "got": null
+   },
+   {
+    "i": 127,
+    "gold": "4210_{5}",
+    "got": "4210_5"
+   },
+   {
+    "i": 154,
+    "gold": "2\\sqrt{113}",
+    "got": null
+   },
+   {
+    "i": 166,
+    "gold": "\\frac{270}7\\text{ degrees}",
+    "got": "\\frac{270}{7}"
+   },
+   {
+    "i": 168,
+    "gold": "19",
+    "got": null
+   },
+   {
+    "i": 189,
+    "gold": "160",
+    "got": null
+   },
+   {
+    "i": 204,
+    "gold": "0",
+    "got": null
+   },
+   {
+    "i": 217,
+    "gold": "11,\\! 111,\\! 111,\\! 100",
+    "got": "11111111100"
+   },
+   {
+    "i": 240,
+    "gold": "116",
+    "got": null
+   },
+   {
+    "i": 264,
+    "gold": "1\\frac{4}{5}",
+    "got": null
+   },
+   {
+    "i": 284,
+    "gold": "3 \\pm 2 \\sqrt{2}",
+    "got": "-3-2\\sqrt{2},\\ -3+2\\sqrt{2},\\ 3-2\\sqrt{2},\\ 3+2\\sqrt{2}"
+   },
+   {
+    "i": 286,
+    "gold": "\\frac{17}{21}",
+    "got": null
+   },
+   {
+    "i": 296,
+    "gold": "\\text{(B)}",
+    "got": "\\textbf{(B)}"
+   },
+   {
+    "i": 303,
+    "gold": "28",
+    "got": null
+   },
+   {
+    "i": 308,
+    "gold": "1+2\\sqrt{3}",
+    "got": "2\\sqrt3 + 1"
+   },
+   {
+    "i": 318,
+    "gold": "\\frac{11+9a}{20}",
+    "got": "\\frac{9a+11}{20}"
+   },
+   {
+    "i": 327,
+    "gold": "15",
+    "got": null
+   },
+   {
+    "i": 349,
+    "gold": "10080",
+    "got": null
+   },
+   {
+    "i": 352,
+    "gold": "11 \\sqrt{5} + 11",
+    "got": "11+11\\sqrt5"
+   },
+   {
+    "i": 379,
+    "gold": "12",
+    "got": "12^{\\mathrm{th}}\\text{ grade}"
+   },
+   {
+    "i": 380,
+    "gold": "(0,9) \\cup (9,36)",
+    "got": "x \\in (0,9)\\cup(9,36)"
+   },
+   {
+    "i": 383,
+    "gold": "x \\in [-2,7]",
+    "got": "[-2, 7]"
+   },
+   {
+    "i": 396,
+    "gold": "2",
+    "got": null
+   },
+   {
+    "i": 408,
+    "gold": "\\begin{pmatrix} 1/5 \\\\ -18/5 \\end{pmatrix}",
+    "got": "\\begin{pmatrix} \\tfrac{1}{5} \\\\[2pt] -\\tfrac{18}{5} \\end{pmatrix}"
+   },
+   {
+    "i": 419,
+    "gold": "\\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}",
+    "got": "\\mathbf{v} = \\begin{pmatrix} -7 \\\\ 16 \\\\ 5 \\end{pmatrix}"
+   },
+   {
+    "i": 420,
+    "gold": "\\begin{pmatrix} 16/49 \\\\ 48/49 \\\\ 24/49 \\end{pmatrix}",
+    "got": "\\text{proj}_{\\mathbf{b}}\\mathbf{a} = \\begin{pmatrix} \\frac{16}{49} \\\\[4pt] \\frac{48}{49} \\\\[4pt] \\frac{24}{49} \\end{pmatrix}"
+   },
+   {
+    "i": 422,
+    "gold": "\\{1\\pm\\sqrt{5},-2\\}",
+    "got": null
+   },
+   {
+    "i": 425,
+    "gold": "3R^2",
+    "got": null
+   },
+   {
+    "i": 432,
+    "gold": "331",
+    "got": null
+   },
+   {
+    "i": 478,
+    "gold": "\\frac{2}{1005}",
+    "got": null
+   },
+   {
+    "i": 481,
+    "gold": "8n^2 + 4n + 1",
+    "got": "\\dfrac{8n^2+4n+1}{8n^2-12n+5}"
+   },
+   {
+    "i": 483,
+    "gold": "\\frac{8}{15}",
+    "got": "\\tan A = \\frac{8}{15}"
+   }
+  ]
+ }
+}

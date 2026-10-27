@@ -1,0 +1,184 @@
+{
+ "name": "drafts",
+ "score": 1.0,
+ "cases": 12,
+ "passed": 12,
+ "seconds": 83.70760917663574,
+ "notes": [
+  "drafted 44 tok/s vs undrafted 37 tok/s"
+ ],
+ "details": {
+  "drafted": [
+   {
+    "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+    "sha": "b13be3ad95d3",
+    "tokens": 175,
+    "tok_s": 43.28974255921758,
+    "text": "The sky looks blue because of a phenomenon called Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~700 nm)\u2014roughly in proportion to the inverse fourth power of wavelength. Blue light is therefore scattered in all directions across the sky, reaching your eyes from wherever you look, while red light travels more directly.\n\nAt sunset, sunlight must pass through much more atmosphere to reach you. Most of the blue light gets scattered out along the way, leaving the direct beam dominated by red and orange wavelengths. Those long wavelengths scatter less, so they survive the journey and appear in the sun's disk. The sky near the horizon glows red for the same reason: it's lit by that reddened, filtered light."
+   },
+   {
+    "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+    "sha": "246a3cdc3486",
+    "tokens": 300,
+    "tok_s": 52.54513183451303,
+    "text": "```python\ndef day_of_week(date_string: str) -> str:\n    \"\"\"\n    Parse an ISO-8601 date string and return the name of its day of the week.\n\n    Accepts dates in the form \"YYYY-MM-DD\" (the most common ISO-8601\n    calendar date format). The string is parsed with datetime.date.fromisoformat,\n    which also supports the extended ISO-8601 forms \"YYYYMMDD\" and\n    \"YYYY-Www-D\" (ISO week date).\n\n    Args:\n        date_string: An ISO-8601 date string, e.g. \"2024-03-15\".\n\n    Returns:\n        The English name of the weekday, e.g. \"Friday\".\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n        TypeError: If the argument is not a string.\n\n    Examples:\n        >>> day_of_week(\"2024-03-15\")\n        'Friday'\n        >>> day_of_week(\"2021-01-01\")\n        'Friday'\n    \"\"\"\n    from datetime import date\n\n    parsed = date.fromisoformat(date_string)\n    return parsed.strftime(\"%A\")\n```\n\n**Notes**\n\n- `date.fromisoformat` raises `ValueError` for malformed input, so invalid dates fail loudly rather than silently returning a wrong weekday.\n- `strftime(\"%A\")` returns the full weekday name in the current locale. If you need a locale-independent"
+   },
+   {
+    "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+    "sha": "90f94e049902",
+    "tokens": 162,
+    "tok_s": 40.412338474507536,
+    "text": "1. TCP is connection-oriented, establishing a handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP guarantees reliable, ordered delivery of data through acknowledgments and retransmissions, whereas UDP makes no such guarantees and can drop or reorder packets.\n\n3. TCP provides flow control and congestion control (using windowing and rate adjustment), while UDP offers neither, simply sending data as fast as the application requests.\n\n4. TCP sends data in segments with a 20-byte header (plus options) per segment, while UDP uses a smaller 8-byte header, making UDP more efficient for small messages.\n\n5. TCP supports full-duplex communication over a single connection between two endpoints, while UDP is primarily unicast one-to-one without built-in broadcast or multicast support."
+   },
+   {
+    "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+    "sha": "f46510fe1149",
+    "tokens": 19,
+    "tok_s": 30.853814344981014,
+    "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+   },
+   {
+    "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+    "sha": "9c58b422da9f",
+    "tokens": 300,
+    "tok_s": 52.80010235857839,
+    "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Recursive** directory tree traversal\n2. **Rename** `.jpeg` \u2192 `.jpg`\n3. **Skip** files whose target name already exists (don't overwrite)\n4. **Print a summary**\n\nLet me write a robust version:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 Recursively rename *.jpeg files to *.jpg in a directory tree.\n#\n# Files whose target name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed counts is printed at the end.\n#\n# Usage: ./rename-jpeg-to-jpg.sh [DIRECTORY]\n#        DIRECTORY defaults to the current directory.\n\nset -uo pipefail\n\nROOT=\"${1:-.}\"\n\nif [[ ! -d \"$ROOT\" ]]; then\n    printf 'Error: \"%s\" is not a directory.\\n' \"$ROOT\" >&2\n    exit 1\nfi\n\nrenamed=0\nskipped=0\nfailed=0\n\nwhile IFS= read -r -d '' src; do\n    dir=\"${src%/*}\"\n    base=\"${src##*/}\"\n    stem=\"${base%.jpeg}\"\n    dest=\"${dir}/${stem}.jpg\"\n\n    # Skip if the target already exists (as a file or directory).\n    if [[ -e \"$dest\" ]]; then\n        printf 'SKIP  %s -> %s ("
+   },
+   {
+    "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+    "sha": "ee38312d726a",
+    "tokens": 137,
+    "tok_s": 46.201064758278584,
+    "text": "**Moving time = 3 hours 40 minutes (220 minutes)**\n\nSteps:\n1. Total elapsed: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min... \n\nWait \u2014 let me redo that: 4 h 25 min = 265 min; 265 \u2212 25 = 240 min = 4 h 00 min.\n\n**Moving time = 4 hours (240 minutes)**\n\nCheck: 09:40 + 4 h = 13:40 moving, + 25 min stop = 14:05 arrival. \u2713"
+   },
+   {
+    "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+    "sha": "502c739f8535",
+    "tokens": 174,
+    "tok_s": 35.43040943421461,
+    "text": "A crew of unemployed mechanics led by a meticulous former safecracker pulls off the improbable theft of a decommissioned bank's gold vault, using a floodlit construction crane and a fake charity gala as diversions. The plan unravels when an elderly widow living in the building's upper floors turns out to be the vault's original designer, and she begins quietly correcting their blueprints from her window. Halfway through the second act, the crew realizes the vault they cracked was a decoy, and the real gold was donated to the museum years ago, meaning they have stolen nothing but a very large empty room and a strong sense of shame. In the finale, they return the stolen contents anonymously, and the widow, charmed by their persistence, hires them to install a new, genuinely secure vault for the museum \u2014 the first honest work any of them have ever done."
+   },
+   {
+    "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+    "sha": "932341ead296",
+    "tokens": 85,
+    "tok_s": 50.41891071160218,
+    "text": "[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]"
+   },
+   {
+    "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+    "sha": "683625c7bc99",
+    "tokens": 27,
+    "tok_s": 36.49272891181789,
+    "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+   },
+   {
+    "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+    "sha": "fcd878b8ca9d",
+    "tokens": 58,
+    "tok_s": 52.816045696141906,
+    "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+   },
+   {
+    "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+    "sha": "31578065d99b",
+    "tokens": 300,
+    "tok_s": 50.40378577810285,
+    "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt spray climbs the stair of stone\u2014\nThe sea forgets my name.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi-gil (2) = **5 syllables**\n\nLine 2: \"Salt spray climbs the stair of stone\"\n- Salt (1) spray (1) climbs (1) the (1) stair (1) of (1) stone (1) = **7 syllables**\n\nLine 3: \"The sea forgets my name\"\n- The (1) sea (1) for-gets (2) my (1) name (1) = **6 syllables**\n\nTotal: 5 + 7 + 6 = 18 syllables, matching the traditional 5\u20137\u20135 structure of a haiku.\n\nA note on the third line: \"forgets\" is the two-syllable word that carries the line, and the phrase \"the sea forgets my name\" gives the poem its quiet turn \u2014 the lighthouse stands watch, but the waves no longer register it, as if the sea has moved past caring. If you'd prefer a strict 5\u20135 ending, \"The sea forgets my name\" could become \"The sea forgets my name\" \u2192 \"The sea forgets my home\" (still 6), or simply \"Waves forget my name\" (5)."
+   },
+   {
+    "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+    "sha": "aedffe25cf7a",
+    "tokens": 41,
+    "tok_s": 39.32098885974246,
+    "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune\n\n(The gas giants are Jupiter, Saturn, Uranus, and Neptune.)"
+   }
+  ],
+  "undrafted": [
+   {
+    "prompt": "Explain, in about 150 words, why the sky is blue and sunsets are red.",
+    "sha": "b13be3ad95d3",
+    "tokens": 175,
+    "tok_s": 39.790225928233475,
+    "text": "The sky looks blue because of a phenomenon called Rayleigh scattering. Sunlight is made of all colors, and air molecules are much smaller than the wavelength of visible light. They scatter short wavelengths (blue, ~450 nm) far more strongly than long ones (red, ~700 nm)\u2014roughly in proportion to the inverse fourth power of wavelength. Blue light is therefore scattered in all directions across the sky, reaching your eyes from wherever you look, while red light travels more directly.\n\nAt sunset, sunlight must pass through much more atmosphere to reach you. Most of the blue light gets scattered out along the way, leaving the direct beam dominated by red and orange wavelengths. Those long wavelengths scatter less, so they survive the journey and appear in the sun's disk. The sky near the horizon glows red for the same reason: it's lit by that reddened, filtered light."
+   },
+   {
+    "prompt": "Write a Python function that parses an ISO-8601 date string and returns the day of the week, with a docstring and two examples.",
+    "sha": "246a3cdc3486",
+    "tokens": 300,
+    "tok_s": 40.66732366972113,
+    "text": "```python\ndef day_of_week(date_string: str) -> str:\n    \"\"\"\n    Parse an ISO-8601 date string and return the name of its day of the week.\n\n    Accepts dates in the form \"YYYY-MM-DD\" (the most common ISO-8601\n    calendar date format). The string is parsed with datetime.date.fromisoformat,\n    which also supports the extended ISO-8601 forms \"YYYYMMDD\" and\n    \"YYYY-Www-D\" (ISO week date).\n\n    Args:\n        date_string: An ISO-8601 date string, e.g. \"2024-03-15\".\n\n    Returns:\n        The English name of the weekday, e.g. \"Friday\".\n\n    Raises:\n        ValueError: If the string is not a valid ISO-8601 date.\n        TypeError: If the argument is not a string.\n\n    Examples:\n        >>> day_of_week(\"2024-03-15\")\n        'Friday'\n        >>> day_of_week(\"2021-01-01\")\n        'Friday'\n    \"\"\"\n    from datetime import date\n\n    parsed = date.fromisoformat(date_string)\n    return parsed.strftime(\"%A\")\n```\n\n**Notes**\n\n- `date.fromisoformat` raises `ValueError` for malformed input, so invalid dates fail loudly rather than silently returning a wrong weekday.\n- `strftime(\"%A\")` returns the full weekday name in the current locale. If you need a locale-independent"
+   },
+   {
+    "prompt": "List five differences between TCP and UDP as a numbered list, one sentence each.",
+    "sha": "90f94e049902",
+    "tokens": 162,
+    "tok_s": 39.71783542512353,
+    "text": "1. TCP is connection-oriented, establishing a handshake before data transfer, while UDP is connectionless and sends data immediately without any setup.\n\n2. TCP guarantees reliable, ordered delivery of data through acknowledgments and retransmissions, whereas UDP makes no such guarantees and can drop or reorder packets.\n\n3. TCP provides flow control and congestion control (using windowing and rate adjustment), while UDP offers neither, simply sending data as fast as the application requests.\n\n4. TCP sends data in segments with a 20-byte header (plus options) per segment, while UDP uses a smaller 8-byte header, making UDP more efficient for small messages.\n\n5. TCP supports full-duplex communication over a single connection between two endpoints, while UDP is primarily unicast one-to-one without built-in broadcast or multicast support."
+   },
+   {
+    "prompt": "Translate to French: 'The committee postponed the vote until the engineers had finished their report.'",
+    "sha": "f46510fe1149",
+    "tokens": 19,
+    "tok_s": 26.211022527842307,
+    "text": "Le comit\u00e9 a report\u00e9 le vote jusqu'\u00e0 ce que les ing\u00e9nieurs aient termin\u00e9 leur rapport."
+   },
+   {
+    "prompt": "Write a bash script that renames every .jpeg file in a directory tree to .jpg, skipping files whose target name exists, and prints a summary.",
+    "sha": "9c58b422da9f",
+    "tokens": 300,
+    "tok_s": 40.725665978462494,
+    "text": "I'll write a bash script for this. Let me think through the requirements:\n\n1. **Recursive** directory tree traversal\n2. **Rename** `.jpeg` \u2192 `.jpg`\n3. **Skip** files whose target name already exists (don't overwrite)\n4. **Print a summary**\n\nLet me write a robust version:\n\n```bash\n#!/usr/bin/env bash\n#\n# rename-jpeg-to-jpg.sh \u2014 Recursively rename *.jpeg files to *.jpg in a directory tree.\n#\n# Files whose target name already exists are skipped (never overwritten).\n# A summary of renamed / skipped / failed counts is printed at the end.\n#\n# Usage: ./rename-jpeg-to-jpg.sh [DIRECTORY]\n#        DIRECTORY defaults to the current directory.\n\nset -uo pipefail\n\nROOT=\"${1:-.}\"\n\nif [[ ! -d \"$ROOT\" ]]; then\n    printf 'Error: \"%s\" is not a directory.\\n' \"$ROOT\" >&2\n    exit 1\nfi\n\nrenamed=0\nskipped=0\nfailed=0\n\nwhile IFS= read -r -d '' src; do\n    dir=\"${src%/*}\"\n    base=\"${src##*/}\"\n    stem=\"${base%.jpeg}\"\n    dest=\"${dir}/${stem}.jpg\"\n\n    # Skip if the target already exists (as a file or directory).\n    if [[ -e \"$dest\" ]]; then\n        printf 'SKIP  %s -> %s ("
+   },
+   {
+    "prompt": "A train leaves at 09:40 and arrives at 14:05 after a 25-minute stop. What is its moving time? Show the steps briefly.",
+    "sha": "ee38312d726a",
+    "tokens": 137,
+    "tok_s": 39.047366806884874,
+    "text": "**Moving time = 3 hours 40 minutes (220 minutes)**\n\nSteps:\n1. Total elapsed: 09:40 \u2192 14:05 = 4 h 25 min = 265 min\n2. Subtract the stop: 265 \u2212 25 = 240 min... \n\nWait \u2014 let me redo that: 4 h 25 min = 265 min; 265 \u2212 25 = 240 min = 4 h 00 min.\n\n**Moving time = 4 hours (240 minutes)**\n\nCheck: 09:40 + 4 h = 13:40 moving, + 25 min stop = 14:05 arrival. \u2713"
+   },
+   {
+    "prompt": "Summarize the plot of a heist film you invent, in exactly four sentences.",
+    "sha": "502c739f8535",
+    "tokens": 174,
+    "tok_s": 39.85343441470118,
+    "text": "A crew of unemployed mechanics led by a meticulous former safecracker pulls off the improbable theft of a decommissioned bank's gold vault, using a floodlit construction crane and a fake charity gala as diversions. The plan unravels when an elderly widow living in the building's upper floors turns out to be the vault's original designer, and she begins quietly correcting their blueprints from her window. Halfway through the second act, the crew realizes the vault they cracked was a decoy, and the real gold was donated to the museum years ago, meaning they have stolen nothing but a very large empty room and a strong sense of shame. In the finale, they return the stolen contents anonymously, and the widow, charmed by their persistence, hires them to install a new, genuinely secure vault for the museum \u2014 the first honest work any of them have ever done."
+   },
+   {
+    "prompt": "Give a JSON array of three objects, each with keys city, country and population (integer), for three large Asian cities.",
+    "sha": "932341ead296",
+    "tokens": 85,
+    "tok_s": 37.249588954377415,
+    "text": "[\n  {\n    \"city\": \"Tokyo\",\n    \"country\": \"Japan\",\n    \"population\": 13960000\n  },\n  {\n    \"city\": \"Delhi\",\n    \"country\": \"India\",\n    \"population\": 32941000\n  },\n  {\n    \"city\": \"Shanghai\",\n    \"country\": \"China\",\n    \"population\": 29210000\n  }\n]"
+   },
+   {
+    "prompt": "Rewrite this sentence in the passive voice and then in the imperative: 'The engineer calibrates the sensor every morning.'",
+    "sha": "683625c7bc99",
+    "tokens": 27,
+    "tok_s": 29.385613495416603,
+    "text": "**Passive voice:** The sensor is calibrated by the engineer every morning.\n\n**Imperative:** Calibrate the sensor every morning."
+   },
+   {
+    "prompt": "What is 17 * 23? Then subtract 91 and divide by 5. Show each step.",
+    "sha": "fcd878b8ca9d",
+    "tokens": 58,
+    "tok_s": 35.41083152550453,
+    "text": "**Step 1: Multiply**\n17 \u00d7 23 = 391\n\n**Step 2: Subtract 91**\n391 \u2212 91 = 300\n\n**Step 3: Divide by 5**\n300 \u00f7 5 = 60\n\n**Answer: 60**"
+   },
+   {
+    "prompt": "Write a haiku about a lighthouse, then explain its syllable count.",
+    "sha": "31578065d99b",
+    "tokens": 300,
+    "tok_s": 40.851499349083305,
+    "text": "**Haiku**\n\nOld light keeps its vigil,\nSalt spray climbs the stair of stone\u2014\nThe sea forgets my name.\n\n**Syllable count**\n\nLine 1: \"Old light keeps its vigil\"\n- Old (1) light (1) keeps (1) its (1) vi-gil (2) = **5 syllables**\n\nLine 2: \"Salt spray climbs the stair of stone\"\n- Salt (1) spray (1) climbs (1) the (1) stair (1) of (1) stone (1) = **7 syllables**\n\nLine 3: \"The sea forgets my name\"\n- The (1) sea (1) for-gets (2) my (1) name (1) = **6 syllables**\n\nTotal: 5 + 7 + 6 = 18 syllables, matching the traditional 5\u20137\u20135 structure of a haiku.\n\nA note on the third line: \"forgets\" is the two-syllable word that carries the line, and the phrase \"the sea forgets my name\" gives the poem its quiet turn \u2014 the lighthouse stands watch, but the waves no longer register it, as if the sea has moved past caring. If you'd prefer a strict 5\u20135 ending, \"The sea forgets my name\" could become \"The sea forgets my name\" \u2192 \"The sea forgets my home\" (still 6), or simply \"Waves forget my name\" (5)."
+   },
+   {
+    "prompt": "Name the planets of the solar system in order from the Sun, one per line, and mark the gas giants with an asterisk.",
+    "sha": "aedffe25cf7a",
+    "tokens": 41,
+    "tok_s": 32.75581678143378,
+    "text": "Mercury\nVenus\nEarth\nMars\n*Jupiter\n*Saturn\n*Uranus\n*Neptune\n\n(The gas giants are Jupiter, Saturn, Uranus, and Neptune.)"
+   }
+  ]
+ }
+}

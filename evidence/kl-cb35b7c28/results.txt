@@ -1,0 +1,10 @@
+Engine cb35b7c28 (tf-minimax-run), bf16 cache, Apple M5 Ultra.
+
+Against the pre-rebase build with the same kernels (95c1c7f54's), mix256k:
+  8,192-token prompt, last-row logits: byte-identical
+  64 forced steps after it: byte-identical
+  1,024 teacher-forced rows: byte-identical
+
+Against the NVFP4 release (tools/compare.py against the release's logits on the same 1,024 rows, the same prompt as the earlier KL figures):
+  mix256k: rows 1024: mean KL 0.29512, max KL 11.95570, top-1 78.4%
+  mix34:   rows 1024: mean KL 0.24401, max KL 14.21793, top-1 80.7%

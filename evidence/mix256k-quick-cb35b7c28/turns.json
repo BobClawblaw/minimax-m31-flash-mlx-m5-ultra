@@ -1,0 +1,102 @@
+{
+ "turn1": {
+  "status": 200,
+  "text": "Three rivers in Europe are the Danube, the Rhine, and the Seine.",
+  "ttft": 3.477,
+  "ttft_any": 3.477,
+  "usage": {
+   "prompt_tokens": 4698,
+   "completion_tokens": 16,
+   "total_tokens": 4714,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 3.766,
+  "finish": "stop",
+  "tool_calls": null
+ },
+ "turn2": {
+  "status": 200,
+  "text": "The Danube is the longest of the three, at about 2,850 km (1,770 miles). It flows from the Black Forest in Germany through ten countries to the Black Sea in Romania. The Rhine is roughly 1,230",
+  "ttft": 0.221,
+  "ttft_any": 0.221,
+  "usage": {
+   "prompt_tokens": 4730,
+   "completion_tokens": 48,
+   "total_tokens": 4778,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.099,
+  "finish": "length",
+  "tool_calls": null
+ },
+ "turn3": {
+  "status": 200,
+  "text": "The Seine is the shortest of the three, at about 777 km (483 miles). It rises on the Langres Plateau in northeastern France and flows through Paris to the English Channel at Le Havre.",
+  "ttft": 0.271,
+  "ttft_any": 0.271,
+  "usage": {
+   "prompt_tokens": 4793,
+   "completion_tokens": 41,
+   "total_tokens": 4834,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.295,
+  "finish": "stop",
+  "tool_calls": null
+ },
+ "turn3_again": {
+  "status": 200,
+  "text": "The Seine is the shortest of the three, at about 777 km (483 miles). It rises on the Langres Plateau in northeastern France and flows through Paris to the English Channel at Le Havre.",
+  "ttft": 0.28,
+  "ttft_any": 0.28,
+  "usage": {
+   "prompt_tokens": 4793,
+   "completion_tokens": 41,
+   "total_tokens": 4834,
+   "prompt_tokens_details": {
+    "cached_tokens": 4685
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 1.3,
+  "finish": "stop",
+  "tool_calls": null
+ },
+ "turn3_cold": {
+  "status": 200,
+  "text": "The Seine is the shortest of the three, at about 777 km (483 miles). It rises on the Langres Plateau in northeastern France and flows through Paris to the English Channel at Le Havre.",
+  "ttft": 3.599,
+  "ttft_any": 3.599,
+  "usage": {
+   "prompt_tokens": 4793,
+   "completion_tokens": 41,
+   "total_tokens": 4834,
+   "prompt_tokens_details": {
+    "cached_tokens": 0
+   },
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "s": 4.703,
+  "finish": "stop",
+  "tool_calls": null
+ }
+}
