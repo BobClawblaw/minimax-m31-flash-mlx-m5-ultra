@@ -68,8 +68,12 @@ name in upper case overrides both (`VARIANT=mix34 python3 -m mac up`).
 `load_limit_gb = 226`. The bf16 cache takes 135 KiB a token across the 60 layers. Under 226 GB the caches fit
 150,400 tokens on mix256k and 37,376 on mix34 (the engine's own fit, with images and the drafter); the windows
 leave a little of that spare. At a 145,203-token prompt on mix256k the Mac showed 210 GiB wired: near the edge, and
-other apps' memory comes out of it. mix34 needs the Mac nearly idle to load (with other apps holding about 36 GiB,
-macOS killed it while it mapped its weights). Shorter windows or `parallel = 1` leave more.
+other apps' memory comes out of it. mix34 needs the Mac nearly idle to load: at its 32k window it holds 203.6 GiB
+(the engine's own count: weights, caches and scratch), which leaves about 52 GiB for macOS and everything else. It
+loaded with the Mac otherwise idle (95% of RAM free before the load), and macOS killed it while it mapped its weights
+with an ordinary desktop open (a browser, mail, a terminal and a build: about 29 GiB of other processes; the kill came
+at 199 GiB loaded, with 0.3 GiB free; earlier, with about 36 GiB held, the same). Quit other apps before serving mix34.
+mix256k (189.2 GiB of weights) loads beside them. Shorter windows or `parallel = 1` leave more.
 
 ## What works, and how it was checked
 
@@ -168,12 +172,15 @@ IFEval is low for a model this size: the suite caps replies at 1,200 tokens, Min
 150 replies hit the cap, 23 of them failing), and many of the rest break the format they were asked for. Thinking
 does not rescue many (3 of 12 failed prompts pass with it on). No thinking-on quality run was made.
 
-**TensorFold leaderboard.** The board's community-v1 suite on mix256k:
-[result](https://tensorfold.dev/benchmarks?result=bc110e01-c245-4dec-aa40-63d3e432c456) (code 32.0 / 51.4 and chat
-28.1 / 45.7 tokens a second at temperature 1 / 0, as the client receives them; the engine commit plus the client's
-`--suite community-v1` protocol). mix34 could not complete the suite: its code fixture is an instruction sent as a raw
-completion, and at temperature 0 mix34 ends it at the first token (an empty reply), as it did on 4 of 6 tries at
-temperature 1.
+**TensorFold leaderboard.** The board's community-v1 suite on mix256k at the pinned cb35b7c28:
+[result](https://tensorfold.dev/benchmarks?result=95ff5cfb-a8ae-4879-81a8-fd133d1594f8) (code 37.5 / 64.5 and chat
+26.1 / 44.4 tokens a second at temperature 1 / 0, as the client receives them; 2,607 of 3,475 drafted tokens accepted;
+the engine commit plus the client's `--suite community-v1` protocol). The earlier engine's
+[result](https://tensorfold.dev/benchmarks?result=bc110e01-c245-4dec-aa40-63d3e432c456) gave 32.0 / 51.4 and 28.1 /
+45.7. mix34 is not on the board. On the earlier engine it could not complete the suite: its code fixture is an
+instruction sent as a raw completion, and at temperature 0 mix34 ends it at the first token (an empty reply), as it did
+on 4 of 6 tries at temperature 1. On cb35b7c28 it was not run: the board's server could not load it beside the other
+apps open on this Mac (see Memory).
 
 ## Limits
 
