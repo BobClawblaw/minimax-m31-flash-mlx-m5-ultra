@@ -1,0 +1,55 @@
+{
+ "name": "vision",
+ "score": 0.5,
+ "cases": 6,
+ "passed": 3,
+ "seconds": 9.23668098449707,
+ "notes": [
+  "two images: missing ['yellow'] in 'The first image is red, and the second image is green.'",
+  "video motion: missing ['left to right/to the right/rightward'] in '<error: HTTP Error 400: Bad Request>'",
+  "video colours: missing ['blue', 'green'] in '<error: HTTP Error 400: Bad Request>'"
+ ],
+ "details": {
+  "shapes": {
+   "reply": "The image contains two simple geometric shapes on a plain white background:\n\n1. **A red circle** on the left side of the image. It is a large, solid-filled circle in a bright red colour (approximately #E01A1A), positioned in the upper-left area.\n\n2. **A blue square** on the right side of the image. It is a solid-filled square in a vivid blue colour (approximately #1F3FE0), positioned in the upper-right area, roughly the same height as the circle but slightly smaller in overall area.\n\nBelow the circle, near the lower-left portion of the image, there is a small line of black text that reads:\n\n**\"GLM 42\"**",
+   "missing": []
+  },
+  "text": {
+   "reply": "TensorFold on DGX Spark",
+   "missing": []
+  },
+  "count": {
+   "reply": "Three triangles, all green.",
+   "missing": []
+  },
+  "two images": {
+   "reply": "The first image is red, and the second image is green.",
+   "missing": [
+    [
+     "yellow"
+    ]
+   ]
+  },
+  "video motion": {
+   "reply": "<error: HTTP Error 400: Bad Request>",
+   "missing": [
+    [
+     "left to right",
+     "to the right",
+     "rightward"
+    ]
+   ]
+  },
+  "video colours": {
+   "reply": "<error: HTTP Error 400: Bad Request>",
+   "missing": [
+    [
+     "blue"
+    ],
+    [
+     "green"
+    ]
+   ]
+  }
+ }
+}

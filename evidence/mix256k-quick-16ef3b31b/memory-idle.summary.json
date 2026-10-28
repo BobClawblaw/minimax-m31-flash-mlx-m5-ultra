@@ -1,0 +1,10 @@
+{
+ "ok": null,
+ "summary": "mac: System-wide memory free percentage: 96%\ntotal = 4096.00M  us",
+ "metrics": {
+  "mac": null
+ },
+ "name": "memory-idle",
+ "type": "memory",
+ "seconds": 0.0
+}

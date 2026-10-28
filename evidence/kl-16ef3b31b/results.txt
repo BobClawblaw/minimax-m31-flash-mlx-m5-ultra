@@ -1,0 +1,16 @@
+Engine 16ef3b31b (tf-minimax-run): minimax-m3 rebased onto TensorFold main 8c2037c9a, config.json read in the release's
+form (minimax_m3_vl, text_config); the checkpoints' config.json in that form (mix34 9524999057e0, mix256k 916e7ca1044f).
+The pinned 114cc80e9 is the same branch rebased onto db3fd5aba (CUDA files and core tests only). Bf16 cache, M5 Ultra.
+
+Against cb35b7c28 (the previous pin, flat config.json):
+  mix256k, 8,192-token prompt, last-row logits: byte-identical
+  mix256k, 64 forced steps after it: byte-identical
+  mix256k, 1,024 teacher-forced rows: byte-identical
+  mix34, 1,024 teacher-forced rows: byte-identical
+
+So the KL against the NVFP4 release is unchanged (evidence/kl-cb35b7c28): mix256k 0.29512 (78.4% top-1), mix34
+0.24401 (80.7%).
+
+mix34's quick (mix34-quick-16ef3b31b) passed structured, tools and sampling; its turns check restarts the server and
+the second load did not come up. A load-and-restart test the same night (about 25 GB held by other programs): this
+head failed both loads, cb35b7c28 came up once and failed once; each failure about 141 s into the load.

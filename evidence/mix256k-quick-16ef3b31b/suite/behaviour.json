@@ -1,0 +1,70 @@
+[
+ {
+  "name": "streaming",
+  "score": 1.0,
+  "cases": 4,
+  "passed": 4,
+  "seconds": 24.32016396522522,
+  "notes": [
+   "identical"
+  ],
+  "details": {}
+ },
+ {
+  "name": "multiturn",
+  "score": 1.0,
+  "cases": 8,
+  "passed": 8,
+  "seconds": 16.974493980407715,
+  "notes": [
+   "recalled 8/8 facts"
+  ],
+  "details": {
+   "reply": "- **Name:** Odile\n- **City:** Lyon\n- **Cat:** Pistache, 7 years old\n- **Job:** Luthier \u2014 repairs violins\n- **Favourite number:** 314\n- **Travel:** Flying to Montreal on 14 November"
+  }
+ },
+ {
+  "name": "stop",
+  "score": 1.0,
+  "cases": 3,
+  "passed": 3,
+  "seconds": 1.635171890258789,
+  "notes": [
+   "3/3 stopped before the string"
+  ],
+  "details": {}
+ },
+ {
+  "name": "thinking",
+  "score": 1.0,
+  "cases": 10,
+  "passed": 10,
+  "seconds": 22.11629319190979,
+  "notes": [
+   "0 replies without reasoning_content, 0 with think tags in content"
+  ],
+  "details": {}
+ },
+ {
+  "name": "copy",
+  "score": 1.0,
+  "cases": 2,
+  "passed": 2,
+  "seconds": 2.4937243461608887,
+  "notes": [
+   "2/2 byte-identical"
+  ],
+  "details": {}
+ },
+ {
+  "name": "max-tokens",
+  "score": 1.0,
+  "cases": 3,
+  "passed": 3,
+  "seconds": 1.757662296295166,
+  "notes": [
+   "3/3 exact"
+  ],
+  "details": {}
+ }
+]

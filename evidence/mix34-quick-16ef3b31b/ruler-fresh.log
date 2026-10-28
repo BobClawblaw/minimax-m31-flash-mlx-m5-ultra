@@ -1,0 +1,5 @@
+ruler: http://127.0.0.1:8897, max_tokens 256, 3 runs, median per stream / aggregate tok/s, ttft median
+  c=1   prose         41.0 /    41.0 tok/s (wall   38.9)   ttft 0.32s   256 tokens a reply
+  c=1   code          63.4 /    63.4 tok/s (wall   58.8)   ttft 0.34s   256 tokens a reply
+  c=1   structured    47.6 /    47.6 tok/s (wall   44.6)   ttft 0.34s   231 tokens a reply
+  c=1   list          54.5 /    54.5 tok/s (wall   50.2)   ttft 0.32s   192 tokens a reply

@@ -2,7 +2,7 @@
 # environment variable of the same name in upper case overrides both (VARIANT=mix34 python3 -m mac up).
 
 [model]
-# MiniMax's release (nvfp4 experts, mxfp8 rest), converted by tools/convert.py; both conversions are public:
+# MiniMax's release (nvfp4 experts, mxfp8 rest), converted by tools/convert.py into two community checkpoints:
 # `python3 -m mac download` fetches the variant's (README: what each holds and costs)
 source_repo = "MiniMaxAI/MiniMax-M3.1-Flash"
 source_revision = "54e4e69dfc452b1e94a426c24a4fdeeaa8e3ad5e"
@@ -15,7 +15,7 @@ revision = ""                    # empty: the variant's pinned revision (config.
 # TensorFold's native Metal engine: a worktree of tensorfold_src at tensorfold_sha, built by `python3 -m mac build`
 # under tf_cache; `binary` names a built tensorfold-native instead
 tensorfold_src = "~/github/TensorFold"
-tensorfold_sha = "cb35b7c28b3d0e824472af05b5254c686517f3d4"   # branch minimax-m3 (README.md)
+tensorfold_sha = "114cc80e9dda5c7baefb7d70707cf8583686edcf"   # branch minimax-m3 (README.md)
 zig = "zig"                      # Zig 0.17.0
 zig_cpu = "native"
 binary = ""

@@ -1,0 +1,22 @@
+{
+ "ok": null,
+ "summary": "vision 3/6, vision-concurrent 12/16",
+ "metrics": {
+  "scores": {
+   "vision": {
+    "passed": 3,
+    "cases": 6,
+    "score": 0.5
+   },
+   "vision-concurrent": {
+    "passed": 12,
+    "cases": 16,
+    "score": 0.75
+   }
+  },
+  "thinking_args": "--only vision vision-concurrent"
+ },
+ "name": "suite-vision",
+ "type": "suite",
+ "seconds": 25.3
+}

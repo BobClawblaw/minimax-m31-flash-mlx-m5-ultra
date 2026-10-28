@@ -5,9 +5,11 @@ block-sparse attention and a vision tower, with TensorFold's native Metal engine
 OpenAI-compatible server with images, tool calls, structured output, thinking on or off, DFlash2 drafts, the prompt
 cache and two streams.
 
-MiniMax's release stores its experts in NVFP4, which Metal has no kernels for, so this recipe serves two conversions
-of it to MLX-style affine groups, both public (the engine's `tools/zig/minimax_m3_convert.py` rebuilds them from
-the pinned release and checks every file against the published hashes):
+MiniMax's release stores its experts in NVFP4 and the rest in MXFP8. Metal has no kernels for those, and as published
+the release takes about 248 GB, more than one 256 GB Mac can give a model. So this recipe serves two community
+checkpoints: lossy conversions of the release to MLX-style affine groups, labelled with their KL against it below. Each
+carries the release's own `config.json` (`minimax_m3_vl`, the language model under `text_config`), with MLX's
+`quantization` block in place of the release's and the drafters' blocks beside it. `tools/convert.py` made them:
 
 | variant | checkpoint | experts | on disk | window on 256 GB |
 |---|---|---|---:|---:|
@@ -23,7 +25,7 @@ Attention, the shared expert, the dense layers and the head are 8-bit in both. E
 release's DSpark head and incoai's [DFlash2 drafter](https://huggingface.co/incoai/MiniMax-M3.1-Flash-DFlash2).
 
 The engine's `minimax_m3` family is in [ashhart/TensorFold#1235](https://github.com/ashhart/TensorFold/pull/1235);
-until it merges, this recipe builds the pinned commit of its branch (cb35b7c28, `minimax-m3` on
+until it merges, this recipe builds the pinned commit of its branch (114cc80e9, `minimax-m3` on
 [BobClawblaw/TensorFold](https://github.com/BobClawblaw/TensorFold/tree/minimax-m3)). Every one of the family's
 Metal kernels is registered with TensorFold's kernel contract (50 kernels, gates 1-4 and launch limits).
 
@@ -86,6 +88,14 @@ nearly flat rows), and the KL to the release goes down. On the pinned engine, bo
 9/9, turns resumed == cold, and the suite's soak 60/60, drafts 12/12, concurrency 12/12 and behaviour checks. Its
 logits are byte-identical to the build the quality suite ran on (`evidence/kl-cb35b7c28`). The math and image
 checks below ran on earlier engines and were not repeated.
+
+The pinned 114cc80e9 reads the release's own `config.json` (the checkpoints at the revisions in `mac/config.py`, only
+`config.json` and the model card changed) and is rebased onto TensorFold main `db3fd5aba`. Its checks ran on the same
+branch on main `8c2037c9a` (16ef3b31b; main's last six commits touch only CUDA and core tests): logits byte-identical
+to cb35b7c28's on both variants (`evidence/kl-16ef3b31b`); mix256k passes `quick` (`evidence/mix256k-quick-16ef3b31b`);
+both pass `glm-vision`, where 16 image requests at once each give the same reply as alone
+(`evidence/*-vision-16ef3b31b`). mix34 passed structured, tools and sampling, but its restart check's second load did
+not come up with about 25 GB held by other programs, on this head and on cb35b7c28 alike (see Memory).
 
 - **The math.** Four layers of the engine against transformers' own model: KL at most 0.005. The full model against
   an MLX reference (`ref/model.py`) at the same weights: KL 0.015, smaller than the reference's own bf16 noise.
@@ -195,12 +205,15 @@ apps open on this Mac (see Memory).
 
 ## Reproducing the checkpoints
 
-The engine's `tools/zig/minimax_m3_convert.py` (from this recipe's `tools/convert.py`) converts the release at revision
-54e4e69d and incoai's DFlash2 at ac07a7c1 to either variant (`--variant mix34|mix256k`), and `--check` compares a
-folder with the published files' hashes; a full mix256k rebuild checks 74/74 (the commands are on the engine's
-recipe page). `tools/requant_study.py` ranked the 4-bit layers; `tools/compare.py` and `ref/` hold the KL checks.
+TensorFold serves published checkpoints and does not ship conversions, so the conversion lives here. `tools/convert.py`
+converts the release at revision 54e4e69d (and incoai's DFlash2 at ac07a7c1, `--only dflash2 --dflash2 DIR`) with
+3-bit g64 experts and 8-bit g64 elsewhere; `--layer-bits` sets each variant's 4-bit g128 layers, as its `config.json`
+records under `source` (mix256k `22:4g128,24:4g128,59:4g128`; mix34 the 26 layers its config lists). `tools/requant_study.py`
+ranked the 4-bit layers; `tools/compare.py` and `ref/` hold the KL checks.
 
 ## License
 
-The recipe is MIT. The weights are under MiniMax's community license (non-commercial use; see the model cards);
-incoai's DFlash2 drafter is Apache-2.0; TensorFold is Apache-2.0.
+The recipe is MIT; TensorFold is Apache-2.0. MiniMax-M3.1-Flash's weights, and these checkpoints made from them, have
+the MiniMax Community License: free for non-commercial use; commercial use must show "Built with MiniMax M3.1-Flash"
+and notify MiniMax, with its written authorization above US$20 million yearly revenue; its appendix lists prohibited
+uses. incoai's DFlash2 drafter is Apache-2.0.

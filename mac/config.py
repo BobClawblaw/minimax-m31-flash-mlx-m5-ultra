@@ -11,8 +11,8 @@ WEBP_VERSION = "1.6.0"  # the libwebp release its WebP decoder pins
 
 # Each conversion: its public repo, the revision the README measured, and the window its memory allows on 256 GB
 VARIANTS = {
-    "mix34": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34", "136e775c89e996cac20c05befbcb26886ad24782", 32768),
-    "mix256k": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k", "c7defa69b0e8b57426a9945eb3f9eb91cfef9f8c", 147456),
+    "mix34": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix34", "9524999057e0d277d26438606e033e2191fb465c", 32768),
+    "mix256k": ("BobClawblaw/MiniMax-M3.1-Flash-MLX-mix256k", "916e7ca1044f1c3e7566163096243c940327224d", 147456),
 }
 
 

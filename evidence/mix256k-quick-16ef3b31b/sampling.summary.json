@@ -1,0 +1,11 @@
+{
+ "ok": true,
+ "summary": "9/9 seeded replies equal on repeat and undrafted; 0 errors",
+ "metrics": {
+  "errors": 0,
+  "differ": []
+ },
+ "name": "sampling",
+ "type": "sampling",
+ "seconds": 93.8
+}

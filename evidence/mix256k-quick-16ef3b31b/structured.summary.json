@@ -1,0 +1,11 @@
+{
+ "ok": true,
+ "summary": "18/18 obey, drafted == plain 12/12; a bad regex -> 400",
+ "metrics": {
+  "failures": [],
+  "bad_regex_status": 400
+ },
+ "name": "structured",
+ "type": "structured",
+ "seconds": 57.4
+}

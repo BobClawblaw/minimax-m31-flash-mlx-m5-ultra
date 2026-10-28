@@ -1,0 +1,54 @@
+{
+ "ok": null,
+ "summary": "c=1 41.0/63.4/47.6/54.5 ttft 0.32-0.34s; engine: c=1 2.22 tokens a round 66% accepted, 43.1 ms a round",
+ "metrics": {
+  "cells": [
+   {
+    "concurrency": 1,
+    "phase": "prose",
+    "per_stream": 40.99994085612656,
+    "aggregate": 40.99994085612656,
+    "ttft": 0.32356758404057473
+   },
+   {
+    "concurrency": 1,
+    "phase": "code",
+    "per_stream": 63.44080404795375,
+    "aggregate": 63.44080404795375,
+    "ttft": 0.3377696250099689
+   },
+   {
+    "concurrency": 1,
+    "phase": "structured",
+    "per_stream": 47.57177910729847,
+    "aggregate": 47.57177910729847,
+    "ttft": 0.34250262507703155
+   },
+   {
+    "concurrency": 1,
+    "phase": "list",
+    "per_stream": 54.47850509812117,
+    "aggregate": 54.47850509812117,
+    "ttft": 0.3205102920765057
+   }
+  ],
+  "engine": {
+   "1": {
+    "requests": 12,
+    "prompt": 2598,
+    "cached": 0,
+    "tokens": 2805,
+    "rounds": 1261,
+    "accepted": 1539,
+    "proposed": 2319,
+    "tokens_a_round": 2.224,
+    "drafts_a_round": 1.839,
+    "accept_rate": 0.6636,
+    "ms_a_round": 43.09
+   }
+  }
+ },
+ "name": "ruler-fresh",
+ "type": "ruler",
+ "seconds": 60.3
+}

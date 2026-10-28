@@ -1,0 +1,14 @@
+{
+ "ok": false,
+ "summary": "public 400; loopback 400; http 400; unexpected: ['public']",
+ "metrics": {
+  "statuses": {
+   "public": 400,
+   "loopback": 400,
+   "http": 400
+  }
+ },
+ "name": "urls",
+ "type": "urls",
+ "seconds": 0.0
+}

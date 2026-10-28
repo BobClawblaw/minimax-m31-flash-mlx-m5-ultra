@@ -1,0 +1,57 @@
+{
+ "ok": null,
+ "summary": "soak 60/60, drafts 12/12, concurrent 12/12, streaming 4/4, multiturn 8/8, stop 3/3, thinking 10/10, copy 2/2, max-tokens 3/3",
+ "metrics": {
+  "scores": {
+   "soak": {
+    "passed": 60,
+    "cases": 60,
+    "score": 1.0
+   },
+   "drafts": {
+    "passed": 12,
+    "cases": 12,
+    "score": 1.0
+   },
+   "concurrent": {
+    "passed": 12,
+    "cases": 12,
+    "score": 1.0
+   },
+   "streaming": {
+    "passed": 4,
+    "cases": 4,
+    "score": 1.0
+   },
+   "multiturn": {
+    "passed": 8,
+    "cases": 8,
+    "score": 1.0
+   },
+   "stop": {
+    "passed": 3,
+    "cases": 3,
+    "score": 1.0
+   },
+   "thinking": {
+    "passed": 10,
+    "cases": 10,
+    "score": 1.0
+   },
+   "copy": {
+    "passed": 2,
+    "cases": 2,
+    "score": 1.0
+   },
+   "max-tokens": {
+    "passed": 3,
+    "cases": 3,
+    "score": 1.0
+   }
+  },
+  "thinking_args": "--only soak drafts concurrent behaviour"
+ },
+ "name": "suite",
+ "type": "suite",
+ "seconds": 552.6
+}

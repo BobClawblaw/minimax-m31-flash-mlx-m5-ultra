@@ -1,0 +1,27 @@
+{
+ "ok": true,
+ "summary": "resumed == again: True; cold (after a restart): True; cached 4685 of 4793; ttft resumed 0.267s, cold 5.776s",
+ "metrics": {
+  "cached": {
+   "turn1": 0,
+   "turn2": 4685,
+   "turn3": 4685,
+   "turn3_again": 4685,
+   "turn3_cold": 0
+  },
+  "ttft": {
+   "turn1": 3.443,
+   "turn2": 0.213,
+   "turn3": 0.267,
+   "turn3_again": 0.269,
+   "turn3_cold": 5.776
+  },
+  "equal": true,
+  "again": true,
+  "cold": true,
+  "cold_restarted": true
+ },
+ "name": "turns",
+ "type": "turns",
+ "seconds": 69.5
+}

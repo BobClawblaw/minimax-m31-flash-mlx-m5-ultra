@@ -1,0 +1,41 @@
+{
+ "name": "vision-concurrent",
+ "score": 0.75,
+ "cases": 16,
+ "passed": 12,
+ "seconds": 16.62095308303833,
+ "notes": [
+  "16 image/video requests together vs alone",
+  "refused alone (HTTP 400), not run together: video motion, video colours",
+  "two images: missing ['yellow']",
+  "two images: missing ['yellow']",
+  "two images: missing ['yellow']",
+  "two images: missing ['yellow']"
+ ],
+ "details": {
+  "alone": {
+   "shapes": "The image contains two simple geometric shapes on a plain white background:\n\n1. **A red circle** on the left side of the image. It is a large, solid-filled circle in a bright red colour (approximately #E02020), positioned in the upper-left area.\n\n2. **A blue square** on the right side of the image. It is a solid-filled square in a vivid blue colour (approximately #1E3FE0), positioned in the upper-right area, roughly the same height as the circle but with straight edges and corners.\n\nBelow the circle, near the lower-left portion of the image, there is a small line of black text reading:\n\n**\"GLM 42\"**",
+   "text": "TensorFold on DGX Spark",
+   "count": "Three triangles, all green.",
+   "two images": "The first image is red, and the second image is green."
+  },
+  "together": [
+   "The image contains two simple geometric shapes on a plain white background:\n\n1. **A red circle** on the left side of the image. It is a large, solid-filled circle in a bright red colour (approximately #E02020), positioned in the upper-left area.\n\n2. **A blue square** on the right side of the image. It is a solid-filled square in a vivid blue colour (approximately #1E3FE0), positioned in the upper-right area, roughly the same height as the circle but with straight edges and corners.\n\nBelow the circle, near the lower-left portion of the image, there is a small line of black text reading:\n\n**\"GLM 42\"**",
+   "TensorFold on DGX Spark",
+   "Three triangles, all green.",
+   "The first image is red, and the second image is green.",
+   "The image contains two simple geometric shapes on a plain white background:\n\n1. **A red circle** on the left side of the image. It is a large, solid-filled circle in a bright red colour (approximately #E02020), positioned in the upper-left area.\n\n2. **A blue square** on the right side of the image. It is a solid-filled square in a vivid blue colour (approximately #1E3FE0), positioned in the upper-right area, roughly the same height as the circle but with straight edges and corners.\n\nBelow the circle, near the lower-left portion of the image, there is a small line of black text reading:\n\n**\"GLM 42\"**",
+   "TensorFold on DGX Spark",
+   "Three triangles, all green.",
+   "The first image is red, and the second image is green.",
+   "The image contains two simple geometric shapes on a plain white background:\n\n1. **A red circle** on the left side of the image. It is a large, solid-filled circle in a bright red colour (approximately #E02020), positioned in the upper-left area.\n\n2. **A blue square** on the right side of the image. It is a solid-filled square in a vivid blue colour (approximately #1E3FE0), positioned in the upper-right area, roughly the same height as the circle but with straight edges and corners.\n\nBelow the circle, near the lower-left portion of the image, there is a small line of black text reading:\n\n**\"GLM 42\"**",
+   "TensorFold on DGX Spark",
+   "Three triangles, all green.",
+   "The first image is red, and the second image is green.",
+   "The image contains two simple geometric shapes on a plain white background:\n\n1. **A red circle** on the left side of the image. It is a large, solid-filled circle in a bright red colour (approximately #E02020), positioned in the upper-left area.\n\n2. **A blue square** on the right side of the image. It is a solid-filled square in a vivid blue colour (approximately #1E3FE0), positioned in the upper-right area, roughly the same height as the circle but with straight edges and corners.\n\nBelow the circle, near the lower-left portion of the image, there is a small line of black text reading:\n\n**\"GLM 42\"**",
+   "TensorFold on DGX Spark",
+   "Three triangles, all green.",
+   "The first image is red, and the second image is green."
+  ]
+ }
+}

@@ -9,8 +9,9 @@ Output, all little-endian safetensors (MLX's own naming and affine layout):
   `.scales`/`.biases` bf16); routed experts are stacked per layer as `mlp.switch_mlp.{gate,up,down}_proj` [E, out, in].
   Norms (Gemma's: the forward scales by 1 + w, the stored w unchanged), the fp32 router and its score bias keep their
   checkpoint dtypes.
-- `config.json`: the checkpoint's text config flattened (`model_type` minimax_m3) beside its vision config, with
-  MLX's `quantization` block (global width = dense width, a key per module that differs).
+- `config.json`: the release's own (`model_type` minimax_m3_vl, the language model under `text_config`), its
+  `quantization_config` replaced by MLX's `quantization` block (global width = dense width, a key per module that
+  differs), with the drafters' `dflash2` and `dspark` blocks and the conversion's `source` beside it.
 
 mxfp8 (e4m3 x 2^k) is exact in bf16; nvfp4 is e2m1 x e4m3 / a global fp32 scale, so its bf16 is the rounded product.
 Projections' affine codes come from mx.quantize on that bf16, the experts' from a least-squares refit (refit).
@@ -406,14 +407,8 @@ def main():
                 kind = f"{bits}-bit g{group} experts" if text["moe_layer_freq"][i] else "dense"
                 print(f"layer {i} ({kind}) {time.time() - t0:.0f}s", flush=True)
 
-    cfg = dict(text)
-    cfg.pop("architectures", None)
-    cfg["model_type"] = "minimax_m3"
-    cfg["architectures"] = hf_cfg["architectures"]
-    for k in ("image_token_index", "video_token_index", "projector_hidden_size", "img_token_compression_config"):
-        if k in hf_cfg:
-            cfg[k] = hf_cfg[k]
-    cfg["vision_config"] = hf_cfg["vision_config"]
+    # the release's config.json as published, its quantization_config (MXFP8/NVFP4) replaced by MLX's block below
+    cfg = {k: v for k, v in hf_cfg.items() if k != "quantization_config"}
     if dflash2_cfg is not None:
         cfg["dflash2"] = dflash2_cfg
     elif "dflash2" in old:
