@@ -1,5 +1,11 @@
 # MiniMax-M3.1-Flash on one M5 Ultra (TensorFold native)
 
+> **Superseded.** Use [minimax-m31-flash-exl3-m5-ultra](https://github.com/BobClawblaw/minimax-m31-flash-exl3-m5-ultra)
+> instead: it serves Mia-AiLab's published EXL3 pack as is, much closer to the release (teacher-forced KL 0.079 and
+> 89.9% top-1 agreement, against this recipe's 0.244-0.295 and 78-81%), at about 33 tokens a second. The MLX
+> conversions here proved too lossy to be useful; this recipe stays for its speed (about 43 tokens a second) and for
+> reference.
+
 Serves [MiniMax-M3.1-Flash](https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash), a 428B-A23B mixture of experts with
 block-sparse attention and a vision tower, with TensorFold's native Metal engine on one 256 GB Mac, as an
 OpenAI-compatible server with images, tool calls, structured output, thinking on or off, DFlash2 drafts, the prompt
